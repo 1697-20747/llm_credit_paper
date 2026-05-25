@@ -1,0 +1,54 @@
+{
+  "bank": "Lloyds Banking Group",
+  "year": "2025",
+  "generated": "2026-05-25T23:15:24.771709",
+  "sources": {
+    "annual_report": "financials/2025-lbg-annual-report.pdf",
+    "pillar3": "pillar3/2025-lbg-fy-pillar-3.pdf"
+  },
+  "metrics": {
+    "cet1_ratio": {
+      "value": 14.0,
+      "source_page": 53,
+      "source_file": "2025-lbg-annual-report.pdf"
+    },
+    "leverage_ratio": {
+      "value": 5.4,
+      "source_page": 53,
+      "source_file": "2025-lbg-annual-report.pdf"
+    },
+    "rwa_bn": {
+      "value": 235.5,
+      "source_page": 53,
+      "source_file": "2025-lbg-annual-report.pdf"
+    },
+    "rote": {
+      "value": 22.1,
+      "source_page": 105,
+      "source_file": "2025-lbg-annual-report.pdf"
+    },
+    "total_capital_ratio": {
+      "value": 18.9,
+      "source_page": 146,
+      "source_file": "2025-lbg-annual-report.pdf"
+    },
+    "lcr": {
+      "value": 145.0,
+      "source_page": 183,
+      "source_file": "2025-lbg-annual-report.pdf"
+    },
+    "nsfr": {
+      "value": 124.0,
+      "source_page": 183,
+      "source_file": "2025-lbg-annual-report.pdf"
+    }
+  },
+  "sections": [
+    "capital_adequacy",
+    "asset_quality",
+    "management",
+    "earnings",
+    "liquidity",
+    "sensitivity"
+  ]
+}

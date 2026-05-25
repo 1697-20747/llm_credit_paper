@@ -61,7 +61,7 @@ if (( MEMORY_GB <= 16 )); then
     BATCH_SIZE=1
     GRAD_ACCUM=16
     MAX_SEQ_LEN=512
-    NUM_ITERS=400
+    NUM_ITERS=600    # increased from 400 for better convergence
     LR=2e-5
     SAVE_EVERY=50
     EVAL_STEPS=25
@@ -79,7 +79,7 @@ elif (( MEMORY_GB <= 32 )); then
     BATCH_SIZE=1
     GRAD_ACCUM=16
     MAX_SEQ_LEN=3072
-    NUM_ITERS=500
+    NUM_ITERS=600
     LR=2e-5
     SAVE_EVERY=100
     EVAL_STEPS=50
@@ -97,7 +97,7 @@ else
     BATCH_SIZE=2
     GRAD_ACCUM=8
     MAX_SEQ_LEN=4096
-    NUM_ITERS=600
+    NUM_ITERS=800
     LR=2e-5
     SAVE_EVERY=100
     EVAL_STEPS=50
@@ -120,9 +120,7 @@ else
 fi
 [[ -f "$SRC_EVAL" ]] || error "Eval data not found: $SRC_EVAL"
 
-# ── Prepare MLX data — TRUNCATE content to fit MAX_SEQ_LEN ───────────────────
-# Do NOT skip pairs — truncate the user/assistant content to fit.
-# The model learns from truncated examples; this is standard practice.
+# ── Prepare MLX data ──────────────────────────────────────────────────────────
 info "Preparing MLX data (truncating to ${MAX_SEQ_LEN} tokens)..."
 
 $PYTHON << PYEOF
@@ -130,20 +128,14 @@ import json
 from pathlib import Path
 
 MAX_SEQ_LEN  = $MAX_SEQ_LEN
-# chars per token varies — use 3 as conservative estimate for mixed content
-# Reserve 20% headroom for tokeniser overhead
 MAX_CHARS = int(MAX_SEQ_LEN * 3 * 0.8)
-
-# Per-role char budgets
-SYSTEM_MAX    = 800           # keep system prompt intact
+SYSTEM_MAX    = 800
 USER_MAX      = MAX_CHARS // 2
 ASSISTANT_MAX = MAX_CHARS // 2
 
 def truncate_msg(content, max_chars):
     if len(content) <= max_chars:
         return content
-    # Truncate from the middle of user content (keep task + end)
-    # Truncate from the end of assistant content (keep assessment + start)
     return content[:max_chars]
 
 pairs_files = [
@@ -238,11 +230,12 @@ echo "════════════════════════�
 echo " TRAINING CONFIGURATION"
 echo "═══════════════════════════════════════════════════════════"
 echo " Model           : $BASE_MODEL"
-echo " Training pairs  : $TRAIN_LINES (truncated to $MAX_SEQ_LEN tokens)"
+echo " Training pairs  : $TRAIN_LINES"
 echo " Eval pairs      : $EVAL_LINES"
 echo " LoRA rank       : $LORA_RANK  |  layers: $NUM_LAYERS"
 echo " Batch           : $BATCH_SIZE × $GRAD_ACCUM = $(( BATCH_SIZE * GRAD_ACCUM )) effective"
 echo " Max seq length  : $MAX_SEQ_LEN tokens"
+echo " Iterations      : $NUM_ITERS (~$(( NUM_ITERS / 30 )) minutes)"
 echo " Grad checkpoint : $GRAD_CHECKPOINT"
 echo " Disk free       : ${AVAILABLE_GB}GB"
 echo " Mem available   : ~${AVAIL_MEM}GB"
@@ -274,10 +267,7 @@ if [[ $TRAIN_STATUS -ne 0 ]]; then
     if grep -q "OutOfMemory\|Insufficient Memory\|kIOGPU" "$LOG_FILE" 2>/dev/null; then
         echo ""
         echo "═══════════════════════════════════════════════════════════"
-        echo " STILL OUT OF MEMORY — Last resort options:"
-        echo "  1. Restart Mac completely, close everything, run immediately"
-        echo "  2. sudo purge && ./train_mlx.sh"
-        echo "  3. Edit train_mlx.sh: change NUM_LAYERS=2 and LORA_RANK=2"
+        echo " OUT OF MEMORY — try: sudo purge && ./train_mlx.sh"
         echo "═══════════════════════════════════════════════════════════"
     fi
     error "Training failed — check $LOG_FILE"
@@ -295,7 +285,7 @@ $PYTHON -m mlx_lm fuse \
     --model "$BASE_MODEL" \
     --adapter-path "$OUTPUT_DIR" \
     --save-path "$FUSED_DIR" \
-    --de-quantize
+    --dequantize
 
 info "Fused: $FUSED_DIR"
 
@@ -343,5 +333,4 @@ echo ""
 echo " Deploy:"
 echo "   ollama create $OLLAMA_NAME -f ./Modelfile"
 echo "   ollama serve"
-echo "   python main.py --pdf financials/lloyds_2025.pdf --bank 'Lloyds Banking Group'"
 echo "═══════════════════════════════════════════════════════════"

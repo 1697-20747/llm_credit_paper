@@ -1,0 +1,85 @@
+# .gitignore — CAMELS Credit Analysis System
+
+# ── Virtual environment ───────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+
+# ── Raw downloaded documents (copyright — not for redistribution) ─────────────
+financials/
+rating_agency/
+
+# ── Processed intermediate files (large, reproducible from source) ────────────
+processed/
+
+# ── Sensitive data ────────────────────────────────────────────────────────────
+.env
+*.env
+logs/upgrade_progress.json
+logs/upgrade_progress.json.bak
+logs/upgrade_progress.json.tmp
+
+# ── Training data (full JSONL — too large for GitHub, use releases) ───────────
+training_data/combined_training.jsonl
+training_data/combined_eval.jsonl
+training_data/financial_pairs.jsonl
+training_data/rating_agency_pairs.jsonl
+training_data/financial_pairs_upgraded.jsonl
+training_data/combined_eval_upgraded.jsonl
+
+# ── Model weights (too large for GitHub — use HuggingFace Hub) ────────────────
+models/
+*.gguf
+*.safetensors
+*.bin
+*.pt
+*.pth
+
+# ── macOS artefacts ───────────────────────────────────────────────────────────
+.DS_Store
+**/.DS_Store
+.AppleDouble
+.LSOverride
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ── Logs (keep structure files, not run artefacts) ────────────────────────────
+logs/extract_financials_run.json
+logs/download_log.json
+logs/uk_download_log.json
+logs/rating_agency_download_log.json
+logs/upgrade_stats.json
+
+# ── Editor ────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Ollama / llama.cpp temp files ─────────────────────────────────────────────
+*.gguf.tmp
+blobs/
+
+# ── What IS committed (whitelist key files) ───────────────────────────────────
+# scripts/*.py              ← all pipeline scripts
+# *.sh                      ← shell scripts
+# requirements*.txt         ← dependencies
+# README.md                 ← main documentation
+# METHODOLOGY.md            ← CAMELS framework documentation
+# DATA_SOURCES.md           ← data provenance
+# RESULTS.md                ← evaluation results
+# LICENSE                   ← Apache 2.0
+# Modelfile                 ← Ollama model definition
+# training_data/combined_training_upgraded.jsonl  ← final training set (via Git LFS)
+# logs/triage_summary.txt   ← dataset overview
+# logs/build_pairs_stats.json ← training data statistics

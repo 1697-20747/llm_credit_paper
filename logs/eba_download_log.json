@@ -1,0 +1,20 @@
+{
+  "run_at": "2026-05-25T13:26:26.038928",
+  "years": {
+    "2024": {
+      "status": "failed"
+    },
+    "2023": {
+      "status": "failed"
+    },
+    "2022": {
+      "status": "failed"
+    },
+    "2021": {
+      "status": "failed"
+    },
+    "2020": {
+      "status": "failed"
+    }
+  }
+}

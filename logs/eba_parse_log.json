@@ -1,0 +1,15 @@
+{
+  "run_at": "2026-05-25T14:01:22.872154",
+  "source": "/Users/bruceschultz/Documents/projects/llm_credit_paper/raw_data/eba/Historical KM.csv",
+  "pairs": 1463,
+  "banks": 156,
+  "years": [
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+    "2024",
+    "2025"
+  ]
+}

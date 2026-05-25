@@ -1,0 +1,404 @@
+{
+  "run_at": "2026-05-25T14:26:14.959600",
+  "banks": {
+    "JPMorgan Chase Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Bank of America, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Citibank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Wells Fargo Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "U.S. Bank National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Capital One, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Goldman Sachs Bank USA": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "PNC Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Truist Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "The Bank of New York Mellon": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "State Street Bank and Trust Company": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "TD Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Morgan Stanley Private Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Charles Schwab Bank, SSB": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Morgan Stanley Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "BMO Bank National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "First-Citizens Bank & Trust Company": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Citizens Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "The Huntington National Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Fifth Third Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Manufacturers and Traders Trust Company": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "American Express National  Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Ally Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "KeyBank National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "The Northern Trust Company": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "HSBC Bank USA, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Regions Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "UBS Bank USA, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Synchrony Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "USAA Federal Savings Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Santander Bank, N.A.": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "City National Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Western Alliance Bank": {
+      "status": "no_data"
+    },
+    "Zions Bancorporation, N.A.": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Flagstar Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Webster Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "First Horizon Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "East West Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "UMB Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Old National Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "SouthState Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Columbia Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Valley National Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "CIBC Bank USA": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Bank of China": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Banco Popular de Puerto Rico": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Pinnacle Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Frost  Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "BOKF, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "First National Bank of Pennsylvania": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Barclays Bank Delaware": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "SoFi Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "EverBank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Associated Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Raymond James Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Deutsche Bank Trust Company Americas": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "MidFirst Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Bank OZK": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Prosperity Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Atlantic Union Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Hancock Whitney Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "BankUnited, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Banc of California": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "TD Bank USA, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "First National Bank of Omaha": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "United Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Commerce Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Fulton Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Glacier Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "BNY Mellon, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Texas Capital Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Eastern Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Sallie Mae Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "City National Bank of Florida": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "United Community Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Arvest Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "WesBanco Bank, Inc.": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Ameris Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "WaFd Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Axos Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Charles Schwab Premier Bank, SSB": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Renasant Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "First Interstate Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "FirstBank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Ameriprise Bank, FSB": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Provident Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Rockland Trust Company": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Customers Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Simmons Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Cathay Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Bank of Hawaii": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "First Hawaiian Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "TriState Capital Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Beacon Bank and Trust": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Centennial Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "State Bank of India": {
+      "status": "ok",
+      "pairs": 2
+    },
+    "Mechanics Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Wilmington Savings Fund Society, FSB": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "First Financial Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Seacoast National Bank": {
+      "status": "ok",
+      "pairs": 5
+    }
+  }
+}

@@ -1,0 +1,10 @@
+Loading configuration file /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/lora_config.yaml
+Loading pretrained model
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Fetching 11 files: 100%|██████████| 11/11 [00:00<00:00, 14066.26it/s]
+Loading datasets
+Training
+Trainable parameters: 0.019% (1.442M/7615.617M)
+Starting training..., iters: 400
+Calculating loss...:   0%|          | 0/2 [00:00<?, ?it/s]libc++abi: terminating due to uncaught exception of type std::runtime_error: [METAL] Command buffer execution failed: Insufficient Memory (00000008:kIOGPUCommandBufferCallbackErrorOutOfMemory)
+/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/multiprocessing/resource_tracker.py:224: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

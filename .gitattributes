@@ -1,0 +1,9 @@
+# Git LFS tracking — large files stored in LFS not Git history
+# Install: brew install git-lfs && git lfs install
+
+# Training data (JSONL files can be 10MB+)
+training_data/*.jsonl filter=lfs diff=lfs merge=lfs -text
+
+# Model files (if committing adapters)
+models/**/*.safetensors filter=lfs diff=lfs merge=lfs -text
+models/**/*.gguf filter=lfs diff=lfs merge=lfs -text

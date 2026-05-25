@@ -1,0 +1,22 @@
+{
+  "run_at": "2026-05-25T14:29:49.131078",
+  "financial_pairs": 854,
+  "rating_agency_pairs": 1023,
+  "eba_pairs": 1463,
+  "fdic_pairs": 492,
+  "credit_report_pairs": 0,
+  "total_after_dedup": 3693,
+  "train_count": 3324,
+  "eval_count": 369,
+  "by_quality": {
+    "structured": 1955,
+    "template": 854,
+    "extracted": 884
+  },
+  "by_pipeline": {
+    "fdic_call_report": 492,
+    "eba_transparency": 1463,
+    "financial_template": 854,
+    "rating_agency": 884
+  }
+}

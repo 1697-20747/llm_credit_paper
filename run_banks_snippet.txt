@@ -1,0 +1,4 @@
+    if [[ "$DOWNLOAD_BANKS" == true ]]; then
+    info "Downloading Annual Reports + Pillar 3 (comprehensive)..."
+    .venv/bin/python "$PROJECT_ROOT/scripts/download_annual_reports.py"
+fi

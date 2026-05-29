@@ -1,20 +1,17 @@
 TRIAGE SUMMARY
 ======================================================================
-Generated: 2026-05-25T14:13:26.272194
-Total files: 118
+Generated: 2026-05-29T16:28:49.432653
+Total files: 219
 
-Financial statements : 100
+Financial statements : 162
   of which HTML/HTM  : 90
-Rating agency docs   : 18
+Pillar 3 reports     : 32
+Rating agency docs   : 25
 
 EXTRACTION STRATEGIES:
-  FALLBACK_LAYOUT           10 file(s)
-  FULL_WITH_TABLES          13 file(s)
+  FALLBACK_LAYOUT           22 file(s)
+  FULL_WITH_TABLES          102 file(s)
   HTML_EXTRACT              90 file(s)
-  OCR_REQUIRED              1 file(s)
-  STANDARD_TEXT             4 file(s)
-
-⚠️  FILES REQUIRING OCR:
-    - fitch_rating.pdf
+  STANDARD_TEXT             5 file(s)
 
 Full report: /Users/bruceschultz/Documents/projects/llm_credit_paper/logs/triage_report.json

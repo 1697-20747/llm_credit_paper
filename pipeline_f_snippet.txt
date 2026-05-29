@@ -1,0 +1,12 @@
+    # ── F: Overview pairs ─────────────────────────────────────────────────────
+    overview_pairs = load_jsonl(
+        TRAINING_DIR / "overview_pairs_upgraded.jsonl", "overview_upgraded", "upgraded"
+    )
+    if not overview_pairs:
+        overview_pairs = load_jsonl(
+            TRAINING_DIR / "overview_pairs.jsonl", "overview_template", "template"
+        )
+    if overview_pairs:
+        print(f"\n[PIPELINE F] Overview pairs: {len(overview_pairs)} pairs")
+    else:
+        print(f"\n[PIPELINE F] Overview: none (run: python scripts/07_build_overview_pairs.py --upgrade)")

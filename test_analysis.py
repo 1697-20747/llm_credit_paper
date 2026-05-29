@@ -2,25 +2,32 @@
 """
 test_analysis.py
 ================
-Standalone CAMELS analysis — works with both Ollama and MLX server.
+Standalone CAMELS analysis — works with Ollama (default) or MLX server.
+Generates: credit paper (MD) + audit JSON + benchmark dashboards.
+
+Overview section added as first item in every credit paper:
+  - Para 1: material facts about the bank (size, ownership, key markets, rating)
+  - Para 2: key highlights from the annual review (strategic themes, notable events)
 
 Usage:
-    # With Ollama (recommended for 16GB Mac):
-    ollama serve   # in separate terminal
-    python test_analysis.py \
-        --pdf financials/2025-lbg-annual-report.pdf \
-        --pillar3 pillar3/2025-lbg-fy-pillar-3.pdf \
-        --bank "Lloyds Banking Group"
+    # Ollama (recommended for 16GB Mac):
+    ollama serve   # separate terminal
+    .venv/bin/python3 test_analysis.py \\
+        --pdf financials/2025-lbg-annual-report.pdf \\
+        --pillar3 pillar3/2025-lbg-fy-pillar-3.pdf \\
+        --bank "Lloyds Banking Group" \\
+        --model camels-base
 
-    # With MLX server (32GB+ only):
-    ./serve_mlx.sh   # in separate terminal
-    python test_analysis.py \
-        --pdf financials/2025-lbg-annual-report.pdf \
-        --bank "Lloyds Banking Group" \
+    # MLX server (32GB+ only):
+    ./serve_mlx.sh
+    .venv/bin/python3 test_analysis.py \\
+        --pdf financials/2025-lbg-annual-report.pdf \\
+        --bank "Lloyds Banking Group" \\
         --llm-url http://localhost:8080
 """
 
 import re
+import sys
 import json
 import argparse
 import urllib.request
@@ -96,12 +103,31 @@ SYSTEM_PROMPT = (
     "Key Metrics, Analysis, Peer Context, Key Risks, Rating Agency Commentary."
 )
 
+PILLAR_LABELS = {
+    "capital_adequacy": "Capital Adequacy (C)",
+    "asset_quality":    "Asset Quality (A)",
+    "management":       "Management Quality (M)",
+    "earnings":         "Earnings (E)",
+    "liquidity":        "Liquidity & Funding (L)",
+    "sensitivity":      "Sensitivity to Market Risk (S)",
+}
+
+PILLAR_METRICS = {
+    "capital_adequacy": ["cet1_ratio","tier1_ratio","total_capital_ratio",
+                         "leverage_ratio","rwa_bn","mrel"],
+    "asset_quality":    ["stage3_pct","npl_ratio"],
+    "earnings":         ["nim","rote","roe","roa","cost_income"],
+    "liquidity":        ["lcr","nsfr"],
+    "sensitivity":      [],
+    "management":       [],
+}
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Extraction
 # ─────────────────────────────────────────────────────────────────────────────
 
-def extract_pdf(path: Path) -> tuple[dict, dict]:
+def extract_pdf(path: Path) -> tuple:
     doc, pages, metrics = fitz.open(str(path)), {}, {}
     for i, page in enumerate(doc):
         text = page.get_text("text")
@@ -123,7 +149,7 @@ def extract_pdf(path: Path) -> tuple[dict, dict]:
     return pages, metrics
 
 
-def extract_htm(path: Path) -> tuple[dict, dict]:
+def extract_htm(path: Path) -> tuple:
     raw   = path.read_text(encoding="utf-8", errors="replace")
     clean = re.sub(r"<[^>]+>", " ", raw)
     clean = clean.replace("&nbsp;", " ").replace("&amp;", "&")
@@ -185,7 +211,7 @@ def get_decile_str(mk: str, value: float, index: dict) -> str:
         return ""
     for i, t in enumerate(deciles):
         if value <= t:
-            d  = i + 1
+            d   = i + 1
             med = dist.get("median", 0)
             p10 = dist.get("p10", 0)
             p90 = dist.get("p90", 0)
@@ -197,22 +223,20 @@ def get_decile_str(mk: str, value: float, index: dict) -> str:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# LLM — supports both Ollama and MLX server
+# LLM calls — Ollama and OpenAI-compat (MLX)
 # ─────────────────────────────────────────────────────────────────────────────
 
 def call_ollama(prompt: str, base_url: str, model: str,
-                max_tokens: int = 1200) -> str:
-    """Call via Ollama API format."""
+                system: str = SYSTEM_PROMPT, max_tokens: int = 1200) -> str:
     payload = json.dumps({
         "model":    model,
         "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "system", "content": system},
             {"role": "user",   "content": prompt},
         ],
         "stream":  False,
         "options": {"temperature": 0.05, "num_predict": max_tokens},
     }).encode()
-
     url = f"{base_url.rstrip('/')}/api/chat"
     req = urllib.request.Request(
         url, data=payload,
@@ -227,18 +251,16 @@ def call_ollama(prompt: str, base_url: str, model: str,
 
 
 def call_openai_compat(prompt: str, base_url: str, model: str,
-                       max_tokens: int = 1200) -> str:
-    """Call via OpenAI-compatible API (MLX server)."""
+                       system: str = SYSTEM_PROMPT, max_tokens: int = 1200) -> str:
     payload = json.dumps({
         "model":       model,
         "messages":    [
-            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "system", "content": system},
             {"role": "user",   "content": prompt},
         ],
         "max_tokens":  max_tokens,
         "temperature": 0.05,
     }).encode()
-
     url = f"{base_url.rstrip('/')}/v1/chat/completions"
     req = urllib.request.Request(
         url, data=payload,
@@ -252,37 +274,78 @@ def call_openai_compat(prompt: str, base_url: str, model: str,
         return f"[ERROR calling MLX server: {e}]"
 
 
-def call_llm(prompt: str, base_url: str, model: str) -> str:
-    """Auto-detect API type and call appropriately."""
+def call_llm(prompt: str, base_url: str, model: str,
+             system: str = SYSTEM_PROMPT, max_tokens: int = 1200) -> str:
     if "11434" in base_url or "ollama" in base_url.lower():
-        return call_ollama(prompt, base_url, model)
+        return call_ollama(prompt, base_url, model, system, max_tokens)
     else:
-        return call_openai_compat(prompt, base_url, model)
+        return call_openai_compat(prompt, base_url, model, system, max_tokens)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Prompt builder
+# Overview section — two paragraphs at top of credit paper
 # ─────────────────────────────────────────────────────────────────────────────
 
-PILLAR_METRICS = {
-    "capital_adequacy": ["cet1_ratio","tier1_ratio","total_capital_ratio",
-                         "leverage_ratio","rwa_bn","mrel"],
-    "asset_quality":    ["stage3_pct","npl_ratio"],
-    "earnings":         ["nim","rote","roe","roa","cost_income"],
-    "liquidity":        ["lcr","nsfr"],
-    "sensitivity":      [],
-    "management":       [],
-}
+def generate_overview(bank: str, year: str, pages: dict,
+                      metrics: dict, base_url: str, model: str) -> str:
+    """
+    Generate two-paragraph overview section:
+      Para 1 — material facts about the bank
+      Para 2 — key highlights from the annual review
+    """
+    # Sample from first ~20 pages (intro/CEO/highlights sections)
+    intro_text = get_text(pages, list(pages.keys())[:20], max_chars=4000)
 
-PILLAR_LABELS = {
-    "capital_adequacy": "Capital Adequacy (C)",
-    "asset_quality":    "Asset Quality (A)",
-    "management":       "Management Quality (M)",
-    "earnings":         "Earnings (E)",
-    "liquidity":        "Liquidity & Funding (L)",
-    "sensitivity":      "Sensitivity to Market Risk (S)",
-}
+    # Para 1: bank facts
+    facts_prompt = (
+        f"Bank: {bank}\n"
+        f"Reporting Year: {year}\n\n"
+        f"TASK: Write exactly ONE paragraph (4-6 sentences) summarising the material facts "
+        f"about {bank}. Include: type of institution, domicile, primary markets and business "
+        f"lines, approximate total assets, ownership structure, and current credit ratings "
+        f"if mentioned. Cite page numbers where facts are sourced. "
+        f"Write in the third person. Be factual and concise — no opinion.\n\n"
+        f"ANNUAL REPORT EXTRACT (first pages):\n{intro_text}"
+    )
 
+    # Para 2: AR highlights
+    highlights_prompt = (
+        f"Bank: {bank}\n"
+        f"Reporting Year: {year}\n\n"
+        f"TASK: Write exactly ONE paragraph (4-6 sentences) summarising the key highlights "
+        f"from {bank}'s {year} Annual Review. Focus on: material strategic developments, "
+        f"major acquisitions or disposals, significant regulatory actions, CEO or leadership "
+        f"changes, and the headline financial performance narrative management emphasised. "
+        f"Cite page numbers. Be factual — no commentary or opinion.\n\n"
+        f"ANNUAL REPORT EXTRACT (first pages):\n{intro_text}"
+    )
+
+    facts_system = (
+        "You are a senior credit analyst writing a factual institutional overview. "
+        "Write one tight paragraph only. Every claim must be cited [Source: p.XX]. "
+        "Never fabricate. If data is unavailable write 'Data not available'."
+    )
+
+    print("  Overview — bank facts...",    end=" ", flush=True)
+    facts      = call_llm(facts_prompt,      base_url, model, facts_system,      max_tokens=400)
+    print("✅")
+    print("  Overview — AR highlights...", end=" ", flush=True)
+    highlights = call_llm(highlights_prompt, base_url, model, facts_system,      max_tokens=400)
+    print("✅")
+
+    return (
+        f"## Overview\n\n"
+        f"### Institutional Profile\n\n"
+        f"{facts.strip()}\n\n"
+        f"### {year} Annual Review — Key Highlights\n\n"
+        f"{highlights.strip()}\n\n"
+        f"---\n"
+    )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Prompt builder and report assembly
+# ─────────────────────────────────────────────────────────────────────────────
 
 def build_prompt(pillar: str, bank: str, year: str, ar_text: str,
                  metrics: dict, benchmark: dict, p3_text: str = "") -> str:
@@ -291,8 +354,8 @@ def build_prompt(pillar: str, bank: str, year: str, ar_text: str,
     metric_lines = []
     for mk in PILLAR_METRICS.get(pillar, []):
         if mk in metrics:
-            v    = metrics[mk]
-            bc   = get_decile_str(mk, v["value"], benchmark)
+            v  = metrics[mk]
+            bc = get_decile_str(mk, v["value"], benchmark)
             line = (f"  {mk.replace('_',' ').upper()}: {v['value']} "
                     f"[Source: {v['source_file']}, p.{v['source_page']}]")
             if bc:
@@ -318,11 +381,7 @@ def build_prompt(pillar: str, bank: str, year: str, ar_text: str,
     return "\n".join(parts)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Report assembly
-# ─────────────────────────────────────────────────────────────────────────────
-
-def assemble(bank: str, year: str, analyses: dict,
+def assemble(bank: str, year: str, overview: str, analyses: dict,
              metrics: dict, benchmark: dict) -> str:
     lines = [
         f"# CAMELS Credit Analysis — {bank} ({year})",
@@ -332,6 +391,7 @@ def assemble(bank: str, year: str, analyses: dict,
         f"",
         "---",
         "",
+        overview,  # ← Overview section first
     ]
 
     # Benchmark table
@@ -396,7 +456,7 @@ def main():
     print(f" Server : {args.llm_url}  model: {args.model}")
     print(f"{'='*60}\n")
 
-    # Extract
+    # Extract annual report
     print("Extracting annual report...", end=" ", flush=True)
     if pdf_path.suffix.lower() in (".htm", ".html"):
         pages, metrics = extract_htm(pdf_path)
@@ -408,7 +468,7 @@ def main():
     for k, v in metrics.items():
         print(f"   {k}: {v['value']} [p.{v['source_page']}]")
 
-    # Pillar 3
+    # Extract Pillar 3
     p3_pages, p3_metrics = {}, {}
     if args.pillar3:
         p3_path = Path(args.pillar3)
@@ -423,7 +483,13 @@ def main():
     print(f"Sections: {list(section_index.keys())}")
     print(f"Benchmark: {'loaded' if benchmark else 'not found'}\n")
 
-    # Analyse each pillar
+    # ── Overview section (new — two paragraphs) ───────────────────────────
+    print("Generating overview section...")
+    overview = generate_overview(
+        args.bank, year, pages, metrics, args.llm_url, args.model
+    )
+
+    # ── Analyse each CAMELS pillar ─────────────────────────────────────────
     analyses = {}
     for pillar in PILLAR_LABELS:
         print(f"Analysing {PILLAR_LABELS[pillar]}...", end=" ", flush=True)
@@ -437,16 +503,16 @@ def main():
         preview = resp.replace("\n", " ")[:80]
         print(f"✅ {preview}")
 
-    # Assemble
+    # ── Assemble report ────────────────────────────────────────────────────
     print("\nAssembling report...", end=" ", flush=True)
-    report  = assemble(args.bank, year, analyses, metrics, benchmark)
+    report  = assemble(args.bank, year, overview, analyses, metrics, benchmark)
     ts      = datetime.now().strftime("%Y%m%d_%H%M%S")
     safe    = args.bank.replace(" ", "_")
     md_path = OUTPUT_DIR / f"{safe}_{year}_{ts}.md"
     md_path.write_text(report, encoding="utf-8")
     print(f"✅")
 
-    # Audit JSON
+    # ── Audit JSON ─────────────────────────────────────────────────────────
     audit_path = OUTPUT_DIR / f"{safe}_{year}_{ts}_audit.json"
     with open(audit_path, "w") as f:
         json.dump({
@@ -460,10 +526,29 @@ def main():
             "sections": list(section_index.keys()),
         }, f, indent=2)
 
+    # ── Generate benchmark dashboards ──────────────────────────────────────
+    print("\nGenerating benchmark dashboards...")
+    try:
+        import subprocess as _sp
+        result = _sp.run(
+            [sys.executable,
+             str(PROJECT_ROOT / "generate_dashboard.py"),
+             "--audit", str(audit_path)],
+            capture_output=False,
+            timeout=60,
+        )
+        if result.returncode != 0:
+            print("⚠️  Dashboard failed — run manually:")
+            print(f"   .venv/bin/python3 generate_dashboard.py --audit {audit_path}")
+    except Exception as e:
+        print(f"⚠️  {e}")
+
     print(f"\n{'='*60}")
-    print(f" Report : {md_path}")
-    print(f" Audit  : {audit_path}")
-    print(f"\n View: cat '{md_path}'")
+    print(f" Report    : {md_path}")
+    print(f" Audit     : {audit_path}")
+    print(f" Dashboard : output/{safe}/{year}/dashboard.html")
+    print(f" Regional  : output/{safe}/{year}/dashboard_regional.html")
+    print(f"\n View: open output/{safe}/{year}/dashboard.html")
     print(f"{'='*60}\n")
 
 

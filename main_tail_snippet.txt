@@ -1,0 +1,94 @@
+    # ── E: FDIC Call Reports ──────────────────────────────────────────────────
+    fdic_pairs = load_jsonl(TRAINING_DIR / "fdic_pairs.jsonl",
+                            "fdic_call_report", "structured")
+    if fdic_pairs:
+        print(f"\n[PIPELINE E] FDIC Call Reports: {len(fdic_pairs)} pairs")
+    else:
+        print(f"\n[PIPELINE E] FDIC: none (run: ./run.sh --download-fdic)")
+
+    # ── F: Overview pairs ─────────────────────────────────────────────────────
+    overview_pairs = load_jsonl(
+        TRAINING_DIR / "overview_pairs_upgraded.jsonl", "overview_upgraded", "upgraded"
+    )
+    if not overview_pairs:
+        overview_pairs = load_jsonl(
+            TRAINING_DIR / "overview_pairs.jsonl", "overview_template", "template"
+        )
+    if overview_pairs:
+        print(f"\n[PIPELINE F] Overview pairs: {len(overview_pairs)} pairs")
+    else:
+        print(f"\n[PIPELINE F] Overview: none")
+        print(f"  Run: .venv/bin/python3 scripts/07_build_overview_pairs.py --upgrade")
+
+    # ── Write pipeline-specific files ─────────────────────────────────────────
+    if financial_pairs:
+        write_jsonl(strip_meta(financial_pairs), TRAINING_DIR / "financial_pairs.jsonl")
+    if rating_pairs:
+        write_jsonl(strip_meta(rating_pairs), TRAINING_DIR / "rating_agency_pairs.jsonl")
+
+    # ── Combine all sources ───────────────────────────────────────────────────
+    all_pairs = (financial_pairs + rating_pairs + eba_pairs +
+                 fdic_pairs + overview_pairs + credit_pairs)
+    if credit_pairs:
+        all_pairs += credit_pairs   # 2× weight for gold pairs
+        print(f"  Gold pairs duplicated (2x weight)")
+
+    if not all_pairs:
+        print("\nNo pairs generated.")
+        return
+
+    all_pairs = dedup(all_pairs)
+    random.shuffle(all_pairs)
+
+    n_eval      = max(1, int(len(all_pairs) * args.eval_frac))
+    eval_pairs  = all_pairs[:n_eval]
+    train_pairs = all_pairs[n_eval:]
+
+    write_jsonl(strip_meta(train_pairs), TRAINING_DIR / "combined_training.jsonl")
+    write_jsonl(strip_meta(eval_pairs),  TRAINING_DIR / "combined_eval.jsonl")
+
+    # ── Stats ─────────────────────────────────────────────────────────────────
+    quality_counts  = {}
+    pipeline_counts = {}
+    for p in all_pairs:
+        q    = p.get("_meta", {}).get("quality",  "unknown")
+        pipe = p.get("_meta", {}).get("pipeline", "unknown")
+        quality_counts[q]     = quality_counts.get(q, 0) + 1
+        pipeline_counts[pipe] = pipeline_counts.get(pipe, 0) + 1
+
+    stats = {
+        "run_at":              datetime.now().isoformat(),
+        "financial_pairs":     len(financial_pairs),
+        "rating_agency_pairs": len(rating_pairs),
+        "eba_pairs":           len(eba_pairs),
+        "fdic_pairs":          len(fdic_pairs),
+        "overview_pairs":      len(overview_pairs),
+        "credit_report_pairs": len(credit_pairs),
+        "total_after_dedup":   len(all_pairs),
+        "train_count":         len(train_pairs),
+        "eval_count":          len(eval_pairs),
+        "by_quality":          quality_counts,
+        "by_pipeline":         pipeline_counts,
+    }
+    with open(LOGS_DIR / "build_pairs_stats.json", "w") as f:
+        json.dump(stats, f, indent=2)
+
+    print(f"\n{'='*60}")
+    print(f"TRAINING DATA BUILD COMPLETE")
+    print(f"  Financial    : {len(financial_pairs)}")
+    print(f"  Rating agency: {len(rating_pairs)}")
+    print(f"  EBA          : {len(eba_pairs)}")
+    print(f"  FDIC         : {len(fdic_pairs)}")
+    print(f"  Overview     : {len(overview_pairs)}")
+    print(f"  Gold (DOCX)  : {len(credit_pairs)}")
+    print(f"  ─────────────────────────")
+    print(f"  Total (dedup): {len(all_pairs)}")
+    print(f"  Training     : {len(train_pairs)}")
+    print(f"  Eval         : {len(eval_pairs)}")
+    print(f"  By pipeline  : {pipeline_counts}")
+    print(f"  By quality   : {quality_counts}")
+    print(f"{'='*60}\n")
+
+
+if __name__ == "__main__":
+    main()

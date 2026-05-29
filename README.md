@@ -4,8 +4,33 @@
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11+-green.svg)](https://python.org)
 [![Platform: macOS Apple Silicon](https://img.shields.io/badge/Platform-macOS%20Apple%20Silicon-lightgrey.svg)](https://apple.com/mac)
-[![Platform: Linux CUDA](https://img.shields.io/badge/Platform-Linux%20CUDA-76b900.svg)](https://nvidia.com)
-[![Base Model: Qwen2.5](https://img.shields.io/badge/Base%20Model-Qwen2.5--7B%2F14B-orange.svg)](https://huggingface.co/Qwen)
+[![Platform: Google Colab](https://img.shields.io/badge/Platform-Google%20Colab%20A100-F9AB00.svg)](https://colab.research.google.com)
+[![Base Model: Qwen2.5-7B](https://img.shields.io/badge/Base%20Model-Qwen2.5--7B-orange.svg)](https://huggingface.co/Qwen)
+
+---
+
+## How It Works
+
+Feed the system a bank's annual report PDF (and optionally its Pillar 3 report).
+A fine-tuned Qwen2.5-7B model — running entirely offline via Ollama on your Mac —
+reads the documents, extracts key metrics, and writes a complete structured credit
+paper. No cloud API. No data leaving your machine. No hallucinated numbers.
+
+**The model does all of this locally:**
+- Writes the institutional profile and Annual Review highlights
+- Analyses all six CAMELS pillars with citations to source page numbers
+- Positions each metric against a benchmark population of 800+ bank-years
+- Flags proximity to Basel III / PRA downgrade triggers
+- Generates interactive peer distribution dashboards
+
+**Training pipeline (one-time, runs before inference):**
+1. Annual reports, Pillar 3 reports, and rating agency methodology documents
+   are downloaded and extracted into structured JSON
+2. Claude Haiku (cheap, fast) writes analyst-quality example responses —
+   this produces the training data, it never runs at inference time
+3. Qwen2.5-7B is fine-tuned on those examples using QLoRA
+4. The fine-tuned model is deployed locally via Ollama
+5. From that point, **Qwen handles everything** — no external API calls ever
 
 ---
 
@@ -15,23 +40,45 @@ A fully offline, production-grade pipeline that generates structured, auditable 
 credit analyses using the **CAMELS framework** (Capital Adequacy, Asset Quality,
 Management, Earnings, Liquidity, Sensitivity to Market Risk).
 
-Every analysis includes **benchmark percentile rankings** — each metric is compared
-against the full population of banks in the training dataset and assigned a global
-decile and regional peer decile:
+Every analysis includes:
+- **Benchmark percentile rankings** — each metric ranked against a global bank population
+- **Peer distribution charts** — histogram showing bank position vs global and regional peers
+- **Downgrade trigger analysis** — distance to each regulatory threshold with time-to-trigger projection
+- **Trend analysis** — 1-year and 5-year trajectory vs the peer population
+- **Overview section** — institutional profile + key highlights from the Annual Review
 
 > *CET1 ratio 14.0% — 7th decile globally (median: 13.8%, p10: 10.5%, p90: 14.2%;
 > n=847 bank-years); 5th decile vs UK peers*
 
-The system fine-tunes a local Qwen2.5 model on a domain-specific dataset built from:
-- **200+ bank annual reports** (SEC EDGAR 10-K filings + UK/EU PDFs, 2015–2025)
-- **EBA EU-wide Transparency Exercise** (156 EU/EEA banks, 2019–2025)
-- **FDIC Call Report API** (top 100 US banks, annual data, 5 years)
-- **Rating agency methodology** (Fitch, S&P, DBRS Morningstar)
-- **Regulatory guidance** (Basel III/IV, OCC, FDIC, EBA SREP, PRA)
-- **Pillar 3 risk disclosures** (granular RWA, IRB model outputs, LCR composition)
+---
 
-Every output is **source-cited and auditable**. No hallucination of financial data.
-**Zero external API calls at inference time.** Runs entirely on-device.
+## What It Produces
+
+**For each bank analysis, the system generates:**
+
+1. **Credit paper** (`output/<bank>/<year>/*.md`) — full CAMELS analysis with:
+   - Overview section (institutional profile + AR highlights)
+   - Benchmark table (decile vs global population)
+   - Six CAMELS pillars with cited metrics, regulatory context, peer comparison
+   - Source citations on every numerical claim `[Source: p.XX]`
+
+2. **Global peer dashboard** (`output/<bank>/<year>/dashboard.html`) — interactive HTML with:
+   - Overview tab: summary cards, decile badges, downgrade alert banners
+   - Distribution tab: peer histogram with bank/median markers + period label + toggle
+   - Trends tab: time series per metric with trigger threshold lines
+   - Downgrade Triggers tab: sorted by severity, distance + projected years to trigger
+
+3. **Regional peer dashboard** (`output/<bank>/<year>/dashboard_regional.html`) — same format,
+   filtered to same-currency regional peers (UK/EU/US/AU/CA)
+
+4. **Dark mode** (`output/<bank>/<year>/dashboard_dark.html`) — dark version of global dashboard
+
+5. **Audit JSON** (`output/<bank>/<year>/*_audit.json`) — machine-readable metrics, source pages, sections
+
+```bash
+open output/Lloyds_Banking_Group/2025/dashboard.html
+open output/Lloyds_Banking_Group/2025/dashboard_regional.html
+```
 
 ---
 
@@ -41,9 +88,12 @@ Every output is **source-cited and auditable**. No hallucination of financial da
 |---------|------------|-------------|
 | Source citations | Every figure cited `[Source: p.XX]` | None |
 | Benchmark context | Decile vs 800+ bank population | None |
+| Downgrade triggers | Distance to Basel/PRA thresholds | None |
+| Regional peers | Separate UK/EU/US/AU/CA distributions | None |
+| RWA currency handling | Regional only (GBP/EUR/USD/AUD/CAD) | N/A |
 | Hallucination control | Refuses to invent data | Often fabricates |
 | Offline inference | Fully local, no API calls | Requires cloud |
-| Domain fine-tuning | Trained on 3,800+ CAMELS pairs | Generic |
+| Domain fine-tuning | Trained on 4,000+ CAMELS pairs | Generic |
 | Audit trail | JSON audit index per analysis | None |
 | Pillar 3 integration | RWA, IRB models, LCR detail | None |
 
@@ -53,79 +103,203 @@ Every output is **source-cited and auditable**. No hallucination of financial da
 
 | Component | Status | Notes |
 |-----------|--------|-------|
-| Data pipeline | ✅ Complete | 5 sources, 3,832 pairs |
-| Training pair upgrade | ✅ Complete | Claude Haiku, ~$5, resumable |
-| Round 1 training (Mac) | ✅ Complete | 512 tokens, val loss 3.14→1.07 |
-| Round 2 training (Colab) | 🔄 In progress | 1,024 tokens, T4 GPU |
-| Benchmark index | ✅ Complete | Decile rankings for all metrics |
-| End-to-end analysis | ✅ Tested | Lloyds 2025 + Pillar 3 |
-| GitHub | ✅ Published | github.com/1697-20747/llm_credit_paper |
+| Data pipeline | ✅ Complete | 5 sources, 4,145 pairs |
+| Financial pair upgrade | ✅ Complete | Claude Haiku, ~$5, resumable |
+| Rating agency pairs | ✅ Complete | 1,336 pairs incl. IMF FSAP, OCC, Fed DFAST |
+| EBA transparency data | ✅ Complete | 1,463 pairs, 156 EU banks, 2019–2025 |
+| FDIC Call Reports | ✅ Complete | 492 pairs, 100 US banks |
+| Overview pairs (Pipeline F) | ✅ Complete | ~150 pairs, API-upgraded |
+| Benchmark index | ✅ Complete | UK/EU/US/AU/CA regional + global |
+| Round 3 training (Mac) | ✅ Complete | 512 tokens, val loss → 0.876 |
+| Dashboards | ✅ Complete | Global + regional HTML, dark mode |
+| Downgrade triggers | ✅ Complete | Basel III / PRA / ECB thresholds |
+| Overview section | ✅ Complete | Institutional profile + AR highlights |
+| Data expansion | 🔄 In progress | 10-year coverage, Pillar 3, Canadian banks |
+| Colab Pro training | ⬜ Pending | 4,096 tokens, A100 — awaiting full dataset |
 
 ---
 
-## Hardware Support
+## A Note on Bank Data Quality and Industry Standards
 
-| Platform | RAM | Model | Training Time | Status |
-|----------|-----|-------|--------------|--------|
-| macOS Apple Silicon (M1/M2/M3) | 16GB | Qwen2.5-7B (4-bit) | ~15–30 min | ✅ Supported |
-| macOS Apple Silicon (M2 Pro/M3 Pro) | 32GB | Qwen2.5-14B | ~8–12 hours | ✅ Recommended |
-| macOS Apple Silicon (M2 Max/M3 Max) | 64GB | Qwen2.5-14B | ~5–8 hours | ✅ Optimal |
-| Linux + NVIDIA GPU (16GB VRAM) | Any | Qwen2.5-7B | ~2–4 hours | ✅ Supported |
-| Linux + NVIDIA GPU (24GB+ VRAM) | Any | Qwen2.5-14B | ~3–6 hours | ✅ Supported |
-| Google Colab (free T4, 15.6GB VRAM) | Any | Qwen2.5-7B | ~60 minutes | ✅ Supported |
-| Google Colab Pro (A100, 40GB VRAM) | Any | Qwen2.5-14B | ~15 minutes | ✅ Fastest |
+> *This section documents a genuine industry problem that directly affects this project
+> and any other system attempting systematic quantitative analysis of bank disclosures.*
 
-> **16GB Mac note:** Training completes in ~15–30 minutes using the pre-quantised
-> 4-bit base model (`mlx-community/Qwen2.5-7B-Instruct-4bit`, ~4GB). Peak memory
-> stable at ~5.7GB. Sequence length limited to 512 tokens on 16GB.
-> Use Colab for 1,024+ token training.
+### The Problem with Bank Reporting Data
 
-> **Colab T4 note:** 15.6GB VRAM supports 1,024 token sequence length with
-> Qwen2.5-7B using Unsloth 4-bit quantisation. Use 2,048 tokens on Colab Pro A100.
+Building this system required downloading, parsing, and extracting structured financial
+data from bank annual reports and Pillar 3 disclosures. The experience reveals a
+significant gap between what the regulatory framework requires banks to disclose and
+the practical accessibility of that data.
 
----
+**Pillar 3 reports are published in a mix of formats.** Some banks publish PDF-only.
+Others publish Excel workbooks alongside or instead of PDFs — but the Excel files
+vary enormously in structure, sheet naming, column layout, and unit conventions from
+bank to bank and year to year within the same bank. There is no standard schema.
+A CET1 ratio reported as `13.50` in one bank's workbook appears as `0.1350` in
+another's and `1350` (basis points) in a third.
 
-## Training — Sequence Length and Quality
+**Extracting data from PDFs is inherently unreliable.** PDF is a presentation format,
+not a data format. Tables in PDFs are reconstructed by layout engines that make
+assumptions about column boundaries, merged cells, and row associations that frequently
+produce incorrect results — particularly in the dense regulatory capital tables that
+Pillar 3 reports contain. A figure that reads clearly to a human eye may be extracted
+as part of the wrong row, merged with an adjacent cell, or split across two entries.
+Any pipeline that relies on PDF table extraction for quantitative data must be treated
+as producing *approximate* outputs requiring human validation, not ground truth.
+**This system is no exception.**
 
-| Tokens | Platform | Quality | Notes |
-|--------|----------|---------|-------|
-| 512 | Mac 16GB | Baseline | Round 1 — fast, shorter analyses |
-| 1,024 | Colab T4 (free) | Good | Round 2 — full sections, ~60 min |
-| 2,048 | Colab Pro A100 | Very good | Recommended production minimum |
-| 4,096 | 64GB Mac / A100 | Excellent | Full annual report sections |
-| 8,192 | H100 80GB | Optimal | No truncation at all |
+**File naming conventions are inconsistent and change year to year.** In building the
+download pipeline for this project, every major bank required its own bespoke URL
+pattern that often changed between reporting years. HSBC uses date-stamped filenames
+(`250227-annual-report-and-accounts-2024.pdf`) with the date reflecting the results
+announcement day rather than the reporting period. Deutsche Bank stores each year's
+report in the following year's folder on their server. NatWest changes the filename
+of its Pillar 3 report every year with no consistent pattern. ABN AMRO migrated its
+document hosting to a third-party CDN mid-series. These are not edge cases — they
+represent the norm across the industry.
 
-**Optimal unconstrained config (A100/H100):**
-```yaml
-model:          Qwen/Qwen2.5-14B-Instruct
-max_seq_length: 8192
-lora_rank:      32
-lora_alpha:     64
-num_layers:     32
-```
+**Access controls create unnecessary barriers.** Several banks block automated
+downloads entirely (Standard Chartered returns HTTP 403). Several others require
+JavaScript execution to render their IR pages (ING, BBVA, Société Générale), making
+programmatic access impossible without a headless browser. Some major US banks embed
+their Pillar 3 documents in iframe viewers that prevent direct PDF download. None of
+these controls serve a legitimate purpose — all of these documents are intended for
+public distribution.
+
+### What Good Would Look Like
+
+The regulatory framework already mandates disclosure of most of this data. The gap
+is purely in the *machine-readability* of that disclosure. A modest set of industry
+conventions would transform this situation:
+
+**Standardised machine-readable format.** The EBA EU-wide Transparency Exercise
+demonstrates what is possible: 156 banks, consistent schema, CSV download, annual
+cadence, free access. This project uses that data as its highest-quality source.
+The same approach applied to Pillar 3 at the bank level — a standardised
+Apache Parquet or JSON schema for the key quantitative tables — would eliminate
+the extraction problem entirely and enable a new generation of analytical tools.
+
+**Consistent file naming.** A simple convention such as
+`<LEI>_<report-type>_<YYYY-MM-DD>.pdf` would make discovery and version tracking
+trivial. The Legal Entity Identifier (LEI) is already a global standard; using it
+as the primary key in filenames costs nothing and enables unambiguous identification.
+
+**Stable, predictable URLs.** Regulatory filings should live at predictable paths
+and not move between years. Redirects to CDNs, date-stamped paths, and
+JavaScript-gated IR pages all add friction without adding value.
+
+**Companion data files alongside PDFs.** Where banks publish a PDF Pillar 3, they
+should also publish a companion structured file — XBRL, JSON, or Parquet — containing
+the same quantitative tables in machine-readable form. Several regulators (EBA, FDIC,
+Federal Reserve) already require this. Extending the requirement to all G-SIBs and
+D-SIBs would be straightforward.
+
+**Open download permissions.** Public regulatory disclosures should be accessible
+without authentication, without JavaScript, without iframe viewers, and without
+rate limiting that prevents systematic research. These documents are already public
+— the friction of obtaining them serves no one.
+
+Until such standards exist, projects like this one must work around the problem with
+bespoke scrapers, PDF heuristics, manual downloads, and validation steps — all of
+which add complexity and introduce potential for error. The EBA, FDIC, and Federal
+Reserve have shown the way. The industry should follow.
 
 ---
 
 ## Training Dataset
 
+### Current (4,145 pairs)
+
 | Source | Type | Coverage | Pairs |
 |--------|------|----------|-------|
-| US bank 10-K filings (SEC EDGAR) | HTM | ~90 filings, 2015–2025 | ~810 |
-| UK/EU bank annual reports | PDF | ~14 filings, 2020–2025 | ~126 |
-| EBA Transparency Exercise | CSV | 156 EU banks, 2019–2025 | ~1,463 |
-| FDIC Call Report API | REST | 100 US banks, 5 years | ~492 |
-| Fitch Bank Rating Criteria (OCR) | PDF | Scanned, 65 pages | ~58 |
+| US bank 10-K filings (SEC EDGAR) | HTM | ~90 filings, 2017–2025 | ~937 |
+| UK/EU bank annual reports | PDF | Lloyds, Barclays, HSBC, NatWest, Santander, UniCredit | ~937 |
+| EBA EU-wide Transparency Exercise | CSV | 156 EU/EEA banks, 2019–2025 | ~1,463 |
+| FDIC Call Report API | REST | 100 US banks, annual | ~492 |
+| Fitch Bank Rating Criteria | PDF | Text-based | ~58 |
 | S&P Global Banks Rating Criteria | PDF | Full methodology | ~85 |
 | DBRS Morningstar Methodology | PDF | Full methodology | ~25 |
-| Basel Committee standards (BIS) | PDF | 7 documents | ~500 |
-| OCC Comptroller's Handbook | PDF | 4 volumes | ~215 |
-| FDIC CAMELS manual | PDF | Original definition | ~27 |
-| EBA SREP guidelines | PDF | EU framework | ~36 |
-| PRA supervisory approach | PDF | UK framework | ~23 |
-| BIS working papers | PDF | 2 papers | ~52 |
-| **Total** | | | **~3,832** |
+| Moody's Banks Rating Criteria | PDF | Argentina supplement (framework valid) | ~60 |
+| Basel Committee standards (BIS) | PDF | 9 documents | ~500 |
+| OCC Comptroller's Handbook | PDF | 7 volumes | ~240 |
+| Federal Reserve DFAST | PDF | 2023 + 2024 stress test results | ~90 |
+| IMF FSAP Technical Notes | PDF | UK, US, Germany, France, Euro Area | ~200 |
+| IMF GFSR | PDF | April/October 2022–2024 | ~120 |
+| Overview pairs (Pipeline F) | API-generated | ~150 annual reports | ~150 |
+| **Total** | | | **~4,300** |
 
-All 854 financial statement pairs upgraded to analyst-quality prose via Claude Haiku (~$5).
+### Training Pipelines
+
+| Pipeline | Source | Quality | Purpose |
+|----------|--------|---------|---------|
+| A — Financial statements | Annual report JSON | Template → upgraded | CAMELS section analysis |
+| B — Rating agency | Methodology PDFs | Extracted | Framework knowledge |
+| C — Gold credit reports | DOCX analyst papers | Gold (2× weight) | Ground truth style |
+| D — EBA transparency | CSV structured data | Structured | EU bank benchmarks |
+| E — FDIC Call Reports | API structured data | Structured | US bank benchmarks |
+| F — Overview pairs | Annual report intros | API-upgraded | Profile + highlights writing |
+
+**Pipeline F explained:** Claude Haiku reads the first pages of each annual report
+and writes analyst-quality institutional profile and AR highlights paragraphs. These
+become training examples — Haiku is a data writer, not an inference model. After
+training, Qwen writes all overview sections entirely locally with no API calls.
+
+### Target (8,000–9,000 pairs)
+
+- **Annual reports**: 10-year coverage (2015–2025) for all UK/EU/AU/CA banks
+- **Pillar 3 reports**: All major banks 2018–2025
+- **Canadian banks**: RBC, TD, Scotiabank, BMO, CIBC
+- **Australian banks**: ANZ, Westpac, NAB, CBA
+- **Extended US EDGAR**: JPMorgan, Goldman, Morgan Stanley, BofA, Citigroup — 10 years
+
+See `DATA_ACQUISITION_PLAN.md` for full plan and URL patterns.
+
+---
+
+## RWA Currency Note
+
+RWA is reported in local currency and is **not directly comparable** across currency
+zones. The benchmark index handles this correctly:
+
+| Region | Currency | Banks |
+|--------|----------|-------|
+| `region_UK` | GBP | Lloyds, Barclays, HSBC, NatWest, StanChart |
+| `region_EU` | EUR | Deutsche, BNP, UniCredit, Santander, ABN, Intesa |
+| `region_US` | USD | JPMorgan, BofA, Citigroup, Goldman, etc. |
+| `region_AU` | AUD | ANZ, Westpac, CBA, NAB |
+| `region_CA` | CAD | RBC, TD, Scotiabank, BMO, CIBC |
+
+The regional dashboard automatically uses the correct currency-matched peer group.
+
+---
+
+## Hardware Support
+
+| Platform | RAM | Model | Max Tokens | Status |
+|----------|-----|-------|-----------|--------|
+| macOS Apple Silicon (M1/M2 16GB) | 16GB | Qwen2.5-7B (4-bit) | 512 | ✅ Supported |
+| macOS Apple Silicon (M2 Pro 32GB) | 32GB | Qwen2.5-7B | 2,048 | ✅ Recommended |
+| macOS Apple Silicon (M2 Max 64GB) | 64GB | Qwen2.5-14B | 4,096 | ✅ Optimal |
+| Google Colab Pro (A100 40GB) | — | Qwen2.5-7B | 4,096 | ✅ Best value ($10/mo) |
+| Google Colab Pro+ (A100 80GB) | — | Qwen2.5-14B | 4,096 | ✅ Best quality |
+| Linux + NVIDIA (24GB VRAM) | Any | Qwen2.5-7B | 2,048 | ✅ Supported |
+| Google Colab free (T4 16GB) | — | Qwen2.5-7B | 1,024 | ✅ Budget option |
+
+> **Recommendation:** Train on **Colab Pro ($10/month)** at 4,096 tokens.
+> Sequence length matters more than model size.
+> A well-trained 7B at 4,096 tokens beats a 14B at 512 tokens.
+
+---
+
+## Training Roadmap
+
+| Round | Platform | Tokens | Pairs | Val Loss | Status |
+|-------|----------|--------|-------|----------|--------|
+| 1 | Mac 16GB (MLX) | 512 | 1,737 | 3.14 → 1.30 | ✅ Done |
+| 2 | Mac 16GB (MLX) | 512 | 3,832 | 2.53 → 1.07 | ✅ Done |
+| 3 | Mac 16GB (MLX) | 512 | 3,832 | — → **0.876** | ✅ Done |
+| 4 | Colab Pro A100 | 4,096 | 4,300+ | ~0.5–0.6 | ⬜ Pending dataset |
+| 5 | Colab Pro A100 | 4,096 | 8,000+ | ~0.4 | ⬜ After data expansion |
 
 ---
 
@@ -135,259 +309,190 @@ All 854 financial statement pairs upgraded to analyst-quality prose via Claude H
 llm_credit_paper/
 │
 ├── scripts/
-│   ├── 00_run_pipeline.py            # Master orchestrator
-│   ├── 01_triage.py                  # PDF/HTM diagnostic
-│   ├── 02_extract_financials.py      # Annual report + Pillar 3 extraction
-│   ├── 03_extract_rating_agency.py   # Methodology + rating reports (OCR)
-│   ├── 04_build_training_pairs.py    # JSONL pair builder (5 pipelines)
-│   ├── 05_upgrade_training_pairs.py  # Claude API quality upgrade (resumable)
-│   ├── 06_extract_credit_reports.py  # DOCX credit paper extraction (GOLD)
-│   ├── build_benchmark_index.py      # Percentile/decile index builder
-│   ├── parse_eba_km.py               # EBA Historical KM CSV parser
-│   ├── download_financials.py        # SEC EDGAR automated downloader
-│   ├── download_uk_banks.py          # UK/EU/AU bank downloader
-│   ├── download_rating_agency.py     # Regulatory doc downloader
-│   ├── download_pillar3.py           # Pillar 3 report downloader
-│   ├── download_eba_data.py          # EBA transparency downloader
-│   ├── download_fdic_data.py         # FDIC Call Report API downloader
-│   └── cleanup_small_files.py        # Post-download cleanup
+│   ├── 00_run_pipeline.py              # Master orchestrator
+│   ├── 01_triage.py                    # PDF/HTM diagnostic
+│   ├── 02_extract_financials.py        # Annual report + Pillar 3 extraction
+│   ├── 03_extract_rating_agency.py     # Methodology + rating reports
+│   ├── 04_build_training_pairs.py      # JSONL pair builder (6 pipelines A–F)
+│   ├── 05_upgrade_training_pairs.py    # Claude Haiku quality upgrade (resumable)
+│   ├── 06_extract_credit_reports.py    # DOCX credit paper extraction (GOLD)
+│   ├── 07_build_overview_pairs.py      # ★ Pipeline F — overview pair builder
+│   ├── build_benchmark_index.py        # Percentile/decile index (UK/EU/US/AU/CA)
+│   ├── parse_eba_km.py                 # EBA Historical KM CSV parser
+│   ├── download_annual_reports.py      # ★ Primary AR + P3 downloader
+│   ├── rename_downloaded_files.py      # Normalise date-stamped filenames
+│   ├── download_financials.py          # SEC EDGAR downloader
+│   ├── download_rating_agency.py       # Regulatory + IMF doc downloader
+│   ├── download_eba_data.py            # EBA transparency downloader
+│   └── download_fdic_data.py           # FDIC Call Report API downloader
 │
-├── financials/                       # Annual reports (PDF, HTM)
-├── pillar3/                          # Pillar 3 risk disclosures (PDF)
-├── rating_agency/                    # Methodology PDFs
-├── rating_reports/                   # Bank-specific rating reports (PDF)
-├── credit_reports/                   # GOLD — analyst credit papers (DOCX)
-├── raw_data/eba/                     # EBA transparency CSV files
+├── financials/                         # Annual reports (PDF, HTM)
+├── pillar3/                            # Pillar 3 disclosures (PDF and/or Excel)
+├── rating_agency/                      # Methodology PDFs
+├── credit_reports/                     # GOLD analyst credit papers (DOCX)
+├── raw_data/eba/                       # EBA transparency CSV files
 │
 ├── processed/
-│   ├── financials/                   # Extracted JSON per filing
-│   ├── rating_agency/                # Chunked JSON per methodology doc
-│   ├── benchmark_index.json          # Percentile/decile index
-│   └── benchmark_summary.json        # Human-readable benchmark summary
+│   ├── financials/                     # Extracted JSON per filing
+│   ├── rating_agency/                  # Chunked JSON per methodology doc
+│   ├── benchmark_index.json            # Decile index with UK/EU/US/AU/CA regions
+│   └── benchmark_summary.json
 │
 ├── training_data/
-│   ├── combined_training_upgraded.jsonl  # Main training set (3,449 pairs)
-│   ├── combined_eval_upgraded.jsonl      # Eval set (383 pairs)
-│   ├── financial_pairs_upgraded.jsonl    # Analyst-quality financial pairs
-│   ├── rating_agency_pairs.jsonl         # Rating agency pairs
-│   ├── eba_pairs.jsonl                   # EBA transparency pairs
-│   └── fdic_pairs.jsonl                  # FDIC Call Report pairs
+│   ├── combined_training_upgraded.jsonl # ★ Main training set
+│   ├── combined_eval_upgraded.jsonl     # ★ Eval set
+│   ├── financial_pairs_upgraded.jsonl   # Analyst-quality financial pairs
+│   ├── rating_agency_pairs.jsonl        # Rating agency + regulatory pairs
+│   ├── eba_pairs.jsonl                  # EBA transparency pairs
+│   ├── fdic_pairs.jsonl                 # FDIC Call Report pairs
+│   └── overview_pairs_upgraded.jsonl   # ★ Overview pairs (Pipeline F)
 │
 ├── models/
-│   ├── qwen2.5-7b-camels-adapter/        # LoRA adapter (round 1+2)
-│   ├── qwen2.5-7b-camels-fused/          # Fused model
-│   └── qwen2.5-7b-camels-4bit/           # 4-bit quantised
+│   ├── qwen2.5-7b-camels-adapter/      # LoRA adapter (round 3)
+│   ├── qwen2.5-7b-camels-fused/        # Fused model
+│   └── qwen2.5-7b-camels-4bit/         # 4-bit quantised for Ollama
 │
-├── output/                           # Generated credit papers
-├── benchmark.py                      # Benchmark utility (decile lookups)
-├── test_analysis.py                  # Standalone analysis script
-├── main.py                           # Full inference pipeline
-├── run.sh                            # Main entry point
-├── setup.sh                          # One-time environment setup
-├── train_mlx.sh                      # QLoRA training (Apple Silicon)
-├── train_unsloth.py                  # QLoRA training (Linux/CUDA)
-├── fuse_and_deploy.sh                # Post-training fuse + deploy
-├── serve_mlx.sh                      # MLX direct server (Ollama fallback)
-├── prepare_for_training.sh           # Close apps, purge RAM, prevent sleep
-├── colab_training.ipynb              # Google Colab training notebook
-├── check_mlx_api.py                  # MLX version diagnostic
-├── fdic_debug.py                     # FDIC API diagnostic
-├── Modelfile                         # Ollama model definition
-└── requirements_ingestion.txt        # All Python dependencies
+├── output/
+│   └── <bank>/<year>/
+│       ├── dashboard.html              # ★ Global peer dashboard
+│       ├── dashboard_regional.html     # ★ Regional peer dashboard
+│       ├── dashboard_dark.html         # Dark mode
+│       └── *_audit.json               # Metrics + source pages
+│
+├── generate_dashboard.py              # ★ Standalone dashboard generator
+├── test_analysis.py                   # ★ Standalone end-to-end analysis
+├── run.sh                             # ★ Main entry point
+├── train_mlx.sh                       # QLoRA training (Apple Silicon)
+├── colab_training.ipynb               # Google Colab training notebook
+├── DATA_ACQUISITION_PLAN.md           # ★ Full data plan + URL fixes
+└── requirements_ingestion.txt         # All Python dependencies
 ```
 
 ---
 
 ## Quick Start
 
-### macOS (Apple Silicon)
-
 ```bash
 # 1. Prerequisites
-brew install poppler tesseract git-lfs ollama
+brew install poppler git-lfs ollama
 git clone https://github.com/1697-20747/llm_credit_paper.git
-cd llm_credit_paper
-chmod +x *.sh
-./setup.sh
+cd llm_credit_paper && chmod +x run.sh && ./setup.sh
 
 # 2. Download data
-./run.sh --download-us --years 10
-./run.sh --download-uk --years 5
-./run.sh --download-ra
-./run.sh --download-pillar3
+./run.sh --download-all
 
-# FDIC (free API key required)
-# Get key: https://api.fdic.gov/banks/docs
-export FDIC_API_KEY=your_key_here
-./run.sh --download-fdic
+# 3. Rename date-stamped manual downloads
+.venv/bin/python3 scripts/rename_downloaded_files.py
 
-# EBA (manual download — EDAP portal)
-# Save CSV to raw_data/eba/ then:
-.venv/bin/python scripts/parse_eba_km.py
+# 4. Validate downloads (removes redirect pages)
+.venv/bin/python3 scripts/download_annual_reports.py --validate
 
-# 3. Build benchmark + training pairs
-.venv/bin/python scripts/build_benchmark_index.py --include-fdic --include-eba
+# 5. Extract and build training data
 ./run.sh --reprocess
+./run.sh --pairs-only
 
-# 4. Upgrade quality (~$5 one-time)
+# 6. Build overview pairs (Pipeline F) — Claude Haiku writes training examples
 export ANTHROPIC_API_KEY=sk-ant-...
-.venv/bin/python scripts/05_upgrade_training_pairs.py
+.venv/bin/python3 scripts/07_build_overview_pairs.py --upgrade
 
-# 5. Train on Mac (16GB — baseline quality)
-sudo purge
-./prepare_for_training.sh
-./train_mlx.sh
+# 7. Build benchmark index
+.venv/bin/python3 scripts/build_benchmark_index.py --include-fdic --include-eba
 
-# OR train on Colab (recommended — better quality)
-# Upload training_data/combined_training_upgraded.jsonl to colab_training.ipynb
+# 8. Upgrade financial pairs to analyst quality (~$5)
+.venv/bin/python3 scripts/05_upgrade_training_pairs.py
 
-# 6. Deploy
+# 9. Rebuild combined training file
+.venv/bin/python3 -c "
+import json, random
+from pathlib import Path
+TRAINING_DIR = Path('training_data')
+random.seed(42)
+def load(p): return [json.loads(l) for l in open(p) if l.strip()] if p.exists() else []
+all_pairs = (load(TRAINING_DIR/'financial_pairs_upgraded.jsonl') +
+             load(TRAINING_DIR/'rating_agency_pairs.jsonl') +
+             load(TRAINING_DIR/'eba_pairs.jsonl') +
+             load(TRAINING_DIR/'fdic_pairs.jsonl') +
+             load(TRAINING_DIR/'overview_pairs_upgraded.jsonl'))
+random.shuffle(all_pairs)
+n = max(1, int(len(all_pairs)*0.10))
+def write(r,p): open(p,'w').writelines(json.dumps(x,ensure_ascii=False)+'\n' for x in r)
+write(all_pairs[n:], TRAINING_DIR/'combined_training_upgraded.jsonl')
+write(all_pairs[:n], TRAINING_DIR/'combined_eval_upgraded.jsonl')
+print(f'Train: {len(all_pairs)-n}  Eval: {n}  Total: {len(all_pairs)}')
+"
+
+# 10. Train on Mac (512 tokens baseline)
+sudo purge && ./prepare_for_training.sh && ./train_mlx.sh
+
+# 11. Deploy and run
 ./fuse_and_deploy.sh
-ollama serve   # separate terminal
-
-# 7. Run analysis
+ollama serve  # separate terminal
 .venv/bin/python3 test_analysis.py \
   --pdf financials/2025-lbg-annual-report.pdf \
-  --pillar3 pillar3/2025-lbg-fy-pillar-3.pdf \
-  --bank "Lloyds Banking Group" \
-  --model camels-base
+  --pillar3 pillar3/lloyds_banking_group_2025_pillar3.pdf \
+  --bank "Lloyds Banking Group"
+
+open output/Lloyds_Banking_Group/2025/dashboard.html
 ```
 
 ---
 
 ## Running an Analysis
 
-The `test_analysis.py` script handles the full pipeline — extraction, benchmarking,
-LLM analysis, and report assembly:
-
 ```bash
-# Start Ollama (if not already running)
-ollama serve &
-
-# Lloyds with Pillar 3
+# UK bank with Pillar 3
 .venv/bin/python3 test_analysis.py \
   --pdf financials/2025-lbg-annual-report.pdf \
-  --pillar3 pillar3/2025-lbg-fy-pillar-3.pdf \
-  --bank "Lloyds Banking Group" \
-  --model camels-base
+  --pillar3 pillar3/lloyds_banking_group_2025_pillar3.pdf \
+  --bank "Lloyds Banking Group"
 
-# US bank (HTM filing)
+# US bank (SEC EDGAR HTM)
 .venv/bin/python3 test_analysis.py \
   --pdf financials/jpmorgan_chase_2025_10k.htm \
-  --bank "JPMorgan Chase" \
-  --model camels-base
-```
+  --bank "JPMorgan Chase"
 
-**Output files (in `output/`):**
-- `*_credit_paper.md` — full CAMELS credit paper with benchmark table
-- `*_audit.json` — extracted metrics, source pages, sections found
+# Dashboards only (from existing audit file)
+.venv/bin/python3 generate_dashboard.py \
+  --audit output/Lloyds_Banking_Group/2025/*_audit.json
+```
 
 ---
 
-## Benchmark Index
+## Google Colab Training (Recommended for Round 4+)
 
-Built from all processed financial data — provides population-level percentile
-context for every metric in every analysis.
+Upload to Colab Pro (A100, $10/month):
+- `training_data/combined_training_upgraded.jsonl`
+- `training_data/combined_eval_upgraded.jsonl`
+- `colab_training.ipynb`
 
-```bash
-# Build
-.venv/bin/python scripts/build_benchmark_index.py --include-fdic --include-eba
+Set `MAX_SEQ = 4096` in Cell 1. Run all cells. Downloads adapter as zip.
 
-# Test
-.venv/bin/python benchmark.py
-```
-
-**Sample analysis output:**
-
-| Metric | Value | Global Decile | Median | p10–p90 |
-|--------|-------|---------------|--------|---------|
-| CET1 Ratio | 14.0% [p.53] | **7th** | 13.8% | 10.5–14.2% |
-| Leverage Ratio | 5.4% [p.53] | **5th** | 5.5% | 5.1–9.3% |
-| LCR | 145% [p.183] | **4th** | 165% | 150–171% |
+| Runtime | Max Seq | Time | Val Loss |
+|---------|---------|------|----------|
+| Free T4 | 1,024 | ~60min | ~0.7 |
+| Colab Pro A100 | 4,096 | ~20min | ~0.5–0.6 |
 
 ---
 
-## Google Colab Training
+## Dashboard Features
 
-Recommended for higher quality training than 16GB Mac allows.
-
-**Files to upload from your Mac:**
-```
-training_data/combined_training_upgraded.jsonl  (20MB)
-training_data/combined_eval_upgraded.jsonl      (2.3MB)
-colab_training.ipynb
-```
-
-**Steps:**
-1. `colab.research.google.com` → Upload `colab_training.ipynb`
-2. Runtime → Change runtime type → **T4 GPU** (free)
-3. Run all cells — Cell 3 prompts for JSONL file upload
-4. Cell 7 downloads trained adapter zip automatically
-5. Extract zip to `models/` on your Mac
-
-**Sequence length by runtime:**
-
-| Runtime | Max Seq Length | Training Time | Quality |
-|---------|---------------|--------------|---------|
-| Free T4 (15.6GB) | 1,024 | ~60 min | Good |
-| Colab Pro A100 (40GB) | 2,048–4,096 | ~15 min | Excellent |
-
-> **Note:** T4 OOMs at 2,048 tokens with this dataset size. Use 1,024 tokens
-> on free T4. Upgrade to Colab Pro A100 for 2,048+ tokens.
-
----
-
-## Training Quality Roadmap
-
-| Round | Platform | Tokens | Pairs | Val Loss | Status |
-|-------|----------|--------|-------|----------|--------|
-| 1 | Mac 16GB (MLX) | 512 | 1,737 | 3.14 → 1.30 | ✅ Done |
-| 1b | Mac 16GB (MLX) | 512 | 3,832 | 2.53 → 1.07 | ✅ Done |
-| 2 | Colab T4 | 1,024 | 3,832 | TBD | 🔄 Running |
-| 3 | Colab Pro A100 | 4,096 | 3,832+ | TBD | Planned |
-| 4 | Any | 4,096 | +DOCX gold | TBD | Planned |
-
-Adding real analyst credit papers (DOCX) to `credit_reports/` and re-running
-`./run.sh --reprocess` will add gold-standard pairs for the highest quality round.
-
----
-
-## Source Folders
-
-| Folder | Contents | How to populate |
-|--------|----------|----------------|
-| `financials/` | Annual reports PDF/HTM | `./run.sh --download-us --download-uk` |
-| `pillar3/` | Pillar 3 risk disclosures | `./run.sh --download-pillar3` or manual |
-| `rating_agency/` | Methodology PDFs | `./run.sh --download-ra` |
-| `rating_reports/` | Bank rating reports | Manual — Fitch/S&P/Moody's IR pages |
-| `credit_reports/` | Your credit papers (DOCX) | Manual — highest quality training data |
-| `raw_data/eba/` | EBA transparency CSV | Manual — EDAP portal |
+Distribution charts show the full peer population as a histogram. Your bank is a
+**navy diamond line** with abbreviated label (`LBG 14.0%`). Peer median is a
+**grey dashed triangle line**. Rating triggers are **coloured dashed lines**
+(amber/red/dark red). Period badge shows `Recent 3yr (n=9)` with a toggle to
+switch to all-time. The Downgrade Triggers tab projects years-to-trigger at
+current trajectory for every metric approaching a threshold.
 
 ---
 
 ## Anti-Hallucination Controls
 
-1. **Grounded prompting** — LLM only sees data extracted from source document
-2. **Citation enforcement** — every number requires `[Source: p.XX]`
-3. **Post-generation validation** — output figures cross-checked against source
-4. **Temperature 0.05** — near-deterministic factual outputs
-5. **Refusal training** — "Data not available" not fabrication
-6. **Audit index** — JSON maps every cited figure to source page
-7. **Benchmark grounding** — percentile context from real population data
-
----
-
-## Regulatory Framework
-
-**Capital (Basel III/IV, PRA):** Pillar 1 (4.5% CET1), CCB (2.5%), CCyB,
-G-SII/O-SII, Pillar 2A, UK leverage (3.25%), Basel IV output floor (72.5% by 2030).
-
-**Asset Quality (IFRS 9):** Stage 1 (12m ECL), Stage 2 (Lifetime/SICR),
-Stage 3 (Lifetime/impaired).
-
-**Liquidity:** LCR ≥100%, NSFR ≥100%.
-
-**Rating agencies:** Moody's BCA, S&P SACP/BICRA, Fitch VR/IDR, DBRS IA.
+1. Grounded prompting — LLM only sees extracted source content
+2. Citation enforcement — every number requires `[Source: p.XX]`
+3. Temperature 0.05 — near-deterministic outputs
+4. Refusal training — "Data not available" not fabrication
+5. Audit JSON — every cited figure mapped to source page
+6. Benchmark grounding — percentile context from real population
 
 ---
 
@@ -395,17 +500,15 @@ Stage 3 (Lifetime/impaired).
 
 | Issue | Fix |
 |-------|-----|
-| `permission denied` on shell scripts | `chmod +x *.sh` |
-| Training OOM on 16GB Mac | `sudo purge` + `./prepare_for_training.sh`; or use Colab |
-| Colab T4 OOM at 2,048 tokens | Reduce to 1,024 tokens in Cell 1 |
-| mlx-lm argument errors | `python check_mlx_api.py` to diagnose |
-| GGUF U32 conversion error | Use `./serve_mlx.sh` instead of Ollama |
-| MLX server crashes 16GB Mac | Use Ollama (`ollama serve`) for inference instead |
-| HuggingFace 401 | `.venv/bin/python -c "from huggingface_hub import login; login()"` |
-| EBA download 404 | Manual download from EDAP portal |
-| FDIC API 403 | Set `FDIC_API_KEY` — free from `api.fdic.gov/banks/docs` |
-| `python` not found on Mac | Use `.venv/bin/python3` instead |
-| `fitz` module not found | Use `.venv/bin/python3` (not system python3) |
+| `permission denied` on scripts | `chmod +x run.sh` — auto-fixes all |
+| Extractor hangs on complex Pillar 3 PDF | Fixed — per-page isolation in `02_extract_financials.py` |
+| Date-stamped HSBC/Lloyds filenames | Run `rename_downloaded_files.py` after manual download |
+| Redirect pages pass as valid PDFs | `--validate` flag; min 1MB AR, 500KB P3 |
+| Training OOM on 16GB Mac | `sudo purge` first; or use Colab Pro |
+| GGUF U32 conversion error | Use Ollama base model for inference |
+| RWA cross-currency comparison | Use `dashboard_regional.html` — regional peers only |
+| `fitz` module not found | Use `.venv/bin/python3` not system python |
+| Fitch PDF in iframe | Cmd+P → Save as PDF |
 
 ---
 
@@ -415,17 +518,9 @@ Stage 3 (Lifetime/impaired).
 |---------|---------|-----|
 | HuggingFace | Model download | `huggingface.co/settings/tokens` |
 | FDIC BankFind | Call Report data | `api.fdic.gov/banks/docs` |
-| Anthropic API | Training pair upgrade (~$5 one-time) | `console.anthropic.com` |
-
----
-
-## Linux / CUDA Training
-
-```bash
-pip install "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"
-pip install --no-deps trl peft accelerate bitsandbytes datasets
-python train_unsloth.py   # auto-detects VRAM, selects 7B or 14B
-```
+| Anthropic API | Training data generation (~$8 total) | `console.anthropic.com` |
+| Fitch Ratings | Rating criteria PDF | `fitchratings.com/site/register` |
+| S&P Global | Rating criteria PDF | `spglobal.com/ratings/en/research-insights/register` |
 
 ---
 
@@ -446,8 +541,8 @@ python train_unsloth.py   # auto-detects VRAM, selects 7B or 14B
 ## Disclaimer
 
 For research and internal analytical use only. Generated analyses do not constitute
-investment advice or official credit ratings. Review by a qualified credit
-professional is required before use.
+investment advice or official credit ratings. All outputs should be reviewed by a
+qualified credit professional before use in any decision-making context.
 
 ---
 

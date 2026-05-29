@@ -2,22 +2,25 @@
 """
 download_rating_agency.py
 =========================
-Downloads freely available rating agency methodology and regulatory
-documents. All sources are fully public — no registration required.
+Downloads rating agency methodology and regulatory documents.
+All BIS, OCC, FDIC, PRA, EBA, Fed and IMF documents are fully automated.
+Fitch, S&P and Moody's require free account registration.
 
 Usage:
     python scripts/download_rating_agency.py
-    python scripts/download_rating_agency.py --dry-run
-    python scripts/download_rating_agency.py --priority 1  # highest priority only
+    python scripts/download_rating_agency.py --skip-manual
+    python scripts/download_rating_agency.py --reprocess
+
+Output:
+    rating_agency/*.pdf
+    logs/rating_agency_download_log.json
 """
 
-import re
 import json
-import time
 import ssl
+import time
 import argparse
 import urllib.request
-import urllib.error
 from pathlib import Path
 from datetime import datetime
 
@@ -34,366 +37,337 @@ RATING_DIR.mkdir(exist_ok=True)
 LOGS_DIR.mkdir(exist_ok=True)
 
 GREEN  = '\033[0;32m'; YELLOW = '\033[1;33m'
-RED    = '\033[0;31m'; CYAN   = '\033[0;36m'; NC = '\033[0m'
-def info(msg):   print(f"{GREEN}[INFO]{NC}  {msg}")
-def warn(msg):   print(f"{YELLOW}[WARN]{NC}  {msg}")
-def error(msg):  print(f"{RED}[ERROR]{NC} {msg}")
-def action(msg): print(f"{CYAN}[GET]{NC}   {msg}")
+CYAN   = '\033[0;36m'; RED    = '\033[0;31m'; NC = '\033[0m'
+def info(msg):   print(f"{GREEN}[INFO]{NC}   {msg}")
+def get(msg):    print(f"{CYAN}[GET]{NC}    {msg}")
+def ok(msg):     print(f"{GREEN}[OK]{NC}     {msg}")
+def fail(msg):   print(f"{RED}[FAIL]{NC}   {msg}")
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                  "AppleWebKit/537.36 (KHTML, like Gecko) "
-                  "Chrome/120.0.0.0 Safari/537.36",
+                  "AppleWebKit/537.36 Chrome/124.0.0.0 Safari/537.36",
     "Accept": "application/pdf,*/*",
+    "Referer": "https://www.google.com/",
 }
 
-DOCUMENTS = [
+MIN_PDF_BYTES = 100_000
 
-    # ── FDIC ──────────────────────────────────────────────────────────────────
-    {
-        "filename":    "fdic_camels_rating_system.pdf",
-        "url":         "https://www.fdic.gov/regulations/safety/manual/section6-1.pdf",
-        "url_alt":     "https://www.fdic.gov/bank/individual/financial/index.html",
-        "description": "FDIC — CAMELS Rating System (Section 6.1)",
-        "category":    "camels_methodology",
-        "priority":    1,
-        "manual_url":  "https://www.fdic.gov/regulations/safety/manual/",
-        "manual_note": "Navigate to Section 6.1 — CAMELS Rating System",
-    },
-    {
-        "filename":    "fdic_bank_examination_overview.pdf",
-        "url":         "https://www.fdic.gov/regulations/safety/manual/section1-1.pdf",
-        "description": "FDIC — Risk Management Examination Manual Overview",
-        "category":    "camels_methodology",
-        "priority":    1,
-    },
 
-    # ── Federal Reserve ───────────────────────────────────────────────────────
-    {
-        "filename":    "fed_sr9638_rfi_rating_system.pdf",
-        "url":         "https://www.federalreserve.gov/boarddocs/srletters/1996/sr9638.pdf",
-        "description": "Federal Reserve SR 96-38 — RFI/C(D) Rating System for BHCs",
-        "category":    "camels_methodology",
-        "priority":    1,
-        "manual_url":  "https://www.federalreserve.gov/apps/srletters/srletters.aspx",
-        "manual_note": "Search SR 96-38",
-    },
-    {
-        "filename":    "fed_commercial_bank_exam_manual.pdf",
-        "url":         "https://www.federalreserve.gov/publications/files/commercial_bank_examination_manual.pdf",
-        "description": "Federal Reserve — Commercial Bank Examination Manual",
-        "category":    "camels_methodology",
-        "priority":    1,
-    },
+def is_valid_pdf(path: Path) -> bool:
+    if not path.exists() or path.stat().st_size < MIN_PDF_BYTES:
+        return False
+    with open(path, "rb") as f:
+        return f.read(4) == b"%PDF"
 
-    # ── Basel Committee (BIS) — all reliably downloadable ─────────────────────
-    {
-        "filename":    "basel_committee_core_principles.pdf",
-        "url":         "https://www.bis.org/publ/bcbs230.pdf",
-        "description": "Basel Committee — Core Principles for Effective Banking Supervision",
-        "category":    "regulatory_standard",
-        "priority":    1,
+
+def download(url: str, dest: Path, description: str) -> bool:
+    if is_valid_pdf(dest):
+        size_mb = dest.stat().st_size / 1_048_576
+        info(f"{description} — already have ({size_mb:.1f}MB)")
+        return True
+
+    get(f"{description}")
+    req = urllib.request.Request(url, headers=HEADERS)
+    try:
+        with urllib.request.urlopen(req, context=SSL_CONTEXT, timeout=120) as r:
+            data = r.read()
+        if len(data) > MIN_PDF_BYTES and data[:4] == b"%PDF":
+            dest.write_bytes(data)
+            ok(f"{description} — {len(data)//1024}KB")
+            return True
+        else:
+            fail(f"{description} — not a valid PDF ({len(data)} bytes)")
+            return False
+    except Exception as e:
+        fail(f"{description} — {e}")
+        return False
+
+
+AUTOMATED_DOCS = {
+
+    # ── BIS / Basel Committee ─────────────────────────────────────────────────
+    "basel_iii_capital_framework.pdf": {
+        "url": "https://www.bis.org/publ/bcbs189.pdf",
+        "description": "Basel III Capital Framework (BCBS189)",
     },
-    {
-        "filename":    "basel_iii_capital_framework.pdf",
-        "url":         "https://www.bis.org/publ/bcbs189.pdf",
-        "description": "Basel III — Global regulatory framework for resilient banks",
-        "category":    "capital_methodology",
-        "priority":    1,
+    "basel_lcr_standard.pdf": {
+        "url": "https://www.bis.org/publ/bcbs238.pdf",
+        "description": "Basel III LCR Standard (BCBS238)",
     },
-    {
-        "filename":    "basel_iv_output_floor.pdf",
-        "url":         "https://www.bis.org/bcbs/publ/d424.pdf",
-        "description": "Basel III Finalising post-crisis reforms (Basel IV)",
-        "category":    "capital_methodology",
-        "priority":    1,
+    "basel_nsfr_standard.pdf": {
+        "url": "https://www.bis.org/publ/bcbs295.pdf",
+        "description": "Basel III NSFR Standard (BCBS295)",
     },
-    {
-        "filename":    "basel_lcr_standard.pdf",
-        "url":         "https://www.bis.org/publ/bcbs238.pdf",
-        "description": "Basel III — Liquidity Coverage Ratio",
-        "category":    "liquidity_methodology",
-        "priority":    1,
+    "basel_leverage_ratio.pdf": {
+        "url": "https://www.bis.org/bcbs/publ/d424.pdf",
+        "description": "Basel III Leverage Ratio (BCBS d424)",
     },
-    {
-        "filename":    "basel_nsfr_standard.pdf",
-        "url":         "https://www.bis.org/bcbs/publ/d295.pdf",
-        "description": "Basel III — Net Stable Funding Ratio",
-        "category":    "liquidity_methodology",
-        "priority":    1,
+    "basel_credit_risk_irb.pdf": {
+        "url": "https://www.bis.org/publ/bcbs128.pdf",
+        "description": "Basel II IRB Credit Risk (BCBS128)",
     },
-    {
-        "filename":    "basel_irrbb_standard.pdf",
-        "url":         "https://www.bis.org/bcbs/publ/d368.pdf",
-        "description": "Basel Committee — Interest Rate Risk in the Banking Book (IRRBB)",
-        "category":    "market_risk",
-        "priority":    1,
+    "basel_irrbb_standard.pdf": {
+        "url": "https://www.bis.org/bcbs/publ/d368.pdf",
+        "description": "IRRBB Standard (BCBS d368)",
     },
-    {
-        "filename":    "basel_leverage_ratio.pdf",
-        "url":         "https://www.bis.org/bcbs/publ/d365.pdf",
-        "description": "Basel III — Leverage ratio framework",
-        "category":    "capital_methodology",
-        "priority":    1,
+    "basel_committee_core_principles.pdf": {
+        "url": "https://www.bis.org/publ/bcbs230.pdf",
+        "description": "Basel Core Principles for Effective Banking Supervision",
     },
-    {
-        "filename":    "bis_working_paper_bank_ratings.pdf",
-        "url":         "https://www.bis.org/publ/work595.pdf",
-        "description": "BIS Working Paper 595 — Bank ratings and supervisors",
-        "category":    "rating_methodology",
-        "priority":    2,
+    "bis_working_paper_bank_ratings.pdf": {
+        "url": "https://www.bis.org/publ/work656.pdf",
+        "description": "BIS Working Paper: Bank Ratings — What Determines their Quality",
     },
-    {
-        "filename":    "bis_working_paper_camels_ratings.pdf",
-        "url":         "https://www.bis.org/publ/work822.pdf",
-        "description": "BIS Working Paper 822 — CAMELS ratings and bank fragility",
-        "category":    "camels_methodology",
-        "priority":    1,
+    "bis_working_paper_camels_ratings.pdf": {
+        "url": "https://www.bis.org/publ/work936.pdf",
+        "description": "BIS Working Paper: CAMELS Ratings and Bank Fragility",
+    },
+    "bis_wp_bank_capital_quality.pdf": {
+        "url": "https://www.bis.org/publ/work671.pdf",
+        "description": "BIS Working Paper: Bank Capital and Risk-Taking",
+    },
+    "bis_wp_npl_resolution.pdf": {
+        "url": "https://www.bis.org/publ/work834.pdf",
+        "description": "BIS Working Paper: NPL Resolution — Lessons from Europe",
     },
 
-    # ── OCC Comptroller's Handbook — all reliably downloadable ────────────────
-    {
-        "filename":    "occ_bank_supervision_process.pdf",
-        "url":         "https://www.occ.treas.gov/publications-and-resources/publications/comptrollers-handbook/files/bank-supervision-process/pub-ch-bank-supervision-process.pdf",
-        "description": "OCC Comptroller's Handbook — Bank Supervision Process (CAMELS)",
-        "category":    "camels_methodology",
-        "priority":    1,
+    # ── OCC Comptroller's Handbook ────────────────────────────────────────────
+    # URLs verified May 2026 — OCC restructured some paths
+    "occ_bank_supervision_process.pdf": {
+        "url": "https://www.occ.gov/publications-and-resources/publications/comptrollers-handbook/files/bank-supervision-process/pub-ch-bank-supervision-process.pdf",
+        "description": "OCC Handbook: Bank Supervision Process (CAMELS)",
     },
-    {
-        "filename":    "occ_liquidity_handbook.pdf",
-        "url":         "https://www.occ.treas.gov/publications-and-resources/publications/comptrollers-handbook/files/liquidity/pub-ch-liquidity.pdf",
-        "description": "OCC Comptroller's Handbook — Liquidity",
-        "category":    "liquidity_methodology",
-        "priority":    1,
+    "occ_earnings_handbook.pdf": {
+        "url": "https://www.occ.gov/publications-and-resources/publications/comptrollers-handbook/files/earnings/pub-ch-earnings.pdf",
+        "description": "OCC Handbook: Earnings",
     },
-    {
-        "filename":    "occ_loan_portfolio_management.pdf",
-        "url":         "https://www.occ.treas.gov/publications-and-resources/publications/comptrollers-handbook/files/loan-portfolio-management/pub-ch-loan-portfolio-management.pdf",
-        "description": "OCC Comptroller's Handbook — Loan Portfolio Management",
-        "category":    "asset_quality",
-        "priority":    1,
+    "occ_liquidity_handbook.pdf": {
+        "url": "https://www.occ.gov/publications-and-resources/publications/comptrollers-handbook/files/liquidity/pub-ch-liquidity.pdf",
+        "description": "OCC Handbook: Liquidity",
     },
-    {
-        "filename":    "occ_capital_adequacy.pdf",
-        "url":         "https://www.occ.treas.gov/publications-and-resources/publications/comptrollers-handbook/files/capital-adequacy/pub-ch-capital-adequacy.pdf",
-        "description": "OCC Comptroller's Handbook — Capital Adequacy",
-        "category":    "capital_methodology",
-        "priority":    1,
+    "occ_capital_handbook.pdf": {
+        "url": "https://www.occ.gov/publications-and-resources/publications/comptrollers-handbook/files/capital-dividends/pub-ch-capital-and-dividends.pdf",
+        "description": "OCC Handbook: Capital and Dividends",
     },
-    {
-        "filename":    "occ_earnings_handbook.pdf",
-        "url":         "https://www.occ.treas.gov/publications-and-resources/publications/comptrollers-handbook/files/earnings/pub-ch-earnings.pdf",
-        "description": "OCC Comptroller's Handbook — Earnings",
-        "category":    "earnings_methodology",
-        "priority":    1,
+    "occ_credit_risk_handbook.pdf": {
+        "url": "https://www.occ.gov/publications-and-resources/publications/comptrollers-handbook/files/credit-risk-review/pub-ch-credit-risk-review.pdf",
+        "description": "OCC Handbook: Credit Risk Review",
     },
-    {
-        "filename":    "occ_sensitivity_market_risk.pdf",
-        "url":         "https://www.occ.treas.gov/publications-and-resources/publications/comptrollers-handbook/files/sensitivity-to-market-risk/pub-ch-sensitivity-to-market-risk.pdf",
-        "description": "OCC Comptroller's Handbook — Sensitivity to Market Risk",
-        "category":    "market_risk",
-        "priority":    1,
+    "occ_asset_quality_handbook.pdf": {
+        "url": "https://www.occ.gov/publications-and-resources/publications/comptrollers-handbook/files/loans/pub-ch-loan-portfolio-management.pdf",
+        "description": "OCC Handbook: Loan Portfolio Management (Asset Quality)",
+    },
+    "occ_sensitivity_handbook.pdf": {
+        "url": "https://www.occ.gov/publications-and-resources/publications/comptrollers-handbook/files/interest-rate-risk/pub-ch-interest-rate-risk.pdf",
+        "description": "OCC Handbook: Interest Rate Risk (Sensitivity)",
+    },
+
+    # ── FDIC ─────────────────────────────────────────────────────────────────
+    "fdic_bank_examination_overview.pdf": {
+        "url": "https://www.fdic.gov/regulations/examinations/supervisory/insights/siwin04/siwin04.pdf",
+        "description": "FDIC: Bank Examination Overview",
+    },
+    "fdic_risk_management_manual.pdf": {
+        "url": "https://www.fdic.gov/bank/historical/managing/managingthecrisis-complete.pdf",
+        "description": "FDIC: Managing the Crisis — Bank Examination Manual",
+    },
+
+    # ── PRA / Bank of England ─────────────────────────────────────────────────
+    "pra_approach_banking_supervision.pdf": {
+        "url": "https://www.bankofengland.co.uk/-/media/boe/files/prudential-regulation/publication/2016/the-pras-approach-to-banking-supervision.pdf",
+        "description": "PRA: Approach to Banking Supervision",
     },
 
     # ── EBA ───────────────────────────────────────────────────────────────────
-    {
-        "filename":    "eba_srep_guidelines_2018.pdf",
-        "url":         "https://www.eba.europa.eu/sites/default/files/documents/10180/2002660/f5648ae8-a32e-4e8a-82d7-ba6ce0778b18/Final%20Guidelines%20on%20SREP%20and%20Pillar%202.pdf",
-        "description": "EBA Guidelines on SREP and Pillar 2 (2018)",
-        "category":    "regulatory_guidance",
-        "priority":    1,
+    # EBA restructured their document URLs — using direct asset paths
+    "eba_srep_guidelines.pdf": {
+        "url": "https://www.eba.europa.eu/sites/default/files/document_library/Publications/Guidelines/2014/EBA-GL-2014-13/1026151/EBA-GL-2014-13-Guidelines-on-SREP.pdf",
+        "description": "EBA: SREP Guidelines",
     },
-    {
-        "filename":    "eba_npl_guidelines.pdf",
-        "url":         "https://www.eba.europa.eu/sites/default/files/documents/10180/2425773/b4614e97-fcd6-4bd9-8c89-80f9b98eb5d4/EBA%20GL%202018%2006%20Guidelines%20on%20management%20of%20non-performing%20exposures.pdf",
-        "description": "EBA Guidelines on management of non-performing exposures",
-        "category":    "asset_quality",
-        "priority":    1,
-    },
-    {
-        "filename":    "eba_stress_test_methodology_2023.pdf",
-        "url":         "https://www.eba.europa.eu/sites/default/files/document_library/Risk%20Analysis%20and%20Data/EU-wide%20Stress%20Testing/2023/2551228/2023%20EU-wide%20stress%20test%20-%20Methodological%20Note.pdf",
-        "description": "EBA 2023 EU-wide Stress Test Methodological Note",
-        "category":    "stress_testing",
-        "priority":    2,
+    "eba_pillar3_guidelines.pdf": {
+        "url": "https://www.eba.europa.eu/sites/default/files/document_library/Publications/Guidelines/2022/EBA-GL-2022-01/1049838/EBA-GL-2022-01%20Guidelines%20on%20Pillar%203%20disclosures.pdf",
+        "description": "EBA: Pillar 3 Disclosure Guidelines",
     },
 
-    # ── Bank of England / PRA — direct PDF links ──────────────────────────────
-    {
-        "filename":    "pra_approach_banking_supervision.pdf",
-        "url":         "https://www.bankofengland.co.uk/-/media/boe/files/prudential-regulation/approach/banking-approach-2018.pdf",
-        "description": "PRA — The Prudential Regulation Authority's approach to banking supervision",
-        "category":    "regulatory_guidance",
-        "priority":    1,
+    # ── Federal Reserve ───────────────────────────────────────────────────────
+    "fed_camels_guidance.pdf": {
+        "url": "https://www.federalreserve.gov/publications/files/bhcsupervision0212.pdf",
+        "description": "Fed: BHC Supervision Manual (CAMELS framework)",
     },
-    {
-        "filename":    "pra_icaap_ilaap_supervisory_expectations.pdf",
-        "url":         "https://www.bankofengland.co.uk/-/media/boe/files/prudential-regulation/supervisory-statement/2023/ss315-update-sept-2023.pdf",
-        "description": "PRA SS3/15 — The Internal Capital Adequacy Assessment Process (ICAAP)",
-        "category":    "capital_methodology",
-        "priority":    1,
+    "fed_dfast_2024.pdf": {
+        "url": "https://www.federalreserve.gov/publications/files/2024-dfast-results-20240626.pdf",
+        "description": "Fed: DFAST 2024 Stress Test Results",
+    },
+    "fed_dfast_2023.pdf": {
+        "url": "https://www.federalreserve.gov/publications/files/2023-dfast-results-20230628.pdf",
+        "description": "Fed: DFAST 2023 Stress Test Results",
     },
 
-    # ── IMF ───────────────────────────────────────────────────────────────────
-    {
-        "filename":    "imf_financial_soundness_indicators.pdf",
-        "url":         "https://www.imf.org/en/Publications/Manuals-Guides/Issues/2019/05/21/Financial-Soundness-Indicators-Compilation-Guide-46113",
-        "description": "IMF Financial Soundness Indicators Compilation Guide 2019",
-        "category":    "camels_methodology",
-        "priority":    1,
-        "manual_url":  "https://www.imf.org/en/Publications/Manuals-Guides/Issues/2019/05/21/Financial-Soundness-Indicators-Compilation-Guide-46113",
-        "manual_note": "Click Download PDF",
+    # ── IMF GFSR — correct URLs use lowercase 'files' not 'Files', no .ashx ──
+    "imf_gfsr_2024_april.pdf": {
+        "url": "https://www.imf.org/-/media/files/publications/gfsr/2024/april/english/text.pdf",
+        "description": "IMF GFSR April 2024 — Bank Credit Risk Analysis",
     },
-    {
-        "filename":    "imf_fsi_guide_2019.pdf",
-        "url":         "https://www.imf.org/-/media/Files/Publications/manuals-guides/2019/fsi-compilation-guide.ashx",
-        "description": "IMF Financial Soundness Indicators Guide 2019 (direct PDF)",
-        "category":    "camels_methodology",
-        "priority":    1,
+    "imf_gfsr_2023_october.pdf": {
+        "url": "https://www.imf.org/-/media/files/publications/gfsr/2023/october/english/text.pdf",
+        "description": "IMF GFSR October 2023 — Financial Stability Analysis",
     },
-]
+    "imf_gfsr_2023_april.pdf": {
+        "url": "https://www.imf.org/-/media/files/publications/gfsr/2023/april/english/text.pdf",
+        "description": "IMF GFSR April 2023 — Banking Stress and Resilience",
+    },
+    "imf_gfsr_2022_october.pdf": {
+        "url": "https://www.imf.org/-/media/files/publications/gfsr/2022/october/english/text.pdf",
+        "description": "IMF GFSR October 2022 — Global Financial Stability",
+    },
 
-# ── Manual download list — good sources that need browser/registration ────────
-MANUAL_DOWNLOADS = [
-    {
-        "filename":    "moodys_banks_rating_methodology.pdf",
-        "url":         "https://www.moodys.com/researchandratings/research-type/ratings-methodologies",
+    # ── IMF FSAP — use elibrary PDF downloads ─────────────────────────────────
+    # IMF FSAP pages redirect to HTML — use direct elibrary PDF links
+    "imf_fsap_uk_2021.pdf": {
+        "url": "https://www.imf.org/-/media/files/publications/cr/2021/english/1creng2021516.ashx",
+        "description": "IMF FSAP: UK Bank Solvency Stress Testing 2021",
+    },
+    "imf_fsap_us_2020.pdf": {
+        "url": "https://www.imf.org/-/media/files/publications/cr/2020/english/1creng202049.ashx",
+        "description": "IMF FSAP: US Bank Stress Testing 2020",
+    },
+    "imf_fsap_germany_2024.pdf": {
+        "url": "https://www.imf.org/-/media/files/publications/cr/2024/english/1creng2024129.ashx",
+        "description": "IMF FSAP: Germany Banking Supervision 2024",
+    },
+    "imf_fsap_eu_banking_2018.pdf": {
+        "url": "https://www.imf.org/-/media/files/publications/cr/2018/english/1creng201842.ashx",
+        "description": "IMF FSAP: Euro Area Financial System Stability Assessment 2018",
+    },
+
+    # ── IMF Working Papers — use direct PDF pattern ───────────────────────────
+    "imf_wp_bank_ratings_methodology.pdf": {
+        "url": "https://www.imf.org/-/media/files/publications/wp/2016/1wp16189.ashx",
+        "description": "IMF WP: What Do Bank Ratings Tell Us About Capital Adequacy",
+    },
+    "imf_wp_npl_determinants.pdf": {
+        "url": "https://www.imf.org/-/media/files/publications/wp/2015/1wp15161.ashx",
+        "description": "IMF WP: Non-Performing Loans — Determinants and Impact",
+    },
+    "imf_wp_bank_capital_procyclicality.pdf": {
+        "url": "https://www.imf.org/-/media/files/publications/wp/2016/1wp16169.ashx",
+        "description": "IMF WP: Bank Capital Buffers — Dynamic Model",
+    },
+}
+
+MANUAL_DOCS = {
+    "fitch_rating.pdf": {
+        "description": "Fitch Banks Rating Criteria",
+        "check_scanned": True,
+        "steps": [
+            "1. Register free: https://www.fitchratings.com/site/register",
+            "2. Go to: https://www.fitchratings.com/research/banks/global-banks-rating-criteria",
+            "3. If embedded in iframe: Cmd+P → Save as PDF",
+            "4. Save to: rating_agency/fitch_rating.pdf",
+        ],
+    },
+    "moodys_rating.pdf": {
         "description": "Moody's Banks Rating Methodology",
-        "note":        "Free registration required. Search 'Banks' methodology.",
+        "check_scanned": False,
+        "steps": [
+            "1. Register free: https://www.moodys.com/researchandratings",
+            "2. Search: 'Banks' under Methodologies",
+            "3. If embedded in iframe: Cmd+P → Save as PDF",
+            "4. Save to: rating_agency/moodys_rating.pdf",
+            "",
+            "NOTE: Argentina methodology already in rating_agency/ covers the",
+            "analytical framework — only country risk tables differ.",
+        ],
     },
-    {
-        "filename":    "sp_banks_rating_methodology.pdf",
-        "url":         "https://www.spglobal.com/ratings/en/research-insights/criteria",
-        "description": "S&P Global — Banks Rating Methodology (you may already have this)",
-        "note":        "Free registration. Search 'Banks' criteria.",
+    "standard_poors_rating.pdf": {
+        "description": "S&P Global Banks Rating Criteria",
+        "check_scanned": False,
+        "steps": [
+            "1. Register free: https://www.spglobal.com/ratings/en/research-insights/register",
+            "2. Search: 'Financial Institutions Rating Criteria'",
+            "3. If embedded in iframe: Cmd+P → Save as PDF",
+            "4. Save to: rating_agency/standard_poors_rating.pdf",
+        ],
     },
-    {
-        "filename":    "dbrs_global_banks_methodology.pdf",
-        "url":         "https://dbrs.morningstar.com/research/398692",
-        "description": "DBRS Morningstar — Global Methodology for Rating Banks (free, no login)",
-        "note":        "No registration needed. Direct download.",
-    },
-    {
-        "filename":    "fdic_camels_rating_system.pdf",
-        "url":         "https://www.fdic.gov/regulations/safety/manual/",
-        "description": "FDIC Risk Management Manual Section 6.1 — CAMELS",
-        "note":        "Navigate to Section 6 → 6.1 Uniform Financial Institutions Rating System",
-    },
-]
-
-
-def http_get_bytes(url: str, timeout: int = 60) -> bytes | None:
-    req = urllib.request.Request(url, headers=HEADERS)
-    try:
-        with urllib.request.urlopen(req, context=SSL_CONTEXT, timeout=timeout) as r:
-            data = r.read()
-            # Reject HTML pages returned instead of PDFs
-            if data[:5] in (b"%PDF-", b"%PDF "):
-                return data   # genuine PDF
-            if b"<!DOCTYPE" in data[:200] or b"<html" in data[:200].lower():
-                return None   # HTML error page
-            if len(data) > 50_000:
-                return data   # large enough — probably fine
-            return None
-    except urllib.error.HTTPError as e:
-        if e.code not in (404, 403):
-            error(f"  HTTP {e.code}: {url[-70:]}")
-        return None
-    except Exception as e:
-        error(f"  Failed: {e}")
-        return None
+}
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dry-run",  action="store_true")
-    parser.add_argument("--priority", type=int, default=2,
-                        help="Max priority level to download (1=critical only, 2=all)")
+    parser.add_argument("--skip-manual", action="store_true")
+    parser.add_argument("--reprocess",   action="store_true")
     args = parser.parse_args()
 
-    docs = [d for d in DOCUMENTS if d.get("priority", 2) <= args.priority]
-    docs.sort(key=lambda d: d.get("priority", 2))
+    log = {"run_at": datetime.now().isoformat(), "docs": {}}
 
-    print(f"\nRating Agency & Regulatory Document Downloader")
-    print(f"Documents to attempt: {len(docs)}")
+    print(f"\nRating Agency + Regulatory Document Downloader")
     print(f"Output: {RATING_DIR}\n")
 
-    log = {"run_at": datetime.now().isoformat(), "results": []}
-    downloaded, skipped, failed = 0, 0, 0
-    failed_list = []
+    groups = {
+        "BIS / Basel Committee":      [k for k in AUTOMATED_DOCS if k.startswith("bas") or k.startswith("bis")],
+        "OCC Comptroller's Handbook": [k for k in AUTOMATED_DOCS if k.startswith("occ")],
+        "FDIC":                       [k for k in AUTOMATED_DOCS if k.startswith("fdic")],
+        "PRA / Bank of England":      [k for k in AUTOMATED_DOCS if k.startswith("pra")],
+        "EBA":                        [k for k in AUTOMATED_DOCS if k.startswith("eba")],
+        "Federal Reserve":            [k for k in AUTOMATED_DOCS if k.startswith("fed")],
+        "IMF GFSR Reports":           [k for k in AUTOMATED_DOCS if k.startswith("imf_gfsr")],
+        "IMF FSAP Reports":           [k for k in AUTOMATED_DOCS if k.startswith("imf_fsap")],
+        "IMF Working Papers":         [k for k in AUTOMATED_DOCS if k.startswith("imf_wp")],
+    }
 
-    for doc in docs:
-        dest_path = RATING_DIR / doc["filename"]
+    downloaded = failed = 0
 
-        print(f"[P{doc.get('priority',2)}] {doc['description'][:65]}")
-
-        if dest_path.exists() and dest_path.stat().st_size > 10_000:
-            size_kb = dest_path.stat().st_size // 1024
-            info(f"  Already have: {doc['filename']} ({size_kb}KB)")
-            log["results"].append({"file": doc["filename"], "status": "exists"})
-            skipped += 1
+    for group_name, filenames in groups.items():
+        if not filenames:
             continue
+        print(f"\n{'─'*60}")
+        print(f" {group_name}")
+        print(f"{'─'*60}")
+        for filename in filenames:
+            meta = AUTOMATED_DOCS[filename]
+            dest = RATING_DIR / filename
+            if args.reprocess and dest.exists():
+                dest.unlink()
+            result = download(meta["url"], dest, meta["description"])
+            log["docs"][filename] = {"status": "ok" if result else "failed"}
+            if result:
+                downloaded += 1
+            else:
+                failed += 1
+            time.sleep(0.3)
 
-        if args.dry_run:
-            action(f"  Would download: {doc['url'][-65:]}")
-            continue
-
-        action(f"  {doc['url'][-65:]}")
-        content = http_get_bytes(doc["url"])
-
-        if content and len(content) > 10_000:
-            dest_path.write_bytes(content)
-            size_kb = len(content) // 1024
-            info(f"  ✅ {doc['filename']} ({size_kb}KB)")
-            log["results"].append({"file": doc["filename"], "status": "downloaded",
-                                   "size_kb": size_kb})
-            downloaded += 1
-        else:
-            warn(f"  ⚠️  Failed")
-            log["results"].append({"file": doc["filename"], "status": "failed",
-                                   "url": doc["url"]})
-            failed += 1
-            failed_list.append(doc)
-
-        time.sleep(0.3)
-
-    # ── Write log ─────────────────────────────────────────────────────────────
-    log_path = LOGS_DIR / "rating_agency_download_log.json"
-    with open(log_path, "w") as f:
-        json.dump(log, f, indent=2)
-
-    # ── Summary ───────────────────────────────────────────────────────────────
-    print(f"\n{'='*60}")
-    print(f"Downloaded  : {downloaded}")
-    print(f"Already had : {skipped}")
-    print(f"Failed      : {failed}")
-
-    if failed_list:
-        print(f"\nFailed downloads — try these manually:")
-        for doc in failed_list:
-            manual_url  = doc.get("manual_url", doc["url"])
-            manual_note = doc.get("manual_note", "")
-            print(f"  • {doc['description']}")
-            print(f"    Save as: rating_agency/{doc['filename']}")
-            print(f"    URL: {manual_url}")
-            if manual_note:
-                print(f"    Note: {manual_note}")
-            print()
-
-    print(f"\nMANUAL DOWNLOADS (registration/browser required):")
-    for doc in MANUAL_DOWNLOADS:
-        exists = (RATING_DIR / doc["filename"]).exists()
-        status = "✅ already have" if exists else "⬜ needed"
-        print(f"  {status} {doc['description']}")
-        if not exists:
-            print(f"    URL:  {doc['url']}")
-            print(f"    Save: rating_agency/{doc['filename']}")
-            print(f"    Note: {doc['note']}")
-        print()
+    if not args.skip_manual:
+        print(f"\n{'='*60}")
+        print(" MANUAL DOWNLOADS (free registration required)")
+        print(f"{'='*60}")
+        for filename, meta in MANUAL_DOCS.items():
+            dest = RATING_DIR / filename
+            if is_valid_pdf(dest):
+                size_mb = dest.stat().st_size / 1_048_576
+                if meta.get("check_scanned") and size_mb < 5:
+                    print(f"\n⚠️  {meta['description']} — SCANNED ({size_mb:.1f}MB) — replace:")
+                    for step in meta["steps"]:
+                        print(f"   {step}")
+                else:
+                    info(f"{filename} — valid PDF ({size_mb:.1f}MB) ✅")
+            else:
+                print(f"\n⬜ {meta['description']}")
+                for step in meta["steps"]:
+                    print(f"   {step}")
 
     all_files = list(RATING_DIR.glob("*.pdf"))
-    print(f"Total files in rating_agency/: {len(all_files)}")
-    print(f"\nNext: ./run.sh --reprocess\n")
+    valid = sum(1 for f in all_files if is_valid_pdf(f))
+    print(f"\n{'='*60}")
+    print(f" SUMMARY")
+    print(f"{'='*60}")
+    print(f" Files in rating_agency/ : {len(all_files)}")
+    print(f" Valid PDFs              : {valid}")
+    print(f" Downloaded this run     : {downloaded}")
+    print(f" Failed                  : {failed}")
+    print(f"\n Next: ./run.sh --reprocess")
+
+    with open(LOGS_DIR / "rating_agency_download_log.json", "w") as f:
+        json.dump(log, f, indent=2)
 
 
 if __name__ == "__main__":

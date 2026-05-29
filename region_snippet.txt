@@ -1,0 +1,9 @@
+    "AU": [
+        "commonwealth bank", "cba", "anz", "westpac", "national australia bank", "nab",
+    ],
+    # Canadian banks — RWA reported in CAD. Only compare RWA within region_CA.
+    "CA": [
+        "royal bank of canada", "rbc", "toronto-dominion", "td bank",
+        "bank of nova scotia", "scotiabank", "bank of montreal", "bmo",
+        "canadian imperial", "cibc",
+    ],

@@ -1,0 +1,1874 @@
+
+===================================================================
+ Annual Report + Pillar 3 Downloader
+ Started: Tue 26 May 2026 18:47:02 BST
+===================================================================
+[0;36m[GET][0m    Lloyds 2023 Annual Report
+[0;36m[GET][0m      → https://www.lloydsbankinggroup.com/assets/pdfs/investors/2023/2023-lbg-annual-report-20f.pdf
+[0;31m[FAIL][0m   Lloyds 2023 Annual Report — HTTP 404, size 283241B
+[0;36m[GET][0m    Lloyds 2020 Annual Report
+[0;36m[GET][0m      → https://www.lloydsbankinggroup.com/assets/pdfs/investors/2020/lloyds-banking-group-2020-annual-report.pdf
+[0;31m[FAIL][0m   Lloyds 2020 Annual Report — HTTP 404, size 283241B
+[0;36m[GET][0m    HSBC 2025 Annual Report
+[0;36m[GET][0m      → https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2025/annual/pdfs/hsbc-holdings-plc/hsbc-2025-annual-report-and-accounts.pdf
+[0;31m[FAIL][0m   HSBC 2025 Annual Report — HTTP 404, size 126113B
+[0;36m[GET][0m    HSBC 2024 Annual Report
+[0;36m[GET][0m      → https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2024/annual/pdfs/hsbc-holdings-plc/hsbc-2024-annual-report-and-accounts.pdf
+[0;31m[FAIL][0m   HSBC 2024 Annual Report — HTTP 404, size 126113B
+[0;36m[GET][0m    HSBC 2023 Annual Report
+[0;36m[GET][0m      → https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2023/annual/pdfs/hsbc-holdings-plc/hsbc-2023-annual-report-and-accounts.pdf
+[0;31m[FAIL][0m   HSBC 2023 Annual Report — HTTP 404, size 126113B
+[0;36m[GET][0m    HSBC 2022 Annual Report
+[0;36m[GET][0m      → https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2022/annual/pdfs/hsbc-holdings-plc/hsbc-2022-annual-report-and-accounts.pdf
+[0;31m[FAIL][0m   HSBC 2022 Annual Report — HTTP 404, size 126113B
+[0;36m[GET][0m    HSBC 2021 Annual Report
+[0;36m[GET][0m      → https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2021/annual/pdfs/hsbc-holdings-plc/hsbc-2021-annual-report-and-accounts.pdf
+[0;31m[FAIL][0m   HSBC 2021 Annual Report — HTTP 404, size 126113B
+[0;36m[GET][0m    HSBC 2020 Annual Report
+[0;36m[GET][0m      → https://www.hsbc.com/-/files/hsbc/investors/hsbc-results/2020/annual/pdfs/hsbc-holdings-plc/hsbc-2020-annual-report-and-accounts.pdf
+[0;31m[FAIL][0m   HSBC 2020 Annual Report — HTTP 404, size 126113B
+[0;36m[GET][0m    NatWest 2024 Annual Report
+[0;36m[GET][0m      → https://investors.natwestgroup.com/~/media/Files/N/Natwest-Group-Investor/documents/2025/natwest-group-annual-report-and-accounts-2024.pdf
+[0;31m[FAIL][0m   NatWest 2024 Annual Report — HTTP 200, size 0B
+[0;36m[GET][0m    NatWest 2023 Annual Report
+[0;36m[GET][0m      → https://investors.natwestgroup.com/~/media/Files/N/Natwest-Group-Investor/documents/2024/natwest-group-annual-report-and-accounts-2023.pdf
+[0;31m[FAIL][0m   NatWest 2023 Annual Report — HTTP 200, size 0B
+[0;36m[GET][0m    NatWest 2022 Annual Report
+[0;36m[GET][0m      → https://investors.natwestgroup.com/~/media/Files/N/Natwest-Group-Investor/documents/2023/natwest-group-annual-report-and-accounts-2022.pdf
+[0;31m[FAIL][0m   NatWest 2022 Annual Report — HTTP 200, size 0B
+[0;36m[GET][0m    NatWest 2021 Annual Report
+[0;36m[GET][0m      → https://investors.natwestgroup.com/~/media/Files/N/Natwest-Group-Investor/documents/2022/natwest-group-annual-report-and-accounts-2021.pdf
+[0;31m[FAIL][0m   NatWest 2021 Annual Report — HTTP 200, size 0B
+[0;36m[GET][0m    NatWest 2020 Annual Report
+[0;36m[GET][0m      → https://investors.natwestgroup.com/~/media/Files/N/Natwest-Group-Investor/documents/2021/natwest-group-annual-report-and-accounts-2020.pdf
+[0;31m[FAIL][0m   NatWest 2020 Annual Report — HTTP 200, size 0B
+[0;36m[GET][0m    Standard Chartered 2024 Annual Report
+[0;36m[GET][0m      → https://av.sc.com/corp-en/content/docs/standard-chartered-annual-report-2024.pdf
+[0;31m[FAIL][0m   Standard Chartered 2024 Annual Report — HTTP 403, size 111B
+[0;36m[GET][0m    Standard Chartered 2023 Annual Report
+[0;36m[GET][0m      → https://av.sc.com/corp-en/content/docs/standard-chartered-annual-report-2023.pdf
+[0;31m[FAIL][0m   Standard Chartered 2023 Annual Report — HTTP 403, size 111B
+[0;36m[GET][0m    Standard Chartered 2022 Annual Report
+[0;36m[GET][0m      → https://av.sc.com/corp-en/content/docs/standard-chartered-annual-report-2022.pdf
+[0;31m[FAIL][0m   Standard Chartered 2022 Annual Report — HTTP 403, size 111B
+[0;36m[GET][0m    Standard Chartered 2021 Annual Report
+[0;36m[GET][0m      → https://av.sc.com/corp-en/content/docs/standard-chartered-annual-report-2021.pdf
+[0;31m[FAIL][0m   Standard Chartered 2021 Annual Report — HTTP 403, size 111B
+[0;36m[GET][0m    Standard Chartered 2020 Annual Report
+[0;36m[GET][0m      → https://av.sc.com/corp-en/content/docs/standard-chartered-annual-report-2020.pdf
+[0;31m[FAIL][0m   Standard Chartered 2020 Annual Report — HTTP 403, size 111B
+
+===================================================================
+ Annual Report + Pillar 3 Downloader
+ Started: Wed 27 May 2026 06:45:16 BST
+===================================================================
+[0;36m[GET][0m    Lloyds 2023
+[0;32m[OK][0m     Lloyds 2023 — 276KB
+[0;36m[GET][0m    Lloyds 2020
+[0;32m[OK][0m     Lloyds 2020 — 276KB
+[0;36m[GET][0m    HSBC 2024
+[0;32m[OK][0m     HSBC 2024 — 122KB
+[0;36m[GET][0m    HSBC 2023
+[0;32m[OK][0m     HSBC 2023 — 122KB
+[0;36m[GET][0m    HSBC 2022
+[0;32m[OK][0m     HSBC 2022 — 7195KB
+[0;36m[GET][0m    HSBC 2021
+[0;32m[OK][0m     HSBC 2021 — 11557KB
+[0;36m[GET][0m    HSBC 2020
+[0;32m[OK][0m     HSBC 2020 — 5412KB
+[0;36m[GET][0m    NatWest 2024
+[0;32m[OK][0m     NatWest 2024 — 19468KB
+[0;36m[GET][0m    NatWest 2023
+[0;32m[OK][0m     NatWest 2023 — 20111KB
+[0;36m[GET][0m    NatWest 2022
+[0;31m[FAIL][0m   NatWest 2022 — HTTP 404 (size 3123B) — https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/17022023/nwg-annual-report-and-accounts-2022.pdf
+[0;36m[GET][0m    NatWest 2021
+[0;31m[FAIL][0m   NatWest 2021 — HTTP 404 (size 3123B) — https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/18022022/nwg-annual-report-and-accounts-2021.pdf
+[0;36m[GET][0m    NatWest 2020
+[0;31m[FAIL][0m   NatWest 2020 — HTTP 404 (size 3123B) — https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/19022021/nwg-annual-report-and-accounts-2020.pdf
+[1;33m[MANUAL][0m StanChart blocks automated downloads (HTTP 403)
+[1;33m[MANUAL][0m   Download from: https://www.sc.com/en/investors/results-and-reports/
+[1;33m[MANUAL][0m   Save as: financials/standard_chartered_<year>_annual_report.pdf
+[0;36m[GET][0m    Deutsche Bank 2024
+[0;32m[OK][0m     Deutsche Bank 2024 — 103KB
+[0;36m[GET][0m    Deutsche Bank 2023
+[0;32m[OK][0m     Deutsche Bank 2023 — 103KB
+[0;36m[GET][0m    Deutsche Bank 2022
+[0;32m[OK][0m     Deutsche Bank 2022 — 103KB
+[0;36m[GET][0m    Deutsche Bank 2021
+[0;32m[OK][0m     Deutsche Bank 2021 — 103KB
+[0;36m[GET][0m    Deutsche Bank 2020
+[0;32m[OK][0m     Deutsche Bank 2020 — 103KB
+[0;36m[GET][0m    BNP Paribas 2024
+[0;31m[FAIL][0m   BNP Paribas 2024 — HTTP 404 (size 42300B) — https://invest.bnpparibas/sites/default/files/documents/bnp_paribas_2024_annual_report.pdf
+[0;36m[GET][0m    BNP Paribas 2023
+[0;31m[FAIL][0m   BNP Paribas 2023 — HTTP 404 (size 42300B) — https://invest.bnpparibas/sites/default/files/documents/bnp_paribas_2023_annual_report.pdf
+[0;36m[GET][0m    BNP Paribas 2022
+[0;31m[FAIL][0m   BNP Paribas 2022 — HTTP 404 (size 42300B) — https://invest.bnpparibas/sites/default/files/documents/bnp_paribas_2022_annual_report.pdf
+[0;36m[GET][0m    BNP Paribas 2021
+[0;31m[FAIL][0m   BNP Paribas 2021 — HTTP 404 (size 42300B) — https://invest.bnpparibas/sites/default/files/documents/bnp_paribas_2021_annual_report.pdf
+[0;36m[GET][0m    BNP Paribas 2020
+[0;31m[FAIL][0m   BNP Paribas 2020 — HTTP 404 (size 42300B) — https://invest.bnpparibas/sites/default/files/documents/bnp_paribas_2020_annual_report.pdf
+[0;36m[GET][0m    UniCredit 2024
+[0;32m[OK][0m     UniCredit 2024 — 149KB
+[0;36m[GET][0m    UniCredit 2023
+[0;32m[OK][0m     UniCredit 2023 — 149KB
+[0;36m[GET][0m    UniCredit 2022
+[0;32m[OK][0m     UniCredit 2022 — 149KB
+[0;36m[GET][0m    UniCredit 2021
+[0;32m[OK][0m     UniCredit 2021 — 149KB
+[0;36m[GET][0m    UniCredit 2020
+[0;32m[OK][0m     UniCredit 2020 — 149KB
+[0;36m[GET][0m    Santander 2024
+[0;32m[OK][0m     Santander 2024 — 89KB
+[0;36m[GET][0m    Santander 2023
+[0;32m[OK][0m     Santander 2023 — 89KB
+[0;36m[GET][0m    Santander 2022
+[0;32m[OK][0m     Santander 2022 — 89KB
+[0;36m[GET][0m    Santander 2021
+[0;32m[OK][0m     Santander 2021 — 89KB
+[0;36m[GET][0m    Santander 2020
+[0;32m[OK][0m     Santander 2020 — 89KB
+[0;36m[GET][0m    ING 2024
+[0;32m[OK][0m     ING 2024 — 222KB
+[0;36m[GET][0m    ING 2023
+[0;32m[OK][0m     ING 2023 — 222KB
+[0;36m[GET][0m    ING 2022
+[0;32m[OK][0m     ING 2022 — 222KB
+[0;36m[GET][0m    ING 2021
+[0;32m[OK][0m     ING 2021 — 222KB
+[0;36m[GET][0m    ING 2020
+[0;32m[OK][0m     ING 2020 — 222KB
+[0;36m[GET][0m    ABN AMRO 2024
+[0;32m[OK][0m     ABN AMRO 2024 — 378KB
+[0;36m[GET][0m    ABN AMRO 2023
+[0;32m[OK][0m     ABN AMRO 2023 — 378KB
+[0;36m[GET][0m    ABN AMRO 2022
+[0;32m[OK][0m     ABN AMRO 2022 — 378KB
+[0;36m[GET][0m    ABN AMRO 2021
+[0;32m[OK][0m     ABN AMRO 2021 — 378KB
+[0;36m[GET][0m    ABN AMRO 2020
+[0;32m[OK][0m     ABN AMRO 2020 — 378KB
+[0;36m[GET][0m    Intesa Sanpaolo 2024
+[0;32m[OK][0m     Intesa Sanpaolo 2024 — 225KB
+[0;36m[GET][0m    Intesa Sanpaolo 2023
+[0;32m[OK][0m     Intesa Sanpaolo 2023 — 225KB
+[0;36m[GET][0m    Intesa Sanpaolo 2022
+[0;32m[OK][0m     Intesa Sanpaolo 2022 — 225KB
+[0;36m[GET][0m    Intesa Sanpaolo 2021
+[0;32m[OK][0m     Intesa Sanpaolo 2021 — 225KB
+[0;36m[GET][0m    CBA 2024
+[0;31m[FAIL][0m   CBA 2024 — HTTP 404 (size 47342B) — https://www.commbank.com.au/content/dam/commbank-assets/investors/2024-annual-report/cba-annual-report-2024.pdf
+[0;36m[GET][0m    CBA 2023
+[0;31m[FAIL][0m   CBA 2023 — HTTP 404 (size 47342B) — https://www.commbank.com.au/content/dam/commbank-assets/investors/2023-annual-report/cba-annual-report-2023.pdf
+[0;36m[GET][0m    CBA 2022
+[0;31m[FAIL][0m   CBA 2022 — HTTP 404 (size 47342B) — https://www.commbank.com.au/content/dam/commbank-assets/investors/2022-annual-report/cba-annual-report-2022.pdf
+[0;36m[GET][0m    CBA 2021
+[0;31m[FAIL][0m   CBA 2021 — HTTP 404 (size 47342B) — https://www.commbank.com.au/content/dam/commbank-assets/investors/2021-annual-report/cba-annual-report-2021.pdf
+[0;36m[GET][0m    CBA 2020
+[0;31m[FAIL][0m   CBA 2020 — HTTP 404 (size 47342B) — https://www.commbank.com.au/content/dam/commbank-assets/investors/2020-annual-report/cba-annual-report-2020.pdf
+[0;36m[GET][0m    ANZ 2024
+[0;32m[OK][0m     ANZ 2024 — 196KB
+[0;36m[GET][0m    ANZ 2023
+[0;32m[OK][0m     ANZ 2023 — 196KB
+[0;36m[GET][0m    ANZ 2022
+[0;32m[OK][0m     ANZ 2022 — 196KB
+[0;36m[GET][0m    ANZ 2021
+[0;32m[OK][0m     ANZ 2021 — 196KB
+[0;36m[GET][0m    ANZ 2020
+[0;32m[OK][0m     ANZ 2020 — 196KB
+[0;36m[GET][0m    Westpac 2024
+[0;32m[OK][0m     Westpac 2024 — 66KB
+[0;36m[GET][0m    Westpac 2023
+[0;32m[OK][0m     Westpac 2023 — 66KB
+[0;36m[GET][0m    Westpac 2022
+[0;32m[OK][0m     Westpac 2022 — 66KB
+[0;36m[GET][0m    Westpac 2021
+[0;32m[OK][0m     Westpac 2021 — 66KB
+[0;36m[GET][0m    Westpac 2020
+[0;32m[OK][0m     Westpac 2020 — 66KB
+[0;36m[GET][0m    NAB 2024
+[0;32m[OK][0m     NAB 2024 — 452KB
+[0;36m[GET][0m    NAB 2023
+[0;32m[OK][0m     NAB 2023 — 452KB
+[0;36m[GET][0m    NAB 2022
+[0;32m[OK][0m     NAB 2022 — 452KB
+[0;36m[GET][0m    NAB 2021
+[0;32m[OK][0m     NAB 2021 — 452KB
+[0;36m[GET][0m    NAB 2020
+[0;32m[OK][0m     NAB 2020 — 452KB
+[0;36m[GET][0m    Lloyds 2024 Pillar 3
+[0;32m[OK][0m     Lloyds 2024 Pillar 3 — 276KB
+[0;36m[GET][0m    Lloyds 2023 Pillar 3
+[0;32m[OK][0m     Lloyds 2023 Pillar 3 — 276KB
+[0;36m[GET][0m    Lloyds 2022 Pillar 3
+[0;32m[OK][0m     Lloyds 2022 Pillar 3 — 276KB
+[0;36m[GET][0m    Lloyds 2021 Pillar 3
+[0;32m[OK][0m     Lloyds 2021 Pillar 3 — 276KB
+[0;36m[GET][0m    HSBC 2024 Pillar 3
+[0;32m[OK][0m     HSBC 2024 Pillar 3 — 122KB
+[0;36m[GET][0m    HSBC 2023 Pillar 3
+[0;32m[OK][0m     HSBC 2023 Pillar 3 — 122KB
+[0;36m[GET][0m    HSBC 2022 Pillar 3
+[0;32m[OK][0m     HSBC 2022 Pillar 3 — 122KB
+[0;36m[GET][0m    Barclays 2024 Pillar 3
+[0;32m[OK][0m     Barclays 2024 Pillar 3 — 165KB
+[0;36m[GET][0m    Barclays 2023 Pillar 3
+[0;32m[OK][0m     Barclays 2023 Pillar 3 — 165KB
+[0;36m[GET][0m    Barclays 2022 Pillar 3
+[0;32m[OK][0m     Barclays 2022 Pillar 3 — 165KB
+[0;36m[GET][0m    Barclays 2021 Pillar 3
+[0;32m[OK][0m     Barclays 2021 Pillar 3 — 165KB
+[0;36m[GET][0m    Barclays 2020 Pillar 3
+[0;32m[OK][0m     Barclays 2020 Pillar 3 — 165KB
+[0;36m[GET][0m    NatWest 2024 Pillar 3
+[0;31m[FAIL][0m   NatWest 2024 Pillar 3 — HTTP 404 (size 3123B) — https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/14022025/nwg-2024-pillar-3-report.pdf
+[0;36m[GET][0m    NatWest 2023 Pillar 3
+[0;31m[FAIL][0m   NatWest 2023 Pillar 3 — HTTP 404 (size 3123B) — https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/16022024/nwg-2023-pillar-3-report.pdf
+[0;36m[GET][0m    NatWest 2022 Pillar 3
+[0;31m[FAIL][0m   NatWest 2022 Pillar 3 — HTTP 404 (size 3123B) — https://investors.natwestgroup.com/~/media/Files/R/RBS-IR-V2/results-center/17022023/nwg-2022-pillar-3-report.pdf
+[0;36m[GET][0m    Deutsche Bank 2024 Pillar 3
+[0;32m[OK][0m     Deutsche Bank 2024 Pillar 3 — 103KB
+[0;36m[GET][0m    Deutsche Bank 2023 Pillar 3
+[0;32m[OK][0m     Deutsche Bank 2023 Pillar 3 — 103KB
+[0;36m[GET][0m    Deutsche Bank 2022 Pillar 3
+[0;32m[OK][0m     Deutsche Bank 2022 Pillar 3 — 103KB
+[0;36m[GET][0m    Deutsche Bank 2021 Pillar 3
+[0;32m[OK][0m     Deutsche Bank 2021 Pillar 3 — 103KB
+[0;36m[GET][0m    BNP Paribas 2024 Pillar 3
+[0;31m[FAIL][0m   BNP Paribas 2024 Pillar 3 — HTTP 404 (size 42300B) — https://invest.bnpparibas/sites/default/files/documents/bnp_paribas_pillar3_2024.pdf
+[0;36m[GET][0m    BNP Paribas 2023 Pillar 3
+[0;31m[FAIL][0m   BNP Paribas 2023 Pillar 3 — HTTP 404 (size 42300B) — https://invest.bnpparibas/sites/default/files/documents/bnp_paribas_pillar3_2023.pdf
+[0;36m[GET][0m    BNP Paribas 2022 Pillar 3
+[0;31m[FAIL][0m   BNP Paribas 2022 Pillar 3 — HTTP 404 (size 42300B) — https://invest.bnpparibas/sites/default/files/documents/bnp_paribas_pillar3_2022.pdf
+[0;36m[GET][0m    UniCredit 2024 Pillar 3
+[0;32m[OK][0m     UniCredit 2024 Pillar 3 — 149KB
+[0;36m[GET][0m    UniCredit 2023 Pillar 3
+[0;32m[OK][0m     UniCredit 2023 Pillar 3 — 149KB
+[0;36m[GET][0m    UniCredit 2022 Pillar 3
+[0;32m[OK][0m     UniCredit 2022 Pillar 3 — 149KB
+[0;36m[GET][0m    JPMorgan 2024 Pillar 3
+[0;31m[FAIL][0m   JPMorgan 2024 Pillar 3 — HTTP 404 (size 6957B) — https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/basel-disclosures/basel-3-pillar-3-capital-disclosures-4q2024.pdf
+[0;36m[GET][0m    JPMorgan 2023 Pillar 3
+[0;31m[FAIL][0m   JPMorgan 2023 Pillar 3 — HTTP 404 (size 6957B) — https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/basel-disclosures/basel-3-pillar-3-capital-disclosures-4q2023.pdf
+[0;36m[GET][0m    JPMorgan 2022 Pillar 3
+[0;31m[FAIL][0m   JPMorgan 2022 Pillar 3 — HTTP 404 (size 6957B) — https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/basel-disclosures/basel-3-pillar-3-capital-disclosures-4q2022.pdf
+
+===================================================================
+ Annual Report + Pillar 3 Downloader
+ Started: Wed 27 May 2026 06:54:48 BST
+ Min valid PDF size: 200000 bytes
+===================================================================
+[0;32m[INFO][0m   Validating existing files...
+[1;33m[WARN][0m   INVALID (153419B, not a real PDF): unicredit_2021_annual_report.pdf
+[1;33m[WARN][0m   INVALID (227780B, not a real PDF): ing_group_2020_annual_report.pdf
+[1;33m[WARN][0m   INVALID (387498B, not a real PDF): abn_amro_2023_annual_report.pdf
+[1;33m[WARN][0m   INVALID (231405B, not a real PDF): intesa_sanpaolo_2023_annual_report.pdf
+[1;33m[WARN][0m   INVALID (125715B, not a real PDF): hsbc_holdings_2023_annual_report.pdf
+[1;33m[WARN][0m   INVALID (153419B, not a real PDF): unicredit_2024_annual_report.pdf
+[1;33m[WARN][0m   INVALID (201611B, not a real PDF): anz_banking_2020_annual_report.pdf
+[1;33m[WARN][0m   INVALID (68550B, not a real PDF): westpac_2022_annual_report.pdf
+[1;33m[WARN][0m   INVALID (463360B, not a real PDF): nab_2023_annual_report.pdf
+[1;33m[WARN][0m   INVALID (153419B, not a real PDF): unicredit_2020_annual_report.pdf
+[1;33m[WARN][0m   INVALID (227780B, not a real PDF): ing_group_2021_annual_report.pdf
+[1;33m[WARN][0m   INVALID (201611B, not a real PDF): anz_banking_2024_annual_report.pdf
+[1;33m[WARN][0m   INVALID (387498B, not a real PDF): abn_amro_2022_annual_report.pdf
+[1;33m[WARN][0m   INVALID (231405B, not a real PDF): intesa_sanpaolo_2022_annual_report.pdf
+[1;33m[WARN][0m   INVALID (227916B, not a real PDF): ing_group_2024_annual_report.pdf
+[1;33m[WARN][0m   INVALID (201611B, not a real PDF): anz_banking_2021_annual_report.pdf
+[1;33m[WARN][0m   INVALID (68550B, not a real PDF): westpac_2023_annual_report.pdf
+[1;33m[WARN][0m   INVALID (463360B, not a real PDF): nab_2022_annual_report.pdf
+[1;33m[WARN][0m   INVALID (153419B, not a real PDF): unicredit_2023_annual_report.pdf
+[1;33m[WARN][0m   INVALID (125715B, not a real PDF): hsbc_holdings_2024_annual_report.pdf
+[1;33m[WARN][0m   INVALID (227916B, not a real PDF): ing_group_2022_annual_report.pdf
+[1;33m[WARN][0m   INVALID (387498B, not a real PDF): abn_amro_2021_annual_report.pdf
+[1;33m[WARN][0m   INVALID (463360B, not a real PDF): nab_2024_annual_report.pdf
+[1;33m[WARN][0m   INVALID (231405B, not a real PDF): intesa_sanpaolo_2021_annual_report.pdf
+[1;33m[WARN][0m   INVALID (201611B, not a real PDF): anz_banking_2022_annual_report.pdf
+[1;33m[WARN][0m   INVALID (68550B, not a real PDF): westpac_2020_annual_report.pdf
+[1;33m[WARN][0m   INVALID (387498B, not a real PDF): abn_amro_2024_annual_report.pdf
+[1;33m[WARN][0m   INVALID (231405B, not a real PDF): intesa_sanpaolo_2024_annual_report.pdf
+[1;33m[WARN][0m   INVALID (463360B, not a real PDF): nab_2021_annual_report.pdf
+[1;33m[WARN][0m   INVALID (153419B, not a real PDF): unicredit_2022_annual_report.pdf
+[1;33m[WARN][0m   INVALID (227916B, not a real PDF): ing_group_2023_annual_report.pdf
+[1;33m[WARN][0m   INVALID (283241B, not a real PDF): 2020-lbg-annual-report.pdf
+[1;33m[WARN][0m   INVALID (68550B, not a real PDF): westpac_2024_annual_report.pdf
+[1;33m[WARN][0m   INVALID (387498B, not a real PDF): abn_amro_2020_annual_report.pdf
+[1;33m[WARN][0m   INVALID (201611B, not a real PDF): anz_banking_2023_annual_report.pdf
+[1;33m[WARN][0m   INVALID (68550B, not a real PDF): westpac_2021_annual_report.pdf
+[1;33m[WARN][0m   INVALID (463360B, not a real PDF): nab_2020_annual_report.pdf
+[1;33m[WARN][0m   INVALID (91286B, not a real PDF): santander_group_2021_annual_report.pdf
+[1;33m[WARN][0m   INVALID (91249B, not a real PDF): santander_group_2024_annual_report.pdf
+[1;33m[WARN][0m   INVALID (105476B, not a real PDF): deutsche_bank_2023_annual_report.pdf
+[1;33m[WARN][0m   INVALID (91249B, not a real PDF): santander_group_2020_annual_report.pdf
+[1;33m[WARN][0m   INVALID (105476B, not a real PDF): deutsche_bank_2022_annual_report.pdf
+[1;33m[WARN][0m   INVALID (91285B, not a real PDF): santander_group_2023_annual_report.pdf
+[1;33m[WARN][0m   INVALID (105476B, not a real PDF): deutsche_bank_2024_annual_report.pdf
+[1;33m[WARN][0m   INVALID (105476B, not a real PDF): deutsche_bank_2021_annual_report.pdf
+[1;33m[WARN][0m   INVALID (283241B, not a real PDF): 2023-lbg-annual-report.pdf
+[1;33m[WARN][0m   INVALID (91286B, not a real PDF): santander_group_2022_annual_report.pdf
+[1;33m[WARN][0m   INVALID (105476B, not a real PDF): deutsche_bank_2020_annual_report.pdf
+[1;33m[WARN][0m   INVALID (125715B, not a real PDF): hsbc_holdings_2023_pillar3.pdf
+[1;33m[WARN][0m   INVALID (105476B, not a real PDF): deutsche_bank_2022_pillar3.pdf
+[1;33m[WARN][0m   INVALID (153367B, not a real PDF): unicredit_2024_pillar3.pdf
+[1;33m[WARN][0m   INVALID (169244B, not a real PDF): barclays_2023_pillar3.pdf
+[1;33m[WARN][0m   INVALID (169244B, not a real PDF): barclays_2020_pillar3.pdf
+[1;33m[WARN][0m   INVALID (105476B, not a real PDF): deutsche_bank_2024_pillar3.pdf
+[1;33m[WARN][0m   INVALID (105476B, not a real PDF): deutsche_bank_2021_pillar3.pdf
+[1;33m[WARN][0m   INVALID (283241B, not a real PDF): lloyds_banking_group_2023_pillar3.pdf
+[1;33m[WARN][0m   INVALID (153367B, not a real PDF): unicredit_2022_pillar3.pdf
+[1;33m[WARN][0m   INVALID (283241B, not a real PDF): lloyds_banking_group_2024_pillar3.pdf
+[1;33m[WARN][0m   INVALID (169244B, not a real PDF): barclays_2022_pillar3.pdf
+[1;33m[WARN][0m   INVALID (125715B, not a real PDF): hsbc_holdings_2022_pillar3.pdf
+[1;33m[WARN][0m   INVALID (283241B, not a real PDF): lloyds_banking_group_2021_pillar3.pdf
+[1;33m[WARN][0m   INVALID (105476B, not a real PDF): deutsche_bank_2023_pillar3.pdf
+[1;33m[WARN][0m   INVALID (153367B, not a real PDF): unicredit_2023_pillar3.pdf
+[1;33m[WARN][0m   INVALID (283241B, not a real PDF): lloyds_banking_group_2022_pillar3.pdf
+[1;33m[WARN][0m   INVALID (169244B, not a real PDF): barclays_2024_pillar3.pdf
+[1;33m[WARN][0m   INVALID (125715B, not a real PDF): hsbc_holdings_2024_pillar3.pdf
+[1;33m[WARN][0m   INVALID (169244B, not a real PDF): barclays_2021_pillar3.pdf
+[0;32m[INFO][0m   Removed 67 invalid files. Re-running download...
+
+===================================================================
+ Annual Report + Pillar 3 Downloader — 10-year coverage
+ Started: Thu 28 May 2026 07:50:26 BST
+===================================================================
+[0;32m[INFO][0m   Validating existing files...
+[0;32m[INFO][0m   Removed 0 invalid files. Re-running download...
+
+===================================================================
+ Annual Report + Pillar 3 Downloader — 10-year coverage
+ Started: Thu 28 May 2026 07:50:26 BST
+===================================================================
+
+===================================================================
+ Annual Report + Pillar 3 Downloader — 10-year coverage
+ Started: Thu 28 May 2026 07:52:57 BST
+===================================================================
+[0;37m[SKIP][0m   Lloyds 2025 (11347KB)
+[0;37m[SKIP][0m   Lloyds 2024 (14116KB)
+[0;36m[GET][0m    Lloyds 2023
+[0;31m[FAIL][0m   Lloyds 2023 — HTTP 404
+[0;37m[SKIP][0m   Lloyds 2022 (12853KB)
+[0;37m[SKIP][0m   Lloyds 2021 (10543KB)
+[0;36m[GET][0m    Lloyds 2020
+[0;31m[FAIL][0m   Lloyds 2020 — HTTP 404
+[0;36m[GET][0m    Lloyds 2019
+[0;31m[FAIL][0m   Lloyds 2019 — HTTP 404
+[0;36m[GET][0m    Lloyds 2018
+[0;31m[FAIL][0m   Lloyds 2018 — HTTP 404
+[0;36m[GET][0m    Lloyds 2017
+[0;31m[FAIL][0m   Lloyds 2017 — HTTP 404
+[0;36m[GET][0m    Lloyds 2016
+[0;31m[FAIL][0m   Lloyds 2016 — HTTP 404
+[0;36m[GET][0m    HSBC 2024
+[0;31m[FAIL][0m   HSBC 2024 — HTTP 404
+[0;36m[GET][0m    HSBC 2023
+[0;31m[FAIL][0m   HSBC 2023 — HTTP 404
+[0;37m[SKIP][0m   HSBC 2022 (7195KB)
+[0;37m[SKIP][0m   HSBC 2021 (11557KB)
+[0;37m[SKIP][0m   HSBC 2020 (5412KB)
+[0;36m[GET][0m    HSBC 2019
+[0;32m[OK][0m     HSBC 2019 — 7514KB
+[0;36m[GET][0m    HSBC 2018
+[0;31m[FAIL][0m   HSBC 2018 — HTTP 404
+[0;36m[GET][0m    HSBC 2017
+[0;31m[FAIL][0m   HSBC 2017 — HTTP 404
+[0;36m[GET][0m    HSBC 2016
+[0;31m[FAIL][0m   HSBC 2016 — HTTP 404
+[0;36m[GET][0m    HSBC 2015
+[0;31m[FAIL][0m   HSBC 2015 — HTTP 404
+[0;37m[SKIP][0m   NatWest/RBS 2024 (19468KB)
+[0;37m[SKIP][0m   NatWest/RBS 2023 (20111KB)
+[0;36m[GET][0m    NatWest/RBS 2022
+[0;31m[FAIL][0m   NatWest/RBS 2022 — HTTP 404
+[0;36m[GET][0m    NatWest/RBS 2021
+[0;32m[OK][0m     NatWest/RBS 2021 — 5845KB
+[0;36m[GET][0m    NatWest/RBS 2020
+[0;32m[OK][0m     NatWest/RBS 2020 — 13758KB
+[0;36m[GET][0m    NatWest/RBS 2019
+[0;31m[FAIL][0m   NatWest/RBS 2019 — HTTP 404
+[0;36m[GET][0m    NatWest/RBS 2018
+[0;31m[FAIL][0m   NatWest/RBS 2018 — HTTP 404
+[0;36m[GET][0m    NatWest/RBS 2017
+[0;31m[FAIL][0m   NatWest/RBS 2017 — HTTP 404
+[0;36m[GET][0m    NatWest/RBS 2016
+[0;31m[FAIL][0m   NatWest/RBS 2016 — HTTP 404
+[0;36m[GET][0m    NatWest/RBS 2015
+[0;31m[FAIL][0m   NatWest/RBS 2015 — HTTP 404
+[1;33m[MANUAL][0m   Download 2015–2025 from: https://www.sc.com/en/investors/results-and-reports/
+[1;33m[MANUAL][0m   Save as: financials/standard_chartered_<year>_annual_report.pdf
+[0;36m[GET][0m    Deutsche Bank 2024
+[0;32m[OK][0m     Deutsche Bank 2024 — 20468KB
+[0;36m[GET][0m    Deutsche Bank 2023
+[0;31m[FAIL][0m   Deutsche Bank 2023 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2022
+[0;31m[FAIL][0m   Deutsche Bank 2022 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2021
+[0;31m[FAIL][0m   Deutsche Bank 2021 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2020
+[0;31m[FAIL][0m   Deutsche Bank 2020 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2019
+[0;31m[FAIL][0m   Deutsche Bank 2019 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2018
+[0;31m[FAIL][0m   Deutsche Bank 2018 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2017
+[0;31m[FAIL][0m   Deutsche Bank 2017 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2016
+[0;31m[FAIL][0m   Deutsche Bank 2016 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2015
+[0;31m[FAIL][0m   Deutsche Bank 2015 — HTTP 404
+[0;36m[GET][0m    BNP Paribas 2024
+[0;31m[FAIL][0m   BNP Paribas 2024 — HTTP 404
+[0;36m[GET][0m    BNP Paribas 2023
+[0;31m[FAIL][0m   BNP Paribas 2023 — HTTP 404
+[0;36m[GET][0m    BNP Paribas 2022
+[0;31m[FAIL][0m   BNP Paribas 2022 — HTTP 404
+[0;36m[GET][0m    BNP Paribas 2021
+[0;31m[FAIL][0m   BNP Paribas 2021 — HTTP 404
+[0;36m[GET][0m    BNP Paribas 2020
+[0;31m[FAIL][0m   BNP Paribas 2020 — HTTP 404
+[0;36m[GET][0m    BNP Paribas 2019
+[0;31m[FAIL][0m   BNP Paribas 2019 — HTTP 404
+[0;36m[GET][0m    BNP Paribas 2018
+[0;31m[FAIL][0m   BNP Paribas 2018 — HTTP 404
+[0;36m[GET][0m    BNP Paribas 2017
+[0;31m[FAIL][0m   BNP Paribas 2017 — HTTP 404
+[0;36m[GET][0m    UniCredit 2024
+[0;32m[OK][0m     UniCredit 2024 — 30187KB
+[0;36m[GET][0m    UniCredit 2023
+[0;32m[OK][0m     UniCredit 2023 — 32930KB
+[0;36m[GET][0m    UniCredit 2022
+[0;32m[OK][0m     UniCredit 2022 — 24387KB
+[0;36m[GET][0m    UniCredit 2021
+[0;32m[OK][0m     UniCredit 2021 — 20644KB
+[0;36m[GET][0m    UniCredit 2020
+[0;31m[FAIL][0m   UniCredit 2020 — HTTP 404
+[0;36m[GET][0m    UniCredit 2019
+[0;31m[FAIL][0m   UniCredit 2019 — HTTP 404
+[0;36m[GET][0m    UniCredit 2018
+[0;31m[FAIL][0m   UniCredit 2018 — HTTP 404
+[0;36m[GET][0m    UniCredit 2017
+[0;31m[FAIL][0m   UniCredit 2017 — HTTP 404
+[0;36m[GET][0m    UniCredit 2016
+[0;31m[FAIL][0m   UniCredit 2016 — HTTP 404
+[0;36m[GET][0m    UniCredit 2015
+[0;31m[FAIL][0m   UniCredit 2015 — HTTP 404
+[0;36m[GET][0m    Santander 2024
+[0;32m[OK][0m     Santander 2024 — 40101KB
+[0;36m[GET][0m    Santander 2023
+[0;32m[OK][0m     Santander 2023 — 50722KB
+[0;36m[GET][0m    Santander 2022
+[0;32m[OK][0m     Santander 2022 — 54934KB
+[0;36m[GET][0m    Santander 2021
+[0;32m[OK][0m     Santander 2021 — 21407KB
+[0;36m[GET][0m    Santander 2020
+[0;32m[OK][0m     Santander 2020 — 77767KB
+[0;36m[GET][0m    Santander 2019
+[0;32m[OK][0m     Santander 2019 — 39331KB
+[0;36m[GET][0m    Santander 2018
+[0;31m[FAIL][0m   Santander 2018 — HTTP 404
+[0;36m[GET][0m    Santander 2017
+[0;31m[FAIL][0m   Santander 2017 — HTTP 404
+[0;36m[GET][0m    Santander 2016
+[0;31m[FAIL][0m   Santander 2016 — HTTP 404
+[0;36m[GET][0m    Santander 2015
+[0;31m[FAIL][0m   Santander 2015 — HTTP 404
+[1;33m[MANUAL][0m   Download 2015–2025 from: https://www.ing.com/Investor-relations/Financial-performance/Annual-reports.htm
+[1;33m[MANUAL][0m   Save as: financials/ing_group_<year>_annual_report.pdf
+[0;36m[GET][0m    ABN AMRO 2024
+[0;31m[FAIL][0m   ABN AMRO 2024 — HTTP 200
+[0;36m[GET][0m    ABN AMRO 2023
+[0;31m[FAIL][0m   ABN AMRO 2023 — HTTP 200
+[0;36m[GET][0m    ABN AMRO 2022
+[0;31m[FAIL][0m   ABN AMRO 2022 — HTTP 200
+[0;36m[GET][0m    ABN AMRO 2021
+[0;31m[FAIL][0m   ABN AMRO 2021 — HTTP 200
+[0;36m[GET][0m    ABN AMRO 2020
+[0;31m[FAIL][0m   ABN AMRO 2020 — HTTP 200
+[0;36m[GET][0m    ABN AMRO 2019
+[0;31m[FAIL][0m   ABN AMRO 2019 — HTTP 200
+[0;36m[GET][0m    ABN AMRO 2018
+[0;31m[FAIL][0m   ABN AMRO 2018 — HTTP 200
+[0;36m[GET][0m    ABN AMRO 2017
+[0;31m[FAIL][0m   ABN AMRO 2017 — HTTP 200
+[0;36m[GET][0m    ABN AMRO 2016
+[0;31m[FAIL][0m   ABN AMRO 2016 — HTTP 200
+[0;36m[GET][0m    ABN AMRO 2015
+[0;31m[FAIL][0m   ABN AMRO 2015 — HTTP 200
+[0;36m[GET][0m    Intesa Sanpaolo 2024
+[0;31m[FAIL][0m   Intesa Sanpaolo 2024 — HTTP 404
+[0;36m[GET][0m    Intesa Sanpaolo 2023
+[0;31m[FAIL][0m   Intesa Sanpaolo 2023 — HTTP 404
+[0;36m[GET][0m    Intesa Sanpaolo 2022
+[0;31m[FAIL][0m   Intesa Sanpaolo 2022 — HTTP 404
+[0;36m[GET][0m    Intesa Sanpaolo 2021
+[0;31m[FAIL][0m   Intesa Sanpaolo 2021 — HTTP 404
+[0;36m[GET][0m    Intesa Sanpaolo 2020
+[0;31m[FAIL][0m   Intesa Sanpaolo 2020 — HTTP 404
+[0;36m[GET][0m    Intesa Sanpaolo 2019
+[0;31m[FAIL][0m   Intesa Sanpaolo 2019 — HTTP 404
+[0;36m[GET][0m    Intesa Sanpaolo 2018
+[0;31m[FAIL][0m   Intesa Sanpaolo 2018 — HTTP 404
+[0;36m[GET][0m    Intesa Sanpaolo 2017
+[0;31m[FAIL][0m   Intesa Sanpaolo 2017 — HTTP 404
+[0;36m[GET][0m    Intesa Sanpaolo 2016
+[0;31m[FAIL][0m   Intesa Sanpaolo 2016 — HTTP 404
+[0;36m[GET][0m    Intesa Sanpaolo 2015
+[0;31m[FAIL][0m   Intesa Sanpaolo 2015 — HTTP 404
+[0;36m[GET][0m    CBA 2024
+[0;31m[FAIL][0m   CBA 2024 — HTTP 404
+[0;36m[GET][0m    CBA 2023
+[0;31m[FAIL][0m   CBA 2023 — HTTP 404
+[0;36m[GET][0m    CBA 2022
+[0;31m[FAIL][0m   CBA 2022 — HTTP 404
+[0;36m[GET][0m    CBA 2021
+[0;31m[FAIL][0m   CBA 2021 — HTTP 404
+[0;36m[GET][0m    CBA 2020
+[0;31m[FAIL][0m   CBA 2020 — HTTP 404
+[0;36m[GET][0m    CBA 2019
+[0;31m[FAIL][0m   CBA 2019 — HTTP 404
+[0;36m[GET][0m    CBA 2018
+[0;31m[FAIL][0m   CBA 2018 — HTTP 404
+[0;36m[GET][0m    CBA 2017
+[0;31m[FAIL][0m   CBA 2017 — HTTP 404
+[0;36m[GET][0m    CBA 2016
+[0;31m[FAIL][0m   CBA 2016 — HTTP 404
+[0;36m[GET][0m    CBA 2015
+[0;31m[FAIL][0m   CBA 2015 — HTTP 404
+[0;36m[GET][0m    ANZ 2024
+[0;32m[OK][0m     ANZ 2024 — 12682KB
+[0;36m[GET][0m    ANZ 2023
+[0;31m[FAIL][0m   ANZ 2023 — HTTP 404
+[0;36m[GET][0m    ANZ 2022
+[0;31m[FAIL][0m   ANZ 2022 — HTTP 404
+[0;36m[GET][0m    ANZ 2021
+[0;31m[FAIL][0m   ANZ 2021 — HTTP 404
+[0;36m[GET][0m    ANZ 2020
+[0;31m[FAIL][0m   ANZ 2020 — HTTP 404
+[0;36m[GET][0m    ANZ 2019
+[0;31m[FAIL][0m   ANZ 2019 — HTTP 404
+[0;36m[GET][0m    ANZ 2018
+[0;31m[FAIL][0m   ANZ 2018 — HTTP 404
+[0;36m[GET][0m    ANZ 2017
+[0;31m[FAIL][0m   ANZ 2017 — HTTP 404
+[0;36m[GET][0m    ANZ 2016
+[0;31m[FAIL][0m   ANZ 2016 — HTTP 404
+[0;36m[GET][0m    ANZ 2015
+[0;31m[FAIL][0m   ANZ 2015 — HTTP 404
+[0;36m[GET][0m    Westpac 2024
+[0;32m[OK][0m     Westpac 2024 — 17497KB
+[0;36m[GET][0m    Westpac 2023
+[0;31m[FAIL][0m   Westpac 2023 — HTTP 404
+[0;36m[GET][0m    Westpac 2022
+[0;31m[FAIL][0m   Westpac 2022 — HTTP 404
+[0;36m[GET][0m    Westpac 2021
+[0;31m[FAIL][0m   Westpac 2021 — HTTP 404
+[0;36m[GET][0m    Westpac 2020
+[0;31m[FAIL][0m   Westpac 2020 — HTTP 404
+[0;36m[GET][0m    Westpac 2019
+[0;31m[FAIL][0m   Westpac 2019 — HTTP 404
+[0;36m[GET][0m    Westpac 2018
+[0;31m[FAIL][0m   Westpac 2018 — HTTP 404
+[0;36m[GET][0m    Westpac 2017
+[0;31m[FAIL][0m   Westpac 2017 — HTTP 404
+[0;36m[GET][0m    Westpac 2016
+[0;31m[FAIL][0m   Westpac 2016 — HTTP 404
+[0;36m[GET][0m    Westpac 2015
+[0;31m[FAIL][0m   Westpac 2015 — HTTP 404
+[0;36m[GET][0m    NAB 2024
+[0;32m[OK][0m     NAB 2024 — 8091KB
+[0;36m[GET][0m    NAB 2023
+[0;32m[OK][0m     NAB 2023 — 9934KB
+[0;36m[GET][0m    NAB 2022
+[0;32m[OK][0m     NAB 2022 — 6177KB
+[0;36m[GET][0m    NAB 2021
+[0;31m[FAIL][0m   NAB 2021 — HTTP 404
+[0;36m[GET][0m    NAB 2020
+[0;31m[FAIL][0m   NAB 2020 — HTTP 404
+[0;36m[GET][0m    NAB 2019
+[0;31m[FAIL][0m   NAB 2019 — HTTP 404
+[0;36m[GET][0m    NAB 2018
+[0;31m[FAIL][0m   NAB 2018 — HTTP 404
+[0;36m[GET][0m    NAB 2017
+[0;31m[FAIL][0m   NAB 2017 — HTTP 404
+[0;36m[GET][0m    NAB 2016
+[0;31m[FAIL][0m   NAB 2016 — HTTP 404
+[0;36m[GET][0m    NAB 2015
+[0;31m[FAIL][0m   NAB 2015 — HTTP 404
+[0;36m[GET][0m    Lloyds 2025 Pillar 3
+[0;32m[OK][0m     Lloyds 2025 Pillar 3 — 1473KB
+[0;36m[GET][0m    Lloyds 2024 Pillar 3
+[0;32m[OK][0m     Lloyds 2024 Pillar 3 — 2399KB
+[0;36m[GET][0m    Lloyds 2023 Pillar 3
+[0;32m[OK][0m     Lloyds 2023 Pillar 3 — 2764KB
+[0;36m[GET][0m    Lloyds 2022 Pillar 3
+[0;31m[FAIL][0m   Lloyds 2022 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Lloyds 2021 Pillar 3
+[0;31m[FAIL][0m   Lloyds 2021 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Lloyds 2020 Pillar 3
+[0;31m[FAIL][0m   Lloyds 2020 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Lloyds 2019 Pillar 3
+[0;31m[FAIL][0m   Lloyds 2019 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Lloyds 2018 Pillar 3
+[0;31m[FAIL][0m   Lloyds 2018 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Barclays 2024 Pillar 3
+[0;32m[OK][0m     Barclays 2024 Pillar 3 — 1983KB
+[0;36m[GET][0m    Barclays 2023 Pillar 3
+[0;31m[FAIL][0m   Barclays 2023 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Barclays 2022 Pillar 3
+[0;31m[FAIL][0m   Barclays 2022 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Barclays 2021 Pillar 3
+[0;31m[FAIL][0m   Barclays 2021 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Barclays 2020 Pillar 3
+[0;31m[FAIL][0m   Barclays 2020 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Barclays 2019 Pillar 3
+[0;31m[FAIL][0m   Barclays 2019 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Barclays 2018 Pillar 3
+[0;31m[FAIL][0m   Barclays 2018 Pillar 3 — HTTP 404
+[0;36m[GET][0m    HSBC 2024 Pillar 3
+[0;31m[FAIL][0m   HSBC 2024 Pillar 3 — HTTP 404
+[0;36m[GET][0m    HSBC 2023 Pillar 3
+[0;31m[FAIL][0m   HSBC 2023 Pillar 3 — HTTP 404
+[0;36m[GET][0m    HSBC 2022 Pillar 3
+[0;31m[FAIL][0m   HSBC 2022 Pillar 3 — HTTP 404
+[0;36m[GET][0m    HSBC 2021 Pillar 3
+[0;31m[FAIL][0m   HSBC 2021 Pillar 3 — HTTP 404
+[0;36m[GET][0m    HSBC 2020 Pillar 3
+[0;31m[FAIL][0m   HSBC 2020 Pillar 3 — HTTP 404
+[0;36m[GET][0m    HSBC 2019 Pillar 3
+[0;31m[FAIL][0m   HSBC 2019 Pillar 3 — HTTP 404
+[0;36m[GET][0m    HSBC 2018 Pillar 3
+[0;31m[FAIL][0m   HSBC 2018 Pillar 3 — HTTP 404
+[0;36m[GET][0m    NatWest 2024 Pillar 3
+[0;31m[FAIL][0m   NatWest 2024 Pillar 3 — HTTP 404
+[0;36m[GET][0m    NatWest 2023 Pillar 3
+[0;32m[OK][0m     NatWest 2023 Pillar 3 — 1381KB
+[0;36m[GET][0m    NatWest 2022 Pillar 3
+[0;31m[FAIL][0m   NatWest 2022 Pillar 3 — HTTP 404
+[0;36m[GET][0m    NatWest 2021 Pillar 3
+[0;31m[FAIL][0m   NatWest 2021 Pillar 3 — HTTP 404
+[0;36m[GET][0m    NatWest 2020 Pillar 3
+[0;31m[FAIL][0m   NatWest 2020 Pillar 3 — HTTP 404
+[0;36m[GET][0m    NatWest 2019 Pillar 3
+[0;31m[FAIL][0m   NatWest 2019 Pillar 3 — HTTP 404
+[0;36m[GET][0m    NatWest 2018 Pillar 3
+[0;31m[FAIL][0m   NatWest 2018 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2024 Pillar 3
+[0;31m[FAIL][0m   Deutsche Bank 2024 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2023 Pillar 3
+[0;31m[FAIL][0m   Deutsche Bank 2023 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2022 Pillar 3
+[0;31m[FAIL][0m   Deutsche Bank 2022 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2021 Pillar 3
+[0;31m[FAIL][0m   Deutsche Bank 2021 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2020 Pillar 3
+[0;31m[FAIL][0m   Deutsche Bank 2020 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2019 Pillar 3
+[0;31m[FAIL][0m   Deutsche Bank 2019 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2018 Pillar 3
+[0;31m[FAIL][0m   Deutsche Bank 2018 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2017 Pillar 3
+[0;31m[FAIL][0m   Deutsche Bank 2017 Pillar 3 — HTTP 404
+[0;36m[GET][0m    UniCredit 2024 Pillar 3
+[0;31m[FAIL][0m   UniCredit 2024 Pillar 3 — HTTP 404
+[0;36m[GET][0m    UniCredit 2023 Pillar 3
+[0;31m[FAIL][0m   UniCredit 2023 Pillar 3 — HTTP 404
+[0;36m[GET][0m    UniCredit 2022 Pillar 3
+[0;31m[FAIL][0m   UniCredit 2022 Pillar 3 — HTTP 404
+[0;36m[GET][0m    UniCredit 2021 Pillar 3
+[0;31m[FAIL][0m   UniCredit 2021 Pillar 3 — HTTP 404
+[0;36m[GET][0m    UniCredit 2020 Pillar 3
+[0;31m[FAIL][0m   UniCredit 2020 Pillar 3 — HTTP 404
+[0;36m[GET][0m    JPMorgan 2024 Pillar 3
+[0;31m[FAIL][0m   JPMorgan 2024 Pillar 3 — HTTP 404
+[0;36m[GET][0m    JPMorgan 2023 Pillar 3
+[0;31m[FAIL][0m   JPMorgan 2023 Pillar 3 — HTTP 404
+[0;36m[GET][0m    JPMorgan 2022 Pillar 3
+[0;31m[FAIL][0m   JPMorgan 2022 Pillar 3 — HTTP 404
+[0;36m[GET][0m    JPMorgan 2021 Pillar 3
+[0;31m[FAIL][0m   JPMorgan 2021 Pillar 3 — HTTP 404
+[0;36m[GET][0m    JPMorgan 2020 Pillar 3
+[0;31m[FAIL][0m   JPMorgan 2020 Pillar 3 — HTTP 404
+
+===================================================================
+ Annual Report + Pillar 3 Downloader
+ Started: Thu 28 May 2026 19:34:50 BST
+===================================================================
+[0;37m[SKIP][0m   Lloyds 2025 (11347KB)
+[0;37m[SKIP][0m   Lloyds 2024 (14116KB)
+[0;36m[GET][0m    Lloyds 2023
+[0;31m[FAIL][0m   Lloyds 2023 — HTTP 404
+[0;37m[SKIP][0m   Lloyds 2022 (12853KB)
+[0;37m[SKIP][0m   Lloyds 2021 (10543KB)
+[0;36m[GET][0m    Lloyds 2020
+[0;31m[FAIL][0m   Lloyds 2020 — HTTP 404
+[0;36m[GET][0m    Lloyds 2019
+[0;31m[FAIL][0m   Lloyds 2019 — HTTP 404
+[0;36m[GET][0m    Lloyds 2018
+[0;31m[FAIL][0m   Lloyds 2018 — HTTP 404
+[0;36m[GET][0m    Lloyds 2017
+[0;31m[FAIL][0m   Lloyds 2017 — HTTP 404
+[0;36m[GET][0m    Lloyds 2016
+[0;31m[FAIL][0m   Lloyds 2016 — HTTP 404
+[0;36m[GET][0m    HSBC 2024
+[0;31m[FAIL][0m   HSBC 2024 — HTTP 404
+[0;36m[GET][0m    HSBC 2023
+[0;31m[FAIL][0m   HSBC 2023 — HTTP 404
+[0;37m[SKIP][0m   HSBC 2022 (7195KB)
+[0;37m[SKIP][0m   HSBC 2021 (11557KB)
+[0;37m[SKIP][0m   HSBC 2020 (5412KB)
+[0;37m[SKIP][0m   HSBC 2019 (7514KB)
+[0;36m[GET][0m    HSBC 2018
+[0;31m[FAIL][0m   HSBC 2018 — HTTP 404
+[0;36m[GET][0m    HSBC 2017
+[0;31m[FAIL][0m   HSBC 2017 — HTTP 404
+[0;36m[GET][0m    HSBC 2016
+[0;31m[FAIL][0m   HSBC 2016 — HTTP 404
+[0;36m[GET][0m    HSBC 2015
+[0;31m[FAIL][0m   HSBC 2015 — HTTP 404
+[0;37m[SKIP][0m   NatWest/RBS 2024 (19468KB)
+[0;37m[SKIP][0m   NatWest/RBS 2023 (20111KB)
+[0;36m[GET][0m    NatWest/RBS 2022
+[0;32m[OK][0m     NatWest/RBS 2022 — 8539KB
+[0;37m[SKIP][0m   NatWest/RBS 2021 (5845KB)
+[0;37m[SKIP][0m   NatWest/RBS 2020 (13758KB)
+[0;36m[GET][0m    NatWest/RBS 2019
+[0;31m[FAIL][0m   NatWest/RBS 2019 — HTTP 404
+[0;36m[GET][0m    NatWest/RBS 2018
+[0;31m[FAIL][0m   NatWest/RBS 2018 — HTTP 404
+[0;36m[GET][0m    NatWest/RBS 2017
+[0;31m[FAIL][0m   NatWest/RBS 2017 — HTTP 404
+[0;36m[GET][0m    NatWest/RBS 2016
+[0;31m[FAIL][0m   NatWest/RBS 2016 — HTTP 404
+[0;36m[GET][0m    NatWest/RBS 2015
+[0;31m[FAIL][0m   NatWest/RBS 2015 — HTTP 404
+[1;33m[MANUAL][0m   https://www.sc.com/en/investors/results-and-reports/
+[1;33m[MANUAL][0m   Save as: financials/standard_chartered_<year>_annual_report.pdf
+[0;37m[SKIP][0m   Deutsche Bank 2024 (20468KB)
+[0;36m[GET][0m    Deutsche Bank 2023
+[0;32m[OK][0m     Deutsche Bank 2023 — 9486KB
+[0;36m[GET][0m    Deutsche Bank 2022
+[0;32m[OK][0m     Deutsche Bank 2022 — 11567KB
+[0;36m[GET][0m    Deutsche Bank 2021
+[0;31m[FAIL][0m   Deutsche Bank 2021 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2020
+[0;31m[FAIL][0m   Deutsche Bank 2020 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2019
+[0;31m[FAIL][0m   Deutsche Bank 2019 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2018
+[0;31m[FAIL][0m   Deutsche Bank 2018 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2017
+[0;31m[FAIL][0m   Deutsche Bank 2017 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2016
+[0;31m[FAIL][0m   Deutsche Bank 2016 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2015
+[0;31m[FAIL][0m   Deutsche Bank 2015 — HTTP 404
+[0;36m[GET][0m    BNP Paribas 2024
+[0;31m[FAIL][0m   BNP Paribas 2024 — HTTP 404
+[0;36m[GET][0m    BNP Paribas 2023
+[0;31m[FAIL][0m   BNP Paribas 2023 — HTTP 404
+[0;36m[GET][0m    BNP Paribas 2022
+[0;31m[FAIL][0m   BNP Paribas 2022 — HTTP 404
+[0;36m[GET][0m    BNP Paribas 2021
+[0;31m[FAIL][0m   BNP Paribas 2021 — HTTP 404
+[0;36m[GET][0m    BNP Paribas 2020
+[0;31m[FAIL][0m   BNP Paribas 2020 — HTTP 404
+[0;36m[GET][0m    BNP Paribas 2019
+[0;31m[FAIL][0m   BNP Paribas 2019 — HTTP 404
+[0;36m[GET][0m    BNP Paribas 2018
+[0;31m[FAIL][0m   BNP Paribas 2018 — HTTP 404
+[0;36m[GET][0m    BNP Paribas 2017
+[0;31m[FAIL][0m   BNP Paribas 2017 — HTTP 404
+[0;37m[SKIP][0m   UniCredit 2024 (30187KB)
+[0;37m[SKIP][0m   UniCredit 2023 (32930KB)
+[0;37m[SKIP][0m   UniCredit 2022 (24387KB)
+[0;37m[SKIP][0m   UniCredit 2021 (20644KB)
+[0;36m[GET][0m    UniCredit 2020
+[0;31m[FAIL][0m   UniCredit 2020 — HTTP 404
+[0;36m[GET][0m    UniCredit 2019
+[0;31m[FAIL][0m   UniCredit 2019 — HTTP 404
+[0;36m[GET][0m    UniCredit 2018
+[0;31m[FAIL][0m   UniCredit 2018 — HTTP 404
+[0;36m[GET][0m    UniCredit 2017
+[0;31m[FAIL][0m   UniCredit 2017 — HTTP 404
+[0;36m[GET][0m    UniCredit 2016
+[0;31m[FAIL][0m   UniCredit 2016 — HTTP 404
+[0;36m[GET][0m    UniCredit 2015
+[0;31m[FAIL][0m   UniCredit 2015 — HTTP 404
+[0;37m[SKIP][0m   Santander 2024 (40101KB)
+[0;37m[SKIP][0m   Santander 2023 (50722KB)
+[0;37m[SKIP][0m   Santander 2022 (54934KB)
+[0;37m[SKIP][0m   Santander 2021 (21407KB)
+[0;37m[SKIP][0m   Santander 2020 (77767KB)
+[0;37m[SKIP][0m   Santander 2019 (39331KB)
+[0;36m[GET][0m    Santander 2018
+[0;31m[FAIL][0m   Santander 2018 — HTTP 404
+[0;36m[GET][0m    Santander 2017
+[0;31m[FAIL][0m   Santander 2017 — HTTP 404
+[0;36m[GET][0m    Santander 2016
+[0;31m[FAIL][0m   Santander 2016 — HTTP 404
+[0;36m[GET][0m    Santander 2015
+[0;31m[FAIL][0m   Santander 2015 — HTTP 404
+[0;36m[GET][0m    ABN AMRO 2024
+[0;31m[FAIL][0m   ABN AMRO 2024 — HTTP 404
+[0;36m[GET][0m    ABN AMRO 2023
+[0;32m[OK][0m     ABN AMRO 2023 — 13570KB
+[0;36m[GET][0m    ABN AMRO 2022
+[0;31m[FAIL][0m   ABN AMRO 2022 — HTTP 404
+[0;36m[GET][0m    ABN AMRO 2021
+[0;31m[FAIL][0m   ABN AMRO 2021 — HTTP 404
+[0;36m[GET][0m    ABN AMRO 2020
+[0;31m[FAIL][0m   ABN AMRO 2020 — HTTP 200
+[0;36m[GET][0m    ABN AMRO 2019
+[0;31m[FAIL][0m   ABN AMRO 2019 — HTTP 200
+[0;36m[GET][0m    ABN AMRO 2018
+[0;31m[FAIL][0m   ABN AMRO 2018 — HTTP 200
+[0;36m[GET][0m    ABN AMRO 2017
+[0;31m[FAIL][0m   ABN AMRO 2017 — HTTP 200
+[0;36m[GET][0m    ABN AMRO 2016
+[0;31m[FAIL][0m   ABN AMRO 2016 — HTTP 200
+[0;36m[GET][0m    ABN AMRO 2015
+[0;31m[FAIL][0m   ABN AMRO 2015 — HTTP 200
+[0;36m[GET][0m    Intesa Sanpaolo 2024
+[0;31m[FAIL][0m   Intesa Sanpaolo 2024 — HTTP 404
+[0;36m[GET][0m    Intesa Sanpaolo 2023
+[0;31m[FAIL][0m   Intesa Sanpaolo 2023 — HTTP 404
+[0;36m[GET][0m    Intesa Sanpaolo 2022
+[0;31m[FAIL][0m   Intesa Sanpaolo 2022 — HTTP 404
+[0;36m[GET][0m    Intesa Sanpaolo 2021
+[0;31m[FAIL][0m   Intesa Sanpaolo 2021 — HTTP 404
+[0;36m[GET][0m    Intesa Sanpaolo 2020
+[0;31m[FAIL][0m   Intesa Sanpaolo 2020 — HTTP 404
+[0;36m[GET][0m    Intesa Sanpaolo 2019
+[0;31m[FAIL][0m   Intesa Sanpaolo 2019 — HTTP 404
+[0;36m[GET][0m    Intesa Sanpaolo 2018
+[0;31m[FAIL][0m   Intesa Sanpaolo 2018 — HTTP 404
+[0;36m[GET][0m    Intesa Sanpaolo 2017
+[0;31m[FAIL][0m   Intesa Sanpaolo 2017 — HTTP 404
+[0;36m[GET][0m    CBA 2024
+[0;31m[FAIL][0m   CBA 2024 — HTTP 404
+[0;36m[GET][0m    CBA 2023
+[0;31m[FAIL][0m   CBA 2023 — HTTP 404
+[0;36m[GET][0m    CBA 2022
+[0;31m[FAIL][0m   CBA 2022 — HTTP 404
+[0;36m[GET][0m    CBA 2021
+[0;31m[FAIL][0m   CBA 2021 — HTTP 404
+[0;36m[GET][0m    CBA 2020
+[0;31m[FAIL][0m   CBA 2020 — HTTP 404
+[0;36m[GET][0m    CBA 2019
+[0;31m[FAIL][0m   CBA 2019 — HTTP 404
+[0;36m[GET][0m    CBA 2018
+[0;31m[FAIL][0m   CBA 2018 — HTTP 404
+[0;36m[GET][0m    CBA 2017
+[0;31m[FAIL][0m   CBA 2017 — HTTP 404
+[0;36m[GET][0m    CBA 2016
+[0;31m[FAIL][0m   CBA 2016 — HTTP 404
+[0;36m[GET][0m    CBA 2015
+[0;31m[FAIL][0m   CBA 2015 — HTTP 404
+[0;37m[SKIP][0m   ANZ 2024 (12682KB)
+[0;36m[GET][0m    ANZ 2023
+[0;31m[FAIL][0m   ANZ 2023 — HTTP 404
+[0;36m[GET][0m    ANZ 2022
+[0;31m[FAIL][0m   ANZ 2022 — HTTP 404
+[0;36m[GET][0m    ANZ 2021
+[0;31m[FAIL][0m   ANZ 2021 — HTTP 404
+[0;36m[GET][0m    ANZ 2020
+[0;31m[FAIL][0m   ANZ 2020 — HTTP 404
+[0;36m[GET][0m    ANZ 2019
+[0;31m[FAIL][0m   ANZ 2019 — HTTP 404
+[0;36m[GET][0m    ANZ 2018
+[0;31m[FAIL][0m   ANZ 2018 — HTTP 404
+[0;36m[GET][0m    ANZ 2017
+[0;31m[FAIL][0m   ANZ 2017 — HTTP 404
+[0;36m[GET][0m    ANZ 2016
+[0;31m[FAIL][0m   ANZ 2016 — HTTP 404
+[0;36m[GET][0m    ANZ 2015
+[0;31m[FAIL][0m   ANZ 2015 — HTTP 404
+[0;37m[SKIP][0m   Westpac 2024 (17497KB)
+[0;36m[GET][0m    Westpac 2023
+[0;31m[FAIL][0m   Westpac 2023 — HTTP 404
+[0;36m[GET][0m    Westpac 2022
+[0;31m[FAIL][0m   Westpac 2022 — HTTP 404
+[0;36m[GET][0m    Westpac 2021
+[0;31m[FAIL][0m   Westpac 2021 — HTTP 404
+[0;36m[GET][0m    Westpac 2020
+[0;31m[FAIL][0m   Westpac 2020 — HTTP 404
+[0;36m[GET][0m    Westpac 2019
+[0;31m[FAIL][0m   Westpac 2019 — HTTP 404
+[0;36m[GET][0m    Westpac 2018
+[0;31m[FAIL][0m   Westpac 2018 — HTTP 404
+[0;36m[GET][0m    Westpac 2017
+[0;31m[FAIL][0m   Westpac 2017 — HTTP 404
+[0;36m[GET][0m    Westpac 2016
+[0;31m[FAIL][0m   Westpac 2016 — HTTP 404
+[0;36m[GET][0m    Westpac 2015
+[0;31m[FAIL][0m   Westpac 2015 — HTTP 404
+[0;37m[SKIP][0m   NAB 2024 (8091KB)
+[0;37m[SKIP][0m   NAB 2023 (9934KB)
+[0;37m[SKIP][0m   NAB 2022 (6177KB)
+[0;36m[GET][0m    NAB 2021
+[0;31m[FAIL][0m   NAB 2021 — HTTP 404
+[0;36m[GET][0m    NAB 2020
+[0;31m[FAIL][0m   NAB 2020 — HTTP 404
+[0;36m[GET][0m    NAB 2019
+[0;31m[FAIL][0m   NAB 2019 — HTTP 404
+[0;36m[GET][0m    NAB 2018
+[0;31m[FAIL][0m   NAB 2018 — HTTP 404
+[0;36m[GET][0m    NAB 2017
+[0;31m[FAIL][0m   NAB 2017 — HTTP 404
+[0;36m[GET][0m    NAB 2016
+[0;31m[FAIL][0m   NAB 2016 — HTTP 404
+[0;36m[GET][0m    NAB 2015
+[0;31m[FAIL][0m   NAB 2015 — HTTP 404
+[1;33m[MANUAL][0m   AR:  https://www.ing.com/Investor-relations/Financial-performance/Annual-reports.htm
+[1;33m[MANUAL][0m   Save: financials/ing_group_<year>_annual_report.pdf
+[0;37m[SKIP][0m   Lloyds 2025 Pillar 3 (1473KB)
+[0;37m[SKIP][0m   Lloyds 2024 Pillar 3 (2399KB)
+[0;37m[SKIP][0m   Lloyds 2023 Pillar 3 (2764KB)
+[0;36m[GET][0m    Lloyds 2022 Pillar 3
+[0;31m[FAIL][0m   Lloyds 2022 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Lloyds 2021 Pillar 3
+[0;31m[FAIL][0m   Lloyds 2021 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Lloyds 2020 Pillar 3
+[0;31m[FAIL][0m   Lloyds 2020 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Lloyds 2019 Pillar 3
+[0;31m[FAIL][0m   Lloyds 2019 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Lloyds 2018 Pillar 3
+[0;31m[FAIL][0m   Lloyds 2018 Pillar 3 — HTTP 404
+[0;37m[SKIP][0m   Barclays 2024 Pillar 3 (1983KB)
+[0;36m[GET][0m    Barclays 2023 Pillar 3
+[0;31m[FAIL][0m   Barclays 2023 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Barclays 2022 Pillar 3
+[0;32m[OK][0m     Barclays 2022 Pillar 3 — 9403KB
+[0;36m[GET][0m    Barclays 2021 Pillar 3
+[0;31m[FAIL][0m   Barclays 2021 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Barclays 2020 Pillar 3
+[0;31m[FAIL][0m   Barclays 2020 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Barclays 2019 Pillar 3
+[0;31m[FAIL][0m   Barclays 2019 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Barclays 2018 Pillar 3
+[0;31m[FAIL][0m   Barclays 2018 Pillar 3 — HTTP 404
+[0;36m[GET][0m    HSBC 2024 Pillar 3
+[0;31m[FAIL][0m   HSBC 2024 Pillar 3 — HTTP 404
+[0;36m[GET][0m    HSBC 2023 Pillar 3
+[0;32m[OK][0m     HSBC 2023 Pillar 3 — 994KB
+[0;36m[GET][0m    HSBC 2022 Pillar 3
+[0;32m[OK][0m     HSBC 2022 Pillar 3 — 1862KB
+[0;36m[GET][0m    HSBC 2021 Pillar 3
+[0;32m[OK][0m     HSBC 2021 Pillar 3 — 839KB
+[0;36m[GET][0m    HSBC 2020 Pillar 3
+[0;32m[OK][0m     HSBC 2020 Pillar 3 — 824KB
+[0;36m[GET][0m    HSBC 2019 Pillar 3
+[0;32m[OK][0m     HSBC 2019 Pillar 3 — 2021KB
+[0;36m[GET][0m    HSBC 2018 Pillar 3
+[0;31m[FAIL][0m   HSBC 2018 Pillar 3 — HTTP 404
+[0;36m[GET][0m    NatWest 2024 Pillar 3
+[0;31m[FAIL][0m   NatWest 2024 Pillar 3 — HTTP 404
+[0;37m[SKIP][0m   NatWest 2023 Pillar 3 (1381KB)
+[0;36m[GET][0m    NatWest 2022 Pillar 3
+[0;32m[OK][0m     NatWest 2022 Pillar 3 — 1200KB
+[0;36m[GET][0m    NatWest 2021 Pillar 3
+[0;32m[OK][0m     NatWest 2021 Pillar 3 — 1069KB
+[0;36m[GET][0m    NatWest 2020 Pillar 3
+[0;32m[OK][0m     NatWest 2020 Pillar 3 — 2153KB
+[0;36m[GET][0m    NatWest 2019 Pillar 3
+[0;31m[FAIL][0m   NatWest 2019 Pillar 3 — HTTP 404
+[0;36m[GET][0m    NatWest 2018 Pillar 3
+[0;31m[FAIL][0m   NatWest 2018 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2024 Pillar 3
+[0;31m[FAIL][0m   Deutsche Bank 2024 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2023 Pillar 3
+[0;31m[FAIL][0m   Deutsche Bank 2023 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2022 Pillar 3
+[0;31m[FAIL][0m   Deutsche Bank 2022 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2021 Pillar 3
+[0;31m[FAIL][0m   Deutsche Bank 2021 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2020 Pillar 3
+[0;31m[FAIL][0m   Deutsche Bank 2020 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2019 Pillar 3
+[0;31m[FAIL][0m   Deutsche Bank 2019 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2018 Pillar 3
+[0;31m[FAIL][0m   Deutsche Bank 2018 Pillar 3 — HTTP 404
+[0;36m[GET][0m    Deutsche Bank 2017 Pillar 3
+[0;31m[FAIL][0m   Deutsche Bank 2017 Pillar 3 — HTTP 404
+[0;36m[GET][0m    UniCredit 2024 Pillar 3
+[0;31m[FAIL][0m   UniCredit 2024 Pillar 3 — HTTP 404
+[0;36m[GET][0m    UniCredit 2023 Pillar 3
+[0;31m[FAIL][0m   UniCredit 2023 Pillar 3 — HTTP 404
+[0;36m[GET][0m    UniCredit 2022 Pillar 3
+[0;31m[FAIL][0m   UniCredit 2022 Pillar 3 — HTTP 404
+[0;36m[GET][0m    UniCredit 2021 Pillar 3
+[0;31m[FAIL][0m   UniCredit 2021 Pillar 3 — HTTP 404
+[0;36m[GET][0m    UniCredit 2020 Pillar 3
+[0;31m[FAIL][0m   UniCredit 2020 Pillar 3 — HTTP 404
+[0;36m[GET][0m    JPMorgan 2024 Pillar 3
+[0;31m[FAIL][0m   JPMorgan 2024 Pillar 3 — HTTP 404
+[0;36m[GET][0m    JPMorgan 2023 Pillar 3
+[0;31m[FAIL][0m   JPMorgan 2023 Pillar 3 — HTTP 404
+[0;36m[GET][0m    JPMorgan 2022 Pillar 3
+[0;31m[FAIL][0m   JPMorgan 2022 Pillar 3 — HTTP 404
+[0;36m[GET][0m    JPMorgan 2021 Pillar 3
+[0;31m[FAIL][0m   JPMorgan 2021 Pillar 3 — HTTP 404
+[0;36m[GET][0m    JPMorgan 2020 Pillar 3
+[0;31m[FAIL][0m   JPMorgan 2020 Pillar 3 — HTTP 404
+
+============================================================
+ Annual Report + Pillar 3 Downloader  2026-05-28 19:45:55.310398
+============================================================
+Lloyds 2025 (11347KB)
+Lloyds 2024 (14116KB)
+Lloyds 2023
+Lloyds 2023 — HTTP 404
+Lloyds 2022 (12853KB)
+Lloyds 2021 (10543KB)
+Lloyds 2020
+Lloyds 2020 — 4836KB
+Lloyds 2019
+Lloyds 2019 — HTTP 404
+Lloyds 2018
+Lloyds 2018 — HTTP 404
+Lloyds 2017
+Lloyds 2017 — HTTP 404
+Lloyds 2016
+Lloyds 2016 — HTTP 404
+Barclays 2025 (10479KB)
+Barclays 2024 (12300KB)
+Barclays 2023 (12318KB)
+Barclays 2022 (15924KB)
+Barclays 2021 (11698KB)
+Barclays 2020 (5477KB)
+Barclays 2019
+Barclays 2019 — HTTP 404
+Barclays 2018
+Barclays 2018 — HTTP 404
+Barclays 2017
+Barclays 2017 — HTTP 404
+Barclays 2016
+Barclays 2016 — HTTP 404
+Hsbc 2025
+Hsbc 2025 — HTTP 404
+Hsbc 2024
+Hsbc 2024 — HTTP 404
+Hsbc 2023
+Hsbc 2023 — HTTP 404
+Hsbc 2022 (7195KB)
+Hsbc 2021 (11557KB)
+Hsbc 2020 (5412KB)
+Hsbc 2019 (7514KB)
+Hsbc 2018
+Hsbc 2018 — HTTP 404
+Hsbc 2017
+Hsbc 2017 — HTTP 404
+Hsbc 2016
+Hsbc 2016 — HTTP 404
+Natwest 2024 (19468KB)
+Natwest 2023 (20111KB)
+Natwest 2022 (8539KB)
+Natwest 2021 (5845KB)
+Natwest 2020 (13758KB)
+Natwest 2019
+Natwest 2019 — HTTP 404
+Natwest 2018
+Natwest 2018 — HTTP 404
+Natwest 2017
+Natwest 2017 — HTTP 404
+Natwest 2016
+Natwest 2016 — HTTP 404
+Natwest 2015
+Natwest 2015 — HTTP 404
+Deutsche 2024 (20468KB)
+Deutsche 2023 (9486KB)
+Deutsche 2022 (11567KB)
+Deutsche 2021
+Deutsche 2021 — HTTP 404
+Deutsche 2020
+Deutsche 2020 — HTTP 404
+Deutsche 2019
+Deutsche 2019 — HTTP 404
+Deutsche 2018
+Deutsche 2018 — HTTP 404
+Deutsche 2017
+Deutsche 2017 — HTTP 404
+Deutsche 2016
+Deutsche 2016 — HTTP 404
+Deutsche 2015
+Deutsche 2015 — HTTP 404
+Bnp 2024
+Bnp 2024 — HTTP 404
+Bnp 2023
+Bnp 2023 — HTTP 404
+Bnp 2022
+Bnp 2022 — HTTP 404
+Bnp 2021
+Bnp 2021 — HTTP 404
+Bnp 2020
+Bnp 2020 — HTTP 404
+Bnp 2019
+Bnp 2019 — HTTP 404
+Bnp 2018
+Bnp 2018 — HTTP 404
+Bnp 2017
+Bnp 2017 — HTTP 404
+Unicredit 2024 (30187KB)
+Unicredit 2023 (32930KB)
+Unicredit 2022 (24387KB)
+Unicredit 2021 (20644KB)
+Unicredit 2020
+Unicredit 2020 — HTTP 404
+Unicredit 2019
+Unicredit 2019 — HTTP 404
+Unicredit 2018
+Unicredit 2018 — HTTP 404
+Unicredit 2017
+Unicredit 2017 — HTTP 404
+Santander 2024 (40101KB)
+Santander 2023 (50722KB)
+Santander 2022 (54934KB)
+Santander 2021 (21407KB)
+Santander 2020 (77767KB)
+Santander 2019 (39331KB)
+Santander 2018
+Santander 2018 — HTTP 404
+Santander 2017
+Santander 2017 — HTTP 404
+Anz 2024 (12682KB)
+Anz 2023
+Anz 2023 — HTTP 404
+Anz 2022
+Anz 2022 — HTTP 404
+Anz 2021
+Anz 2021 — HTTP 404
+Anz 2020
+Anz 2020 — HTTP 404
+Anz 2019
+Anz 2019 — HTTP 404
+Anz 2018
+Anz 2018 — HTTP 404
+Anz 2017
+Anz 2017 — HTTP 404
+Anz 2016
+Anz 2016 — HTTP 404
+Anz 2015
+Anz 2015 — HTTP 404
+Westpac 2024 (17497KB)
+Westpac 2023
+Westpac 2023 — HTTP 404
+Westpac 2022
+Westpac 2022 — HTTP 404
+Westpac 2021
+Westpac 2021 — HTTP 404
+Westpac 2020
+Westpac 2020 — HTTP 404
+Westpac 2019
+Westpac 2019 — HTTP 404
+Westpac 2018
+Westpac 2018 — HTTP 404
+Westpac 2017
+Westpac 2017 — HTTP 404
+Westpac 2016
+Westpac 2016 — HTTP 404
+Westpac 2015
+Westpac 2015 — HTTP 404
+Nab 2024 (8091KB)
+Nab 2023 (9934KB)
+Nab 2022 (6177KB)
+Nab 2021
+Nab 2021 — HTTP 404
+Nab 2020
+Nab 2020 — HTTP 404
+Nab 2019
+Nab 2019 — HTTP 404
+Nab 2018
+Nab 2018 — HTTP 404
+Nab 2017
+Nab 2017 — HTTP 404
+Nab 2016
+Nab 2016 — HTTP 404
+Nab 2015
+Nab 2015 — HTTP 404
+Commonwealth 2024
+Commonwealth 2024 — HTTP 404
+Commonwealth 2023
+Commonwealth 2023 — HTTP 404
+Commonwealth 2022
+Commonwealth 2022 — HTTP 404
+Commonwealth 2021
+Commonwealth 2021 — HTTP 404
+Commonwealth 2020
+Commonwealth 2020 — HTTP 404
+Commonwealth 2019
+Commonwealth 2019 — HTTP 404
+Commonwealth 2018
+Commonwealth 2018 — HTTP 404
+Commonwealth 2017
+Commonwealth 2017 — HTTP 404
+Commonwealth 2016
+Commonwealth 2016 — HTTP 404
+Commonwealth 2015
+Commonwealth 2015 — HTTP 404
+Intesa 2024
+Intesa 2024 — HTTP 404
+Intesa 2023
+Intesa 2023 — HTTP 404
+Intesa 2022
+Intesa 2022 — HTTP 404
+Intesa 2021
+Intesa 2021 — HTTP 404
+Intesa 2020
+Intesa 2020 — HTTP 404
+Intesa 2019
+Intesa 2019 — HTTP 404
+Intesa 2018
+Intesa 2018 — HTTP 404
+Lloyds 2025 Pillar 3 (1473KB)
+Lloyds 2024 Pillar 3 (2399KB)
+Lloyds 2023 Pillar 3 (2764KB)
+Lloyds 2022 Pillar 3
+Lloyds 2022 Pillar 3 — HTTP 404
+Lloyds 2021 Pillar 3
+Lloyds 2021 Pillar 3 — HTTP 404
+Lloyds 2020 Pillar 3
+Lloyds 2020 Pillar 3 — HTTP 404
+Lloyds 2019 Pillar 3
+Lloyds 2019 Pillar 3 — HTTP 404
+Lloyds 2018 Pillar 3
+Lloyds 2018 Pillar 3 — HTTP 404
+Barclays 2024 Pillar 3 (1983KB)
+Barclays 2023 Pillar 3
+Barclays 2023 Pillar 3 — HTTP 404
+Barclays 2022 Pillar 3 (9403KB)
+Barclays 2021 Pillar 3
+Barclays 2021 Pillar 3 — HTTP 404
+Barclays 2020 Pillar 3
+Barclays 2020 Pillar 3 — HTTP 404
+Barclays 2019 Pillar 3
+Barclays 2019 Pillar 3 — HTTP 404
+Barclays 2018 Pillar 3
+Barclays 2018 Pillar 3 — HTTP 404
+Hsbc 2024 Pillar 3
+Hsbc 2024 Pillar 3 — HTTP 404
+Hsbc 2023 Pillar 3 (994KB)
+Hsbc 2022 Pillar 3 (1862KB)
+Hsbc 2021 Pillar 3 (839KB)
+Hsbc 2020 Pillar 3 (824KB)
+Hsbc 2019 Pillar 3 (2021KB)
+Hsbc 2018 Pillar 3
+Hsbc 2018 Pillar 3 — HTTP 404
+Natwest 2024 Pillar 3
+Natwest 2024 Pillar 3 — HTTP 404
+Natwest 2023 Pillar 3 (1381KB)
+Natwest 2022 Pillar 3 (1200KB)
+Natwest 2021 Pillar 3 (1069KB)
+Natwest 2020 Pillar 3 (2153KB)
+Natwest 2019 Pillar 3
+Natwest 2019 Pillar 3 — HTTP 404
+Natwest 2018 Pillar 3
+Natwest 2018 Pillar 3 — HTTP 404
+Deutsche 2024 Pillar 3
+Deutsche 2024 Pillar 3 — HTTP 404
+Deutsche 2023 Pillar 3
+Deutsche 2023 Pillar 3 — HTTP 404
+Deutsche 2022 Pillar 3
+Deutsche 2022 Pillar 3 — HTTP 404
+Deutsche 2021 Pillar 3
+Deutsche 2021 Pillar 3 — HTTP 404
+Deutsche 2020 Pillar 3
+Deutsche 2020 Pillar 3 — HTTP 404
+Deutsche 2019 Pillar 3
+Deutsche 2019 Pillar 3 — HTTP 404
+Deutsche 2018 Pillar 3
+Deutsche 2018 Pillar 3 — HTTP 404
+Deutsche 2017 Pillar 3
+Deutsche 2017 Pillar 3 — HTTP 404
+Unicredit 2024 Pillar 3
+Unicredit 2024 Pillar 3 — HTTP 404
+Unicredit 2023 Pillar 3
+Unicredit 2023 Pillar 3 — HTTP 404
+Unicredit 2022 Pillar 3
+Unicredit 2022 Pillar 3 — HTTP 404
+Unicredit 2021 Pillar 3
+Unicredit 2021 Pillar 3 — HTTP 404
+Unicredit 2020 Pillar 3
+Unicredit 2020 Pillar 3 — HTTP 404
+Jpmorgan 2024 Pillar 3
+Jpmorgan 2024 Pillar 3 — HTTP 404
+Jpmorgan 2023 Pillar 3
+Jpmorgan 2023 Pillar 3 — HTTP 404
+Jpmorgan 2022 Pillar 3
+Jpmorgan 2022 Pillar 3 — HTTP 404
+Jpmorgan 2021 Pillar 3
+Jpmorgan 2021 Pillar 3 — HTTP 404
+Jpmorgan 2020 Pillar 3
+Jpmorgan 2020 Pillar 3 — HTTP 404
+Standard Chartered AR + P3 (HTTP 403)
+  URL:  https://www.sc.com/en/investors/results-and-reports/
+  Save: financials/standard_chartered_<year>_annual_report.pdf
+  pillar3/standard_chartered_<year>_pillar3.pdf
+
+ING Group AR + P3 (JS-rendered)
+  URL:  AR: https://www.ing.com/Investor-relations/Financial-performance/Annual-reports.htm
+  Save: financials/ing_group_<year>_annual_report.pdf
+
+BBVA AR (JS-rendered)
+  URL:  https://shareholdersandinvestors.bbva.com/financial-information/annual-report/
+  Save: financials/bbva_<year>_annual_report.pdf
+
+Bank of America Pillar 3
+  URL:  https://investor.bankofamerica.com/regulatory-and-other-filings/basel-disclosures
+  Save: pillar3/bank_of_america_<year>_pillar3.pdf
+
+Wells Fargo Pillar 3
+  URL:  https://www.wellsfargo.com/invest_relations/basel/
+  Save: pillar3/wells_fargo_<year>_pillar3.pdf
+
+Goldman Sachs Pillar 3
+  URL:  https://www.goldmansachs.com/investor-relations/financials/basel-disclosures/
+  Save: pillar3/goldman_sachs_<year>_pillar3.pdf
+
+
+============================================================
+ Annual Report + Pillar 3 Downloader  2026-05-29 08:30:35.165628
+ MIN_AR_BYTES=976KB  MIN_P3_BYTES=488KB
+============================================================
+Lloyds 2025 (11347KB)
+Lloyds 2024 (14116KB)
+Lloyds 2023
+Lloyds 2023 — HTTP 404
+Lloyds 2022 (12853KB)
+Lloyds 2021 (10543KB)
+Lloyds 2020 (4836KB)
+Lloyds 2019
+Lloyds 2019 — HTTP 404
+Lloyds 2018
+Lloyds 2018 — HTTP 404
+Lloyds 2017
+Lloyds 2017 — HTTP 404
+Lloyds 2016
+Lloyds 2016 — HTTP 404
+Barclays 2025 (10479KB)
+Barclays 2024 (12300KB)
+Barclays 2023 (12318KB)
+Barclays 2022 (15924KB)
+Barclays 2021 (11698KB)
+Barclays 2020 (5477KB)
+Barclays 2019
+Barclays 2019 — HTTP 404
+Barclays 2018
+Barclays 2018 — HTTP 404
+Barclays 2017
+Barclays 2017 — HTTP 404
+Barclays 2016
+Barclays 2016 — HTTP 404
+Hsbc 2025
+Hsbc 2025 — HTTP 404
+Hsbc 2024
+Hsbc 2024 — HTTP 404
+Hsbc 2023
+Hsbc 2023 — HTTP 404
+Hsbc 2022 (7195KB)
+Hsbc 2021 (11557KB)
+Hsbc 2020 (5412KB)
+Hsbc 2019 (7514KB)
+Hsbc 2018
+Hsbc 2018 — HTTP 404
+Hsbc 2017
+Hsbc 2017 — HTTP 404
+Hsbc 2016
+Hsbc 2016 — HTTP 404
+Natwest 2024 (19468KB)
+Natwest 2023 (20111KB)
+Natwest 2022 (8539KB)
+Natwest 2021 (5845KB)
+Natwest 2020 (13758KB)
+Natwest 2019
+Natwest 2019 — HTTP 404
+Natwest 2018
+Natwest 2018 — HTTP 404
+Natwest 2017
+Natwest 2017 — HTTP 404
+Natwest 2016
+Natwest 2016 — HTTP 404
+Natwest 2015
+Natwest 2015 — HTTP 404
+Deutsche 2024 (20468KB)
+Deutsche 2023 (9486KB)
+Deutsche 2022 (11567KB)
+Deutsche 2021
+Deutsche 2021 — HTTP 404
+Deutsche 2020
+Deutsche 2020 — HTTP 404
+Deutsche 2019
+Deutsche 2019 — HTTP 404
+Deutsche 2018
+Deutsche 2018 — HTTP 404
+Deutsche 2017
+Deutsche 2017 — HTTP 404
+Deutsche 2016
+Deutsche 2016 — HTTP 404
+Deutsche 2015
+Deutsche 2015 — HTTP 404
+Bnp 2024
+Bnp 2024 — HTTP 404
+Bnp 2023
+Bnp 2023 — HTTP 404
+Bnp 2022
+Bnp 2022 — HTTP 404
+Bnp 2021
+Bnp 2021 — HTTP 404
+Bnp 2020
+Bnp 2020 — HTTP 404
+Bnp 2019
+Bnp 2019 — HTTP 404
+Bnp 2018
+Bnp 2018 — HTTP 404
+Bnp 2017
+Bnp 2017 — HTTP 404
+Unicredit 2024 (30187KB)
+Unicredit 2023 (32930KB)
+Unicredit 2022 (24387KB)
+Unicredit 2021 (20644KB)
+Unicredit 2020
+Unicredit 2020 — HTTP 404
+Unicredit 2019
+Unicredit 2019 — HTTP 404
+Unicredit 2018
+Unicredit 2018 — HTTP 404
+Unicredit 2017
+Unicredit 2017 — HTTP 404
+Santander 2024 (40101KB)
+Santander 2023 (50722KB)
+Santander 2022 (54934KB)
+Santander 2021 (21407KB)
+Santander 2020 (77767KB)
+Santander 2019 (39331KB)
+Santander 2018
+Santander 2018 — HTTP 404
+Santander 2017
+Santander 2017 — HTTP 404
+Abn 2024
+Abn 2024 — HTTP 404
+Abn 2023 (13570KB)
+Abn 2022
+Abn 2022 — not a valid PDF (378KB, need 976KB+)
+Abn 2021
+Abn 2021 — not a valid PDF (378KB, need 976KB+)
+Abn 2020
+Abn 2020 — not a valid PDF (378KB, need 976KB+)
+Abn 2019
+Abn 2019 — not a valid PDF (378KB, need 976KB+)
+Abn 2018
+Abn 2018 — not a valid PDF (378KB, need 976KB+)
+Abn 2017
+Abn 2017 — not a valid PDF (378KB, need 976KB+)
+Abn 2016
+Abn 2016 — not a valid PDF (378KB, need 976KB+)
+Abn 2015
+Abn 2015 — not a valid PDF (378KB, need 976KB+)
+Intesa 2024
+Intesa 2024 — HTTP 404
+Intesa 2023
+Intesa 2023 — HTTP 404
+Intesa 2022
+Intesa 2022 — HTTP 404
+Intesa 2021
+Intesa 2021 — HTTP 404
+Intesa 2020
+Intesa 2020 — HTTP 404
+Intesa 2019
+Intesa 2019 — HTTP 404
+Intesa 2018
+Intesa 2018 — HTTP 404
+Intesa 2017
+Intesa 2017 — HTTP 404
+Anz 2024 (12682KB)
+Anz 2023
+Anz 2023 — 8543KB
+Anz 2022
+Anz 2022 — HTTP 404
+Anz 2021
+Anz 2021 — HTTP 404
+Anz 2020
+Anz 2020 — HTTP 404
+Anz 2019
+Anz 2019 — HTTP 404
+Anz 2018
+Anz 2018 — HTTP 404
+Anz 2017
+Anz 2017 — HTTP 404
+Anz 2016
+Anz 2016 — HTTP 404
+Anz 2015
+Anz 2015 — HTTP 404
+Westpac 2024 (17497KB)
+Westpac 2023
+Westpac 2023 — 12020KB
+Westpac 2022
+Westpac 2022 — 10196KB
+Westpac 2021
+Westpac 2021 — HTTP 404
+Westpac 2020
+Westpac 2020 — HTTP 404
+Westpac 2019
+Westpac 2019 — HTTP 404
+Westpac 2018
+Westpac 2018 — HTTP 404
+Westpac 2017
+Westpac 2017 — HTTP 404
+Westpac 2016
+Westpac 2016 — HTTP 404
+Westpac 2015
+Westpac 2015 — HTTP 404
+Nab 2024 (8091KB)
+Nab 2023 (9934KB)
+Nab 2022 (6177KB)
+Nab 2021
+Nab 2021 — HTTP 404
+Nab 2020
+Nab 2020 — HTTP 404
+Nab 2019
+Nab 2019 — HTTP 404
+Nab 2018
+Nab 2018 — HTTP 404
+Nab 2017
+Nab 2017 — HTTP 404
+Nab 2016
+Nab 2016 — HTTP 404
+Nab 2015
+Nab 2015 — HTTP 404
+Commonwealth 2024
+Commonwealth 2024 — HTTP 404
+Commonwealth 2023
+Commonwealth 2023 — HTTP 404
+Commonwealth 2022
+Commonwealth 2022 — HTTP 404
+Commonwealth 2021
+Commonwealth 2021 — HTTP 404
+Commonwealth 2020
+Commonwealth 2020 — HTTP 404
+Commonwealth 2019
+Commonwealth 2019 — HTTP 404
+Commonwealth 2018
+Commonwealth 2018 — HTTP 404
+Rbc 2024
+Rbc 2024 — 6312KB
+Rbc 2023
+Rbc 2023 — 7394KB
+Rbc 2022
+Rbc 2022 — 8192KB
+Rbc 2021
+Rbc 2021 — 10954KB
+Rbc 2020
+Rbc 2020 — 10046KB
+Rbc 2019
+Rbc 2019 — 9414KB
+Rbc 2018
+Rbc 2018 — 7839KB
+Rbc 2017
+Rbc 2017 — 12899KB
+Rbc 2016
+Rbc 2016 — 6228KB
+Rbc 2015
+Rbc 2015 — 7415KB
+Td 2024
+Td 2024 — HTTP 404
+Td 2023
+Td 2023 — HTTP 404
+Td 2022
+Td 2022 — HTTP 404
+Td 2021
+Td 2021 — HTTP 404
+Td 2020
+Td 2020 — HTTP 404
+Td 2019
+Td 2019 — HTTP 404
+Td 2018
+Td 2018 — HTTP 404
+Scotiabank 2024
+Scotiabank 2024 — HTTP 404
+Scotiabank 2023
+Scotiabank 2023 — HTTP 404
+Scotiabank 2022
+Scotiabank 2022 — HTTP 404
+Scotiabank 2021
+Scotiabank 2021 — HTTP 404
+Scotiabank 2020
+Scotiabank 2020 — HTTP 404
+Scotiabank 2019
+Scotiabank 2019 — HTTP 404
+Scotiabank 2018
+Scotiabank 2018 — HTTP 404
+Bmo 2024
+Bmo 2024 — The read operation timed out
+Bmo 2023
+
+============================================================
+ Annual Report + Pillar 3 Downloader  2026-05-29 08:42:08.463259
+============================================================
+Lloyds 2025 (11347KB)
+Lloyds 2024 (14116KB)
+Lloyds 2023
+Lloyds 2023 — HTTP 404
+Lloyds 2022 (12853KB)
+Lloyds 2021 (10543KB)
+Lloyds 2020 (4836KB)
+Lloyds 2019
+Lloyds 2019 — HTTP 404
+Lloyds 2018
+Lloyds 2018 — HTTP 404
+Lloyds 2017
+Lloyds 2017 — HTTP 404
+Lloyds 2016
+Lloyds 2016 — HTTP 404
+Barclays 2025 (10479KB)
+Barclays 2024 (12300KB)
+Barclays 2023 (12318KB)
+Barclays 2022 (15924KB)
+Barclays 2021 (11698KB)
+Barclays 2020 (5477KB)
+Barclays 2019
+Barclays 2019 — HTTP 404
+Barclays 2018
+Barclays 2018 — HTTP 404
+Barclays 2017
+Barclays 2017 — HTTP 404
+Barclays 2016
+Barclays 2016 — HTTP 404
+Hsbc 2025
+Hsbc 2025 — HTTP 404
+Hsbc 2024
+Hsbc 2024 — HTTP 404
+Hsbc 2023
+Hsbc 2023 — HTTP 404
+Hsbc 2022 (7195KB)
+Hsbc 2021 (11557KB)
+Hsbc 2020 (5412KB)
+Hsbc 2019 (7514KB)
+Hsbc 2018
+Hsbc 2018 — HTTP 404
+Hsbc 2017
+Hsbc 2017 — HTTP 404
+Hsbc 2016
+Hsbc 2016 — HTTP 404
+Natwest 2024 (19468KB)
+Natwest 2023 (20111KB)
+Natwest 2022 (8539KB)
+Natwest 2021 (5845KB)
+Natwest 2020 (13758KB)
+Natwest 2019
+Natwest 2019 — HTTP 404
+Natwest 2018
+Natwest 2018 — HTTP 404
+Natwest 2017
+Natwest 2017 — HTTP 404
+Natwest 2016
+Natwest 2016 — HTTP 404
+Natwest 2015
+Natwest 2015 — HTTP 404
+Deutsche 2024 (20468KB)
+Deutsche 2023 (9486KB)
+Deutsche 2022 (11567KB)
+Deutsche 2021
+Deutsche 2021 — HTTP 404
+Deutsche 2020
+Deutsche 2020 — HTTP 404
+Deutsche 2019
+Deutsche 2019 — HTTP 404
+Deutsche 2018
+Deutsche 2018 — HTTP 404
+Deutsche 2017
+Deutsche 2017 — HTTP 404
+Deutsche 2016
+Deutsche 2016 — HTTP 404
+Deutsche 2015
+Deutsche 2015 — HTTP 404
+Bnp 2024
+Bnp 2024 — HTTP 404
+Bnp 2023
+Bnp 2023 — HTTP 404
+Bnp 2022
+Bnp 2022 — HTTP 404
+Bnp 2021
+Bnp 2021 — HTTP 404
+Bnp 2020
+Bnp 2020 — HTTP 404
+Bnp 2019
+Bnp 2019 — HTTP 404
+Bnp 2018
+Bnp 2018 — HTTP 404
+Bnp 2017
+Bnp 2017 — HTTP 404
+Unicredit 2024 (30187KB)
+Unicredit 2023 (32930KB)
+Unicredit 2022 (24387KB)
+Unicredit 2021 (20644KB)
+Unicredit 2020
+Unicredit 2020 — HTTP 404
+Unicredit 2019
+Unicredit 2019 — HTTP 404
+Unicredit 2018
+Unicredit 2018 — HTTP 404
+Unicredit 2017
+Unicredit 2017 — HTTP 404
+Santander 2024 (40101KB)
+Santander 2023 (50722KB)
+Santander 2022 (54934KB)
+Santander 2021 (21407KB)
+Santander 2020 (77767KB)
+Santander 2019 (39331KB)
+Santander 2018
+Santander 2018 — HTTP 404
+Santander 2017
+Santander 2017 — HTTP 404
+Abn 2024
+Abn 2024 — HTTP 404
+Abn 2023 (13570KB)
+Abn 2022
+Abn 2022 — not a valid PDF (378KB, need 976KB+)
+Abn 2021
+Abn 2021 — not a valid PDF (378KB, need 976KB+)
+Abn 2020
+Abn 2020 — not a valid PDF (378KB, need 976KB+)
+Abn 2019
+Abn 2019 — not a valid PDF (378KB, need 976KB+)
+Abn 2018
+Abn 2018 — not a valid PDF (378KB, need 976KB+)
+Abn 2017
+Abn 2017 — not a valid PDF (378KB, need 976KB+)
+Abn 2016
+Abn 2016 — not a valid PDF (378KB, need 976KB+)
+Abn 2015
+Abn 2015 — not a valid PDF (378KB, need 976KB+)
+Intesa 2024
+Intesa 2024 — HTTP 404
+Intesa 2023
+Intesa 2023 — HTTP 404
+Intesa 2022
+Intesa 2022 — HTTP 404
+Intesa 2021
+Intesa 2021 — HTTP 404
+Intesa 2020
+Intesa 2020 — HTTP 404
+Intesa 2019
+Intesa 2019 — HTTP 404
+Intesa 2018
+Intesa 2018 — HTTP 404
+Intesa 2017
+Intesa 2017 — HTTP 404
+Anz 2024 (12682KB)
+Anz 2023 (8543KB)
+Anz 2022
+Anz 2022 — HTTP 404
+Anz 2021
+Anz 2021 — HTTP 404
+Anz 2020
+Anz 2020 — HTTP 404
+Anz 2019
+Anz 2019 — HTTP 404
+Anz 2018
+Anz 2018 — HTTP 404
+Anz 2017
+Anz 2017 — HTTP 404
+Anz 2016
+Anz 2016 — HTTP 404
+Anz 2015
+Anz 2015 — HTTP 404
+Westpac 2024 (17497KB)
+Westpac 2023 (12020KB)
+Westpac 2022 (10196KB)
+Westpac 2021
+Westpac 2021 — HTTP 404
+Westpac 2020
+Westpac 2020 — HTTP 404
+Westpac 2019
+Westpac 2019 — HTTP 404
+Westpac 2018
+Westpac 2018 — HTTP 404
+Westpac 2017
+Westpac 2017 — HTTP 404
+Westpac 2016
+Westpac 2016 — HTTP 404
+Westpac 2015
+Westpac 2015 — HTTP 404
+Nab 2024 (8091KB)
+Nab 2023 (9934KB)
+Nab 2022 (6177KB)
+Nab 2021
+Nab 2021 — HTTP 404
+Nab 2020
+Nab 2020 — HTTP 404
+Nab 2019
+Nab 2019 — HTTP 404
+Nab 2018
+Nab 2018 — HTTP 404
+Nab 2017
+Nab 2017 — HTTP 404
+Nab 2016
+Nab 2016 — HTTP 404
+Nab 2015
+Nab 2015 — HTTP 404
+Commonwealth 2024
+Commonwealth 2024 — HTTP 404
+Commonwealth 2023
+Commonwealth 2023 — HTTP 404
+Commonwealth 2022
+Commonwealth 2022 — HTTP 404
+Commonwealth 2021
+Commonwealth 2021 — HTTP 404
+Commonwealth 2020
+Commonwealth 2020 — HTTP 404
+Commonwealth 2019
+Commonwealth 2019 — HTTP 404
+Commonwealth 2018
+Commonwealth 2018 — HTTP 404
+Rbc 2024 (6312KB)
+Rbc 2023 (7394KB)
+Rbc 2022 (8192KB)
+Rbc 2021 (10954KB)
+Rbc 2020 (10046KB)
+Rbc 2019 (9414KB)
+Rbc 2018 (7839KB)
+Rbc 2017 (12899KB)
+Rbc 2016 (6228KB)
+Rbc 2015 (7415KB)
+Td 2024
+Td 2024 — 3510KB
+Td 2023
+Td 2023 — HTTP 404
+Td 2022
+Td 2022 — HTTP 404
+Td 2021
+Td 2021 — HTTP 404
+Td 2020
+Td 2020 — HTTP 404
+Td 2019
+Td 2019 — HTTP 404
+Td 2018
+Td 2018 — HTTP 404
+Td 2017
+Td 2017 — HTTP 404
+Td 2016
+Td 2016 — HTTP 404
+Td 2015
+Td 2015 — HTTP 404
+Scotiabank 2024
+Scotiabank 2024 — 6541KB
+Scotiabank 2023
+Scotiabank 2023 — 4274KB
+Scotiabank 2022
+Scotiabank 2022 — HTTP 404
+Scotiabank 2021
+Scotiabank 2021 — HTTP 404
+Scotiabank 2020
+Scotiabank 2020 — HTTP 404
+Scotiabank 2019
+Scotiabank 2019 — HTTP 404
+Scotiabank 2018
+Scotiabank 2018 — HTTP 404
+Scotiabank 2017
+Scotiabank 2017 — HTTP 404
+Scotiabank 2016
+Scotiabank 2016 — HTTP 404
+Scotiabank 2015
+Scotiabank 2015 — HTTP 404
+Bmo 2024

@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-05-25T14:26:14.959600",
+  "run_at": "2026-05-28T07:38:29.789880",
   "banks": {
     "JPMorgan Chase Bank, National Association": {
       "status": "ok",
@@ -14,18 +14,16 @@
       "pairs": 5
     },
     "Wells Fargo Bank, National Association": {
-      "status": "ok",
-      "pairs": 5
+      "status": "no_data"
+    },
+    "Goldman Sachs Bank USA": {
+      "status": "no_data"
     },
     "U.S. Bank National Association": {
       "status": "ok",
       "pairs": 5
     },
     "Capital One, National Association": {
-      "status": "ok",
-      "pairs": 5
-    },
-    "Goldman Sachs Bank USA": {
       "status": "ok",
       "pairs": 5
     },
@@ -41,6 +39,10 @@
       "status": "ok",
       "pairs": 5
     },
+    "Morgan Stanley Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
     "State Street Bank and Trust Company": {
       "status": "ok",
       "pairs": 5
@@ -49,7 +51,15 @@
       "status": "ok",
       "pairs": 5
     },
-    "Morgan Stanley Private Bank, National Association": {
+    "Fifth Third Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "The Huntington National Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "BMO Bank National Association": {
       "status": "ok",
       "pairs": 5
     },
@@ -57,11 +67,7 @@
       "status": "ok",
       "pairs": 5
     },
-    "Morgan Stanley Bank, National Association": {
-      "status": "ok",
-      "pairs": 5
-    },
-    "BMO Bank National Association": {
+    "Morgan Stanley Private Bank, National Association": {
       "status": "ok",
       "pairs": 5
     },
@@ -73,11 +79,7 @@
       "status": "ok",
       "pairs": 5
     },
-    "The Huntington National Bank": {
-      "status": "ok",
-      "pairs": 5
-    },
-    "Fifth Third Bank, National Association": {
+    "American Express National  Bank": {
       "status": "ok",
       "pairs": 5
     },
@@ -85,15 +87,11 @@
       "status": "ok",
       "pairs": 5
     },
-    "American Express National  Bank": {
+    "KeyBank National Association": {
       "status": "ok",
       "pairs": 5
     },
     "Ally Bank": {
-      "status": "ok",
-      "pairs": 5
-    },
-    "KeyBank National Association": {
       "status": "ok",
       "pairs": 5
     },
@@ -106,6 +104,10 @@
       "pairs": 5
     },
     "Regions Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Pinnacle Bank": {
       "status": "ok",
       "pairs": 5
     },
@@ -130,7 +132,8 @@
       "pairs": 5
     },
     "Western Alliance Bank": {
-      "status": "no_data"
+      "status": "ok",
+      "pairs": 5
     },
     "Zions Bancorporation, N.A.": {
       "status": "ok",
@@ -152,11 +155,11 @@
       "status": "ok",
       "pairs": 5
     },
-    "UMB Bank, National Association": {
+    "Old National Bank": {
       "status": "ok",
       "pairs": 5
     },
-    "Old National Bank": {
+    "UMB Bank, National Association": {
       "status": "ok",
       "pairs": 5
     },
@@ -168,15 +171,11 @@
       "status": "ok",
       "pairs": 5
     },
-    "Valley National Bank": {
-      "status": "ok",
-      "pairs": 5
-    },
     "CIBC Bank USA": {
       "status": "ok",
       "pairs": 5
     },
-    "Bank of China": {
+    "Valley National Bank": {
       "status": "ok",
       "pairs": 5
     },
@@ -184,7 +183,7 @@
       "status": "ok",
       "pairs": 5
     },
-    "Pinnacle Bank": {
+    "BOKF, National Association": {
       "status": "ok",
       "pairs": 5
     },
@@ -192,15 +191,7 @@
       "status": "ok",
       "pairs": 5
     },
-    "BOKF, National Association": {
-      "status": "ok",
-      "pairs": 5
-    },
     "First National Bank of Pennsylvania": {
-      "status": "ok",
-      "pairs": 5
-    },
-    "Barclays Bank Delaware": {
       "status": "ok",
       "pairs": 5
     },
@@ -212,7 +203,7 @@
       "status": "ok",
       "pairs": 5
     },
-    "Associated Bank, National Association": {
+    "Barclays Bank Delaware": {
       "status": "ok",
       "pairs": 5
     },
@@ -220,7 +211,15 @@
       "status": "ok",
       "pairs": 5
     },
-    "Deutsche Bank Trust Company Americas": {
+    "Associated Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Bank of China": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Prosperity Bank": {
       "status": "ok",
       "pairs": 5
     },
@@ -229,10 +228,9 @@
       "pairs": 5
     },
     "Bank OZK": {
-      "status": "ok",
-      "pairs": 5
+      "status": "no_data"
     },
-    "Prosperity Bank": {
+    "Deutsche Bank Trust Company Americas": {
       "status": "ok",
       "pairs": 5
     },
@@ -240,11 +238,17 @@
       "status": "ok",
       "pairs": 5
     },
-    "Hancock Whitney Bank": {
+    "Commerce Bank": {
       "status": "ok",
       "pairs": 5
     },
+    "Hancock Whitney Bank": {
+      "status": "no_data"
+    },
     "BankUnited, National Association": {
+      "status": "no_data"
+    },
+    "First National Bank of Omaha": {
       "status": "ok",
       "pairs": 5
     },
@@ -252,19 +256,15 @@
       "status": "ok",
       "pairs": 5
     },
-    "TD Bank USA, National Association": {
-      "status": "ok",
-      "pairs": 5
-    },
-    "First National Bank of Omaha": {
-      "status": "ok",
-      "pairs": 5
-    },
     "United Bank": {
       "status": "ok",
       "pairs": 5
     },
-    "Commerce Bank": {
+    "Texas Capital Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "TD Bank USA, National Association": {
       "status": "ok",
       "pairs": 5
     },
@@ -280,10 +280,6 @@
       "status": "ok",
       "pairs": 5
     },
-    "Texas Capital Bank": {
-      "status": "ok",
-      "pairs": 5
-    },
     "Eastern Bank": {
       "status": "ok",
       "pairs": 5
@@ -292,7 +288,15 @@
       "status": "ok",
       "pairs": 5
     },
+    "FirstBank": {
+      "status": "ok",
+      "pairs": 5
+    },
     "City National Bank of Florida": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Axos Bank": {
       "status": "ok",
       "pairs": 5
     },
@@ -304,10 +308,6 @@
       "status": "ok",
       "pairs": 5
     },
-    "WesBanco Bank, Inc.": {
-      "status": "ok",
-      "pairs": 5
-    },
     "Ameris Bank": {
       "status": "ok",
       "pairs": 5
@@ -316,11 +316,11 @@
       "status": "ok",
       "pairs": 5
     },
-    "Axos Bank": {
+    "Charles Schwab Premier Bank, SSB": {
       "status": "ok",
       "pairs": 5
     },
-    "Charles Schwab Premier Bank, SSB": {
+    "WesBanco Bank, Inc.": {
       "status": "ok",
       "pairs": 5
     },
@@ -332,7 +332,7 @@
       "status": "ok",
       "pairs": 5
     },
-    "FirstBank": {
+    "Customers Bank": {
       "status": "ok",
       "pairs": 5
     },
@@ -348,11 +348,11 @@
       "status": "ok",
       "pairs": 5
     },
-    "Customers Bank": {
+    "Simmons Bank": {
       "status": "ok",
       "pairs": 5
     },
-    "Simmons Bank": {
+    "First Hawaiian Bank": {
       "status": "ok",
       "pairs": 5
     },
@@ -364,15 +364,11 @@
       "status": "ok",
       "pairs": 5
     },
-    "First Hawaiian Bank": {
+    "State Bank of India": {
       "status": "ok",
-      "pairs": 5
+      "pairs": 2
     },
     "TriState Capital Bank": {
-      "status": "ok",
-      "pairs": 5
-    },
-    "Beacon Bank and Trust": {
       "status": "ok",
       "pairs": 5
     },
@@ -380,11 +376,14 @@
       "status": "ok",
       "pairs": 5
     },
-    "State Bank of India": {
+    "First Financial Bank": {
       "status": "ok",
-      "pairs": 2
+      "pairs": 5
     },
-    "Mechanics Bank": {
+    "TowneBank": {
+      "status": "no_data"
+    },
+    "Beacon Bank and Trust": {
       "status": "ok",
       "pairs": 5
     },
@@ -392,11 +391,385 @@
       "status": "ok",
       "pairs": 5
     },
-    "First Financial Bank": {
+    "Mechanics Bank": {
       "status": "ok",
       "pairs": 5
     },
     "Seacoast National Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "First Merchants Bank": {
+      "status": "no_data"
+    },
+    "Optum Bank, Inc.": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "The Central Trust Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Merchants Bank of Indiana": {
+      "status": "no_data"
+    },
+    "Stifel Bank and Trust": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Apple Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "FirstBank Puerto Rico": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Trustmark Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Bank of Hope": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "ServisFirst Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Busey Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Third Federal Savings and Loan Association of Cleveland": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Community Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Enterprise Bank & Trust": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Northwest Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "First United Bank and Trust Company": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Banner Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Toyota Financial Savings Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "NBT Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Bank of Baroda": {
+      "status": "ok",
+      "pairs": 3
+    },
+    "Nicolet National Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Citizens Business Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Live Oak Banking Company": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Bank of America California, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Dime Community Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Popular Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Bell Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "OceanFirst Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "ConnectOne Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Israel Discount Bank of New York": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "NexBank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Comenity Capital Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Beal Bank USA": {
+      "status": "no_data"
+    },
+    "BMW Bank of North America": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "First Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "The Park National Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "BancFirst": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "NBH Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Dollar Bank, Federal Savings Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "PlainsCapital Bank": {
+      "status": "no_data"
+    },
+    "First Commonwealth Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Safra National Bank of New York": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Stifel Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Oriental Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Farmers and Merchants Bank of Long Beach": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "LendingClub Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Stellar Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Washington Trust Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Bank Hapoalim B.M.": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Charles Schwab Trust Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Amarillo National Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Origin Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Centier Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Tri Counties Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "S&T Bank": {
+      "status": "no_data"
+    },
+    "EagleBank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "The Bancorp Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "International Bank of Commerce": {
+      "status": "no_data"
+    },
+    "Byline Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Amerant Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Capitol Federal Savings Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Peoples Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Principal Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "WEX Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Stock Yards Bank & Trust Company": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Wintrust Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Union Bank and Trust Company": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Woodforest National Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Amalgamated Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "1st Source Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "American Savings Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Wells Fargo National Bank West": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Liberty Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Lake Forest Bank & Trust Company, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Merrick Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "b1BANK": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Flushing Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Metropolitan Commercial Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Southside Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "RBC Bank, (Georgia) National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Cross River Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Tompkins Community Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Salem Five Cents Savings Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Sunflower Bank, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "CNB Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Heritage Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "First Security Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "German American Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "First American Trust, FSB": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "BankPlus": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Forbright Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "First American Bank": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "First Mid Bank & Trust, National Association": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Univest  Bank and Trust Co.": {
+      "status": "ok",
+      "pairs": 5
+    },
+    "Burke & Herbert Bank & Trust Company": {
       "status": "ok",
       "pairs": 5
     }

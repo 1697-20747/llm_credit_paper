@@ -1,22 +1,23 @@
 {
-  "run_at": "2026-05-25T14:29:49.131078",
-  "financial_pairs": 854,
-  "rating_agency_pairs": 1023,
+  "run_at": "2026-05-29T18:19:08.812112",
+  "financial_pairs": 2494,
+  "rating_agency_pairs": 1336,
   "eba_pairs": 1463,
-  "fdic_pairs": 492,
+  "fdic_pairs": 935,
+  "overview_pairs": 0,
   "credit_report_pairs": 0,
-  "total_after_dedup": 3693,
-  "train_count": 3324,
-  "eval_count": 369,
+  "total_after_dedup": 5714,
+  "train_count": 5143,
+  "eval_count": 571,
   "by_quality": {
-    "structured": 1955,
-    "template": 854,
-    "extracted": 884
+    "structured": 2398,
+    "template": 2120,
+    "extracted": 1196
   },
   "by_pipeline": {
-    "fdic_call_report": 492,
+    "fdic_call_report": 935,
     "eba_transparency": 1463,
-    "financial_template": 854,
-    "rating_agency": 884
+    "financial_template": 2120,
+    "rating_agency": 1196
   }
 }

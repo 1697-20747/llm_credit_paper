@@ -1,0 +1,23 @@
+    # ── E: FDIC Call Reports ──────────────────────────────────────────────────
+    fdic_pairs = load_jsonl(TRAINING_DIR / "fdic_pairs.jsonl",
+                            "fdic_call_report", "structured")
+    if fdic_pairs:
+        print(f"\n[PIPELINE E] FDIC Call Reports: {len(fdic_pairs)} pairs")
+    else:
+        print(f"\n[PIPELINE E] FDIC: none (run: ./run.sh --download-fdic)")
+
+    # ── F: Overview pairs ─────────────────────────────────────────────────────
+    # Prefers upgraded (API-generated) over template pairs
+    overview_pairs = load_jsonl(
+        TRAINING_DIR / "overview_pairs_upgraded.jsonl", "overview_upgraded", "upgraded"
+    )
+    if not overview_pairs:
+        overview_pairs = load_jsonl(
+            TRAINING_DIR / "overview_pairs.jsonl", "overview_template", "template"
+        )
+    if overview_pairs:
+        print(f"\n[PIPELINE F] Overview pairs: {len(overview_pairs)} pairs")
+    else:
+        print(f"\n[PIPELINE F] Overview: none")
+        print(f"  Run: .venv/bin/python3 scripts/07_build_overview_pairs.py --upgrade")
+        print(f"  Or:  .venv/bin/python3 scripts/07_build_overview_pairs.py --template")

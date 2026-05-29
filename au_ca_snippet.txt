@@ -1,0 +1,9 @@
+    "AU": [
+        "commonwealth bank", "anz", "westpac", "national australia bank", "nab",
+    ],
+    # Canadian banks — CAD currency. RWA in CAD, region_CA peers only for RWA comparison
+    "CA": [
+        "royal bank of canada", "rbc", "toronto-dominion", "td bank",
+        "bank of nova scotia", "scotiabank", "bank of montreal", "bmo",
+        "canadian imperial", "cibc",
+    ],

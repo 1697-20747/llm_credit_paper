@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Lloyds Banking Group — CAMELS Dashboard 2025 · UK Regional Peers</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;700&display=swap');
+:root{
+  --bg:#f8f7f4;--surface:#fff;--surface2:#f2f0ec;--border:#e2ddd6;
+  --text:#1a1816;--text2:#6b6560;--text3:#9c9490;
+  --accent:#1a3a5c;--accent2:#2d6a9f;
+  --green:#059669;--amber:#d97706;--red:#dc2626;--darkred:#7f1d1d;
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 12px rgba(0,0,0,.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:13px;line-height:1.5}
+.header{background:var(--accent);color:#fff;padding:28px 40px 24px;position:relative;overflow:hidden}
+.header::after{content:'';position:absolute;right:-60px;top:-60px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none}
+.header-top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.bank-name{font-size:26px;font-weight:700;letter-spacing:-.5px;line-height:1.2}
+.bank-meta{font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,.6);margin-top:6px;letter-spacing:.5px;text-transform:uppercase}
+.header-badge{font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border-radius:4px;background:rgba(255,255,255,.12);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15);white-space:nowrap}
+.tabs{background:var(--accent);padding:0 40px;display:flex;gap:0;border-top:1px solid rgba(255,255,255,.1)}
+.tab{padding:10px 16px;font-size:11px;font-weight:500;color:rgba(255,255,255,.5);cursor:pointer;border-bottom:2px solid transparent;text-transform:uppercase;letter-spacing:.5px;transition:all .15s}
+.tab:hover{color:rgba(255,255,255,.8)}
+.tab.active{color:#fff;border-bottom-color:#60a5fa}
+.page{padding:28px 40px;max-width:1600px;margin:0 auto}
+.nav-links{background:rgba(255,255,255,.08);padding:8px 40px;display:flex;gap:12px;font-size:11px}
+.nav-link{color:rgba(255,255,255,.6);text-decoration:none;font-family:'DM Mono',monospace;padding:3px 8px;border-radius:3px;border:1px solid rgba(255,255,255,.15)}
+.nav-link:hover,.nav-link.current{color:#fff;background:rgba(255,255,255,.12)}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:28px}
+.summary-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.summary-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--status-color,var(--accent2));border-radius:8px 8px 0 0}
+.summary-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.summary-value{font-family:'DM Mono',monospace;font-size:22px;font-weight:500;color:var(--text);line-height:1;margin-bottom:6px}
+.summary-unit{font-size:12px;color:var(--text2)}
+.summary-meta{display:flex;align-items:center;gap:6px;margin-top:6px}
+.decile-badge{font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:3px;background:var(--surface2);color:var(--text2);border:1px solid var(--border)}
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(480px,1fr));gap:16px}
+.metric-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;box-shadow:var(--shadow)}
+.metric-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+.metric-title{font-size:13px;font-weight:600;color:var(--text)}
+.metric-value-large{font-family:'DM Mono',monospace;font-size:28px;font-weight:400;color:var(--text);line-height:1}
+.metric-unit-large{font-size:14px;color:var(--text2);margin-left:2px}
+.status-pill{font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px}
+.status-comfortable{background:#d1fae5;color:#065f46}
+.status-watch{background:#fef3c7;color:#92400e}
+.status-downgrade_risk{background:#fee2e2;color:#7f1d1d}
+.status-breach{background:#7f1d1d;color:#fff}
+.dist-canvas{width:100%;height:100px;display:block}
+.period-label{display:inline-block;font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:3px;background:#eef2f7;color:#4a6080;border:1px solid #c8d4e3;margin-bottom:6px}
+.dist-legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;font-size:10px;color:var(--text2);align-items:center}
+.legend-item{display:flex;align-items:center;gap:4px}
+.legend-line{width:16px;height:2px;border-radius:1px;display:inline-block}
+.legend-dash{width:16px;height:0;border-top:2px dashed;display:inline-block}
+.trend-section{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.trend-item{text-align:center}
+.trend-label{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px}
+.trend-val{font-family:'DM Mono',monospace;font-size:13px;font-weight:500}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.alert-banner{padding:12px 16px;border-radius:8px;margin-bottom:12px;display:flex;align-items:flex-start;gap:10px;font-size:12px}
+.alert-icon{font-size:16px;flex-shrink:0}
+.alert-red{background:#fee2e2;border:1px solid #fca5a5;color:#7f1d1d}
+.alert-amber{background:#fef3c7;border:1px solid #fcd34d;color:#78350f}
+.footer{text-align:center;padding:28px;color:var(--text3);font-size:10px;font-family:'DM Mono',monospace;letter-spacing:.3px;border-top:1px solid var(--border);margin-top:40px}
+.toggle-btn{font-size:9px;padding:2px 7px;border-radius:3px;border:1px solid var(--border);background:var(--surface2);color:var(--text2);cursor:pointer;font-family:'DM Mono',monospace;margin-left:6px}
+.toggle-btn:hover{background:var(--border)}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="bank-name">Lloyds Banking Group</div>
+      <div class="bank-meta">CAMELS Dashboard · UK Regional Peers · 2025 · 28 May 2026 07:33</div>
+    </div>
+    <div class="header-badge">CAMELS Analytics v1.0</div>
+  </div>
+</div>
+<div class="nav-links"><a class="nav-link" href="dashboard.html">🌍 Global Peers</a><a class="nav-link current" href="dashboard_regional.html">🏴 UK Peers</a></div>
+<div class="tabs">
+  <div class="tab active" onclick="showTab('overview',this)">Overview</div>
+  <div class="tab" onclick="showTab('distribution',this)">Peer Distribution</div>
+  <div class="tab" onclick="showTab('trends',this)">Trends</div>
+  <div class="tab" onclick="showTab('triggers',this)">Downgrade Triggers</div>
+</div>
+<div class="page">
+  <div class="tab-panel active" id="tab-overview">
+    <div id="alert-container"></div>
+    <div class="summary-grid" id="summary-grid"></div>
+  </div>
+  <div class="tab-panel" id="tab-distribution">
+    <div class="metrics-grid" id="dist-grid"></div>
+  </div>
+  <div class="tab-panel" id="tab-trends">
+    <div class="metrics-grid" id="trend-grid"></div>
+  </div>
+  <div class="tab-panel" id="tab-triggers">
+    <div id="trigger-list"></div>
+  </div>
+</div>
+<div class="footer">
+  Lloyds Banking Group · 2025 · Peer population: UK regional peers from benchmark index ·
+  Thresholds: Basel III / PRA / ECB · For analytical use only
+</div>
+<script>
+const CHARTS = [{"key": "cet1_ratio", "label": "CET1 Ratio", "unit": "%", "value": 14.0, "bins": [13.4, 13.6, 13.79, 13.98, 14.18, 14.38, 14.57, 14.77, 14.96, 15.16, 15.35, 15.54, 15.74, 15.94, 16.13, 16.32, 16.52, 16.71, 16.91, 17.11, 17.3], "counts": [1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5], "abins": [9.28, 9.68, 10.08, 10.48, 10.88, 11.29, 11.69, 12.09, 12.49, 12.89, 13.29, 13.69, 14.09, 14.49, 14.89, 15.3, 15.7, 16.1, 16.5, 16.9, 17.3], "acounts": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5], "median": 14.25, "all_median": 13.95, "p10": 13.6, "p90": 15.87, "period_label": "UK peers (n=14)", "all_period_label": "All-time (n=20)", "use_recent": false, "decile": 4, "pct_rank": 30.5, "triggers": [{"value": 11.0, "label": "MDA trigger", "color": "#f59e0b"}, {"value": 8.0, "label": "Regulatory min", "color": "#ef4444"}, {"value": 4.5, "label": "Pillar 1 min", "color": "#991b1b"}], "hist_series": [{"year": 2021, "value": 17.3}, {"year": 2022, "value": 15.1}, {"year": 2024, "value": 14.2}, {"year": 2025, "value": 14.0}], "direction": "deteriorating", "change_1y": -0.2, "change_5y": null, "prox_status": "comfortable", "prox_dist": 3.0, "prox_trigger": "MDA trigger", "prox_years": null}, {"key": "total_capital_ratio", "label": "Total Capital Ratio", "unit": "%", "value": 18.9, "bins": [18.9, 19.13, 19.37, 19.61, 19.84, 20.07, 20.31, 20.54, 20.78, 21.02, 21.25, 21.48, 21.72, 21.96, 22.19, 22.43, 22.66, 22.9, 23.13, 23.37, 23.6], "counts": [1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5], "abins": [18.9, 19.13, 19.37, 19.61, 19.84, 20.07, 20.31, 20.54, 20.78, 21.02, 21.25, 21.48, 21.72, 21.96, 22.19, 22.43, 22.66, 22.9, 23.13, 23.37, 23.6], "acounts": [1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5], "median": 19.7, "all_median": 19.7, "p10": 19.06, "p90": 22.82, "period_label": "All-time (n=3)", "all_period_label": "All-time (n=3)", "use_recent": false, "decile": 1, "pct_rank": 0.0, "triggers": [], "hist_series": [{"year": 2021, "value": 23.6}, {"year": 2022, "value": 19.7}, {"year": 2025, "value": 18.9}], "direction": "deteriorating", "change_1y": -0.8, "change_5y": null, "prox_status": "comfortable", "prox_dist": null, "prox_trigger": "", "prox_years": null}, {"key": "leverage_ratio", "label": "Leverage Ratio", "unit": "%", "value": 5.4, "bins": [4.9, 4.95, 4.99, 5.04, 5.08, 5.12, 5.17, 5.21, 5.26, 5.3, 5.35, 5.39, 5.44, 5.49, 5.53, 5.58, 5.62, 5.67, 5.71, 5.75, 5.8], "counts": [1, 1, 4, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 0.5, 0.5], "abins": [4.9, 5.13, 5.35, 5.58, 5.8, 6.03, 6.25, 6.48, 6.7, 6.93, 7.16, 7.38, 7.61, 7.83, 8.06, 8.28, 8.51, 8.73, 8.96, 9.18, 9.41], "acounts": [3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5], "median": 5.1, "all_median": 5.45, "p10": 5.0, "p90": 5.6, "period_label": "UK peers (n=11)", "all_period_label": "All-time (n=18)", "use_recent": false, "decile": 7, "pct_rank": 70.0, "triggers": [{"value": 3.25, "label": "UK/EU min", "color": "#ef4444"}, {"value": 3.0, "label": "Basel min", "color": "#991b1b"}], "hist_series": [{"year": 2021, "value": 5.8}, {"year": 2022, "value": 5.6}, {"year": 2024, "value": 5.5}, {"year": 2025, "value": 5.4}], "direction": "deteriorating", "change_1y": -0.1, "change_5y": null, "prox_status": "comfortable", "prox_dist": 2.15, "prox_trigger": "UK/EU min", "prox_years": null}, {"key": "rote", "label": "RoTE", "unit": "%", "value": 22.1, "bins": [], "counts": [], "abins": [], "acounts": [], "median": 0, "all_median": 0, "p10": 0, "p90": 0, "period_label": "All-time (n=0)", "all_period_label": "n/a", "use_recent": false, "decile": 5, "pct_rank": 50.0, "triggers": [{"value": 10.0, "label": "Cost of equity", "color": "#f59e0b"}, {"value": 0.0, "label": "Breakeven", "color": "#ef4444"}], "hist_series": [{"year": 2025, "value": 22.1}], "direction": "flat", "change_1y": null, "change_5y": null, "prox_status": "comfortable", "prox_dist": 12.1, "prox_trigger": "Cost of equity", "prox_years": null}, {"key": "lcr", "label": "LCR", "unit": "%", "value": 145.0, "bins": [132.0, 134.0, 136.0, 138.0, 140.0, 142.0, 144.0, 146.0, 148.0, 150.0, 152.0, 154.0, 156.0, 158.0, 160.0, 162.0, 164.0, 166.0, 168.0, 170.0, 172.0], "counts": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "abins": [132.0, 134.0, 136.0, 138.0, 140.0, 142.0, 144.0, 146.0, 148.0, 150.0, 152.0, 154.0, 156.0, 158.0, 160.0, 162.0, 164.0, 166.0, 168.0, 170.0, 172.0], "acounts": [1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 2, 1], "median": 153.5, "all_median": 161.0, "p10": 137.4, "p90": 170.2, "period_label": "UK peers (n=10)", "all_period_label": "All-time (n=11)", "use_recent": false, "decile": 5, "pct_rank": 40.4, "triggers": [{"value": 100.0, "label": "Regulatory min", "color": "#ef4444"}], "hist_series": [{"year": 2025, "value": 145.0}], "direction": "flat", "change_1y": null, "change_5y": null, "prox_status": "comfortable", "prox_dist": 45.0, "prox_trigger": "Regulatory min", "prox_years": null}, {"key": "nsfr", "label": "NSFR", "unit": "%", "value": 124.0, "bins": [124.0, 124.65, 125.3, 125.95, 126.6, 127.25, 127.9, 128.55, 129.2, 129.85, 130.5, 131.15, 131.8, 132.45, 133.1, 133.75, 134.4, 135.05, 135.7, 136.35, 137.0], "counts": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 0.5], "abins": [124.0, 124.7, 125.4, 126.1, 126.8, 127.5, 128.2, 128.9, 129.6, 130.3, 131.0, 131.7, 132.4, 133.1, 133.8, 134.5, 135.2, 135.9, 136.6, 137.3, 138.0], "acounts": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1], "median": 135.0, "all_median": 135.0, "p10": 127.6, "p90": 136.2, "period_label": "UK peers (n=5)", "all_period_label": "All-time (n=6)", "use_recent": false, "decile": 1, "pct_rank": 0.0, "triggers": [{"value": 100.0, "label": "Regulatory min", "color": "#ef4444"}], "hist_series": [{"year": 2025, "value": 124.0}], "direction": "flat", "change_1y": null, "change_5y": null, "prox_status": "comfortable", "prox_dist": 24.0, "prox_trigger": "Regulatory min", "prox_years": null}, {"key": "rwa_bn", "label": "Risk-Weighted Assets", "unit": "bn", "value": 235.5, "bins": [11.2, 22.41, 33.63, 44.84, 56.06, 67.28, 78.49, 89.7, 100.92, 112.14, 123.35, 134.56, 145.78, 156.99, 168.21, 179.42, 190.64, 201.85, 213.07, 224.28, 235.5], "counts": [1, 1, 1, 1, 1, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "abins": [11.2, 22.41, 33.63, 44.84, 56.06, 67.28, 78.49, 89.7, 100.92, 112.14, 123.35, 134.56, 145.78, 156.99, 168.21, 179.42, 190.64, 201.85, 213.07, 224.28, 235.5], "acounts": [1, 1, 1, 1, 1, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5], "median": 84.5, "all_median": 79.1, "p10": 65.5, "p90": 224.6, "period_label": "UK peers (n=11)", "all_period_label": "All-time (n=12)", "use_recent": false, "decile": 10, "pct_rank": 99.0, "triggers": [], "hist_series": [{"year": 2021, "value": 196.0}, {"year": 2022, "value": 210.9}, {"year": 2024, "value": 224.6}, {"year": 2025, "value": 235.5}], "direction": "improving", "change_1y": 10.9, "change_5y": null, "prox_status": "comfortable", "prox_dist": null, "prox_trigger": "", "prox_years": null}];
+const BANK   = "Lloyds Banking Group";
+const YEAR   = 2025;
+
+function showTab(name,el){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  el.classList.add('active');
+  if(name==='distribution') renderDistCharts();
+  if(name==='trends')       renderTrendCharts();
+  if(name==='triggers')     renderTriggers();
+}
+function ordinal(n){const s=['th','st','nd','rd'],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0]);}
+function trendArrow(dir,ch){
+  if(ch==null)return'';
+  const sign=ch>0?'+':'';
+  const col=dir==='improving'?'#059669':dir==='deteriorating'?'#dc2626':'#9c9490';
+  const arr=dir==='improving'?'↑':dir==='deteriorating'?'↓':'→';
+  return `<span style="font-size:11px;color:${col}">${arr} ${sign}${ch.toFixed(1)}</span>`;
+}
+function statusColor(s){return{comfortable:'#10b981',watch:'#f59e0b',downgrade_risk:'#ef4444',breach:'#7f1d1d'}[s]||'#94a3b8';}
+
+function renderOverview(){
+  const grid=document.getElementById('summary-grid');
+  const alerts=document.getElementById('alert-container');
+  let ah='';
+  CHARTS.forEach(c=>{
+    const sc=statusColor(c.prox_status);
+    const div=document.createElement('div');
+    div.className='summary-card';
+    div.style.setProperty('--status-color',sc);
+    div.innerHTML=`
+      <div class="summary-label">${c.label}</div>
+      <div class="summary-value">${c.value}<span class="summary-unit">${c.unit}</span></div>
+      <div class="summary-meta">
+        <span class="decile-badge">${ordinal(c.decile)} decile</span>
+        ${trendArrow(c.direction,c.change_1y)}
+      </div>`;
+    grid.appendChild(div);
+    if(c.prox_status==='downgrade_risk'||c.prox_status==='breach'){
+      const cls=c.prox_status==='breach'?'alert-red':'alert-amber';
+      const icon=c.prox_status==='breach'?'🚨':'⚠️';
+      let msg=`<strong>${c.label} (${c.value}${c.unit})</strong> — ${c.prox_trigger}`;
+      if(c.prox_dist) msg+=`. Distance: <strong>${c.prox_dist}${c.unit}</strong>`;
+      if(c.prox_years) msg+=`. At current trend: <strong>~${c.prox_years}yr</strong> to trigger`;
+      ah+=`<div class="alert-banner ${cls}"><span class="alert-icon">${icon}</span><div>${msg}</div></div>`;
+    }
+  });
+  alerts.innerHTML=ah;
+}
+
+function renderDistCharts(){
+  const grid=document.getElementById('dist-grid');
+  if(grid.children.length>0)return;
+  CHARTS.forEach(c=>{
+    const card=document.createElement('div');
+    card.className='metric-card';
+    const hasBoth=c.abins&&c.abins.length>0&&c.bins&&c.bins.length>0;
+    const toggleHtml=hasBoth
+      ?`<button class="toggle-btn" id="toggle-${c.key}" onclick="togglePeriod('${c.key}')">${c.use_recent?'Show all-time':'Show recent'}</button>`:'';
+    card.innerHTML=`
+      <div class="metric-header">
+        <div>
+          <div class="metric-title">${c.label}</div>
+          <div style="margin-top:4px">
+            <span class="metric-value-large">${c.value}</span>
+            <span class="metric-unit-large">${c.unit}</span>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <span class="status-pill status-${c.prox_status}">${c.prox_status.replace('_',' ')}</span>
+          <div style="margin-top:6px;font-size:11px;color:#6b6560">${ordinal(c.decile)} decile</div>
+          <div style="font-size:10px;color:#9c9490">${c.pct_rank.toFixed(0)}th percentile</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+        <span class="period-label" id="period-label-${c.key}">${c.period_label}</span>
+        ${toggleHtml}
+      </div>
+      <canvas class="dist-canvas" id="canvas-${c.key}" height="100"></canvas>
+      <div class="dist-legend" id="legend-${c.key}">
+        <div class="legend-item">
+          <span class="legend-line" style="background:#1a3a5c;height:3px"></span>
+          <span style="color:#1a3a5c;font-weight:600">${BANK} (${c.value}${c.unit})</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dash" style="border-color:#64748b"></span>
+          <span>Peer median (${c.median}${c.unit})</span>
+        </div>
+        ${c.triggers.map(t=>`
+        <div class="legend-item">
+          <span class="legend-dash" style="border-color:${t.color}"></span>
+          <span style="color:${t.color}">${t.label} (${t.value}${c.unit})</span>
+        </div>`).join('')}
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:#9c9490;margin-top:4px">
+        <span>p10: ${c.p10}${c.unit}</span>
+        <span>median: ${c.median}${c.unit}</span>
+        <span>p90: ${c.p90}${c.unit}</span>
+      </div>
+      <div class="trend-section">
+        <div class="trend-item">
+          <div class="trend-label">Current</div>
+          <div class="trend-val">${c.value}${c.unit}</div>
+        </div>
+        <div class="trend-item">
+          <div class="trend-label">1Y Change</div>
+          <div class="trend-val" style="color:${c.change_1y==null?'#9c9490':c.change_1y>0?'#059669':'#dc2626'}">
+            ${c.change_1y!=null?(c.change_1y>0?'+':'')+c.change_1y.toFixed(1)+c.unit:'—'}
+          </div>
+        </div>
+        <div class="trend-item">
+          <div class="trend-label">5Y Change</div>
+          <div class="trend-val" style="color:${c.change_5y==null?'#9c9490':c.change_5y>0?'#059669':'#dc2626'}">
+            ${c.change_5y!=null?(c.change_5y>0?'+':'')+c.change_5y.toFixed(1)+c.unit:'—'}
+          </div>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+    drawDistChart(c,`canvas-${c.key}`,false);
+  });
+}
+
+function togglePeriod(key){
+  const c=CHARTS.find(x=>x.key===key);
+  if(!c)return;
+  const btn=document.getElementById(`toggle-${key}`);
+  const lbl=document.getElementById(`period-label-${key}`);
+  const showAll=btn.textContent.includes('all-time');
+  if(showAll){lbl.textContent=c.all_period_label;btn.textContent='Show recent';drawDistChart(c,`canvas-${key}`,true);}
+  else{lbl.textContent=c.period_label;btn.textContent='Show all-time';drawDistChart(c,`canvas-${key}`,false);}
+}
+
+function drawDistChart(c,canvasId,useAll){
+  const canvas=document.getElementById(canvasId);
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.offsetWidth||440;
+  const H=100;
+  canvas.width=W;canvas.height=H;
+  ctx.clearRect(0,0,W,H);
+  const bins=useAll?c.abins:c.bins;
+  const counts=useAll?c.acounts:c.counts;
+  const median=useAll?c.all_median:c.median;
+  if(!bins||bins.length<2)return;
+  const lo=bins[0],hi=bins[bins.length-1],range=hi-lo||1;
+  const maxCount=Math.max(...counts,1);
+  const barW=W/(bins.length-1);
+  const axisY=H-18,topPad=22;
+  // grid
+  ctx.strokeStyle='#f0ede8';ctx.lineWidth=1;
+  [0.25,0.5,0.75].forEach(f=>{
+    const y=axisY-f*(axisY-topPad);
+    ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
+  });
+  // bars
+  counts.forEach((cnt,i)=>{
+    const x=i*barW;
+    const bh=(cnt/maxCount)*(axisY-topPad);
+    ctx.fillStyle='#d4dae3';
+    ctx.fillRect(x,axisY-bh,barW-1,bh);
+  });
+  // trigger lines
+  (c.triggers||[]).forEach(t=>{
+    const px=((t.value-lo)/range)*W;
+    if(px<0||px>W)return;
+    ctx.save();
+    ctx.strokeStyle=t.color;ctx.lineWidth=1.5;ctx.setLineDash([3,3]);
+    ctx.beginPath();ctx.moveTo(px,topPad);ctx.lineTo(px,axisY);ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle=t.color;ctx.font='8px DM Mono,monospace';
+    const lx=px>W-52?px-50:px+2;
+    ctx.fillText(t.label,lx,topPad+9);
+    ctx.restore();
+  });
+  // peer median marker
+  const mx=((median-lo)/range)*W;
+  if(mx>=0&&mx<=W){
+    ctx.save();
+    ctx.strokeStyle='#64748b';ctx.lineWidth=1.5;ctx.setLineDash([5,4]);
+    ctx.beginPath();ctx.moveTo(mx,topPad);ctx.lineTo(mx,axisY);ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle='#64748b';
+    ctx.beginPath();ctx.moveTo(mx,axisY+2);ctx.lineTo(mx-4,axisY+9);ctx.lineTo(mx+4,axisY+9);ctx.closePath();ctx.fill();
+    ctx.font='8px DM Mono,monospace';ctx.textAlign='center';
+    ctx.fillText('median',mx,axisY+17);
+    ctx.textAlign='left';ctx.restore();
+  }
+  // bank marker
+  const vx=((c.value-lo)/range)*W;
+  if(vx>=0&&vx<=W){
+    ctx.save();
+    ctx.strokeStyle='#1a3a5c';ctx.lineWidth=2.5;
+    ctx.beginPath();ctx.moveTo(vx,topPad);ctx.lineTo(vx,axisY);ctx.stroke();
+    ctx.fillStyle='#1a3a5c';
+    ctx.beginPath();ctx.moveTo(vx,axisY+2);ctx.lineTo(vx-5,axisY+7);ctx.lineTo(vx,axisY+12);ctx.lineTo(vx+5,axisY+7);ctx.closePath();ctx.fill();
+    ctx.font='bold 9px DM Mono,monospace';
+    const nameLabel=BANK.split(' ').map(w=>w[0]).join('')+' '+c.value+c.unit;
+    const lw=ctx.measureText(nameLabel).width;
+    const lx=vx+lw>W-4?vx-lw-4:vx+4;
+    ctx.fillText(nameLabel,lx,topPad-4);
+    ctx.restore();
+  }
+  // x axis
+  ctx.fillStyle='#9c9490';ctx.font='9px DM Mono,monospace';
+  ctx.textAlign='left'; ctx.fillText(lo.toFixed(1),0,H);
+  ctx.textAlign='center';ctx.fillText(((lo+hi)/2).toFixed(1),W/2,H);
+  ctx.textAlign='right'; ctx.fillText(hi.toFixed(1),W,H);
+  ctx.textAlign='left';
+}
+
+function renderTrendCharts(){
+  const grid=document.getElementById('trend-grid');
+  if(grid.children.length>0)return;
+  CHARTS.forEach(c=>{
+    const hasHist=c.hist_series&&c.hist_series.length>1;
+    const card=document.createElement('div');
+    card.className='metric-card';
+    const histRows=hasHist
+      ?c.hist_series.map(p=>{
+          const cur=p.year===YEAR;
+          return `<span style="font-family:'DM Mono',monospace;font-size:11px;${cur?'font-weight:700;color:#1a3a5c':'color:#6b6560'}">${p.year}: ${p.value}${c.unit}</span>`;
+        }).join(' &nbsp;·&nbsp; ')
+      :'<span style="color:#9c9490">No historical data in dataset yet</span>';
+    card.innerHTML=`
+      <div class="metric-header">
+        <div>
+          <div class="metric-title">${c.label}</div>
+          <div style="margin-top:4px">
+            <span class="metric-value-large">${c.value}</span>
+            <span class="metric-unit-large">${c.unit}</span>
+          </div>
+        </div>
+        <div style="text-align:right;font-size:11px;color:#6b6560">
+          <div>1Y: ${c.change_1y!=null?(c.change_1y>0?'+':'')+c.change_1y.toFixed(1)+c.unit:'—'}</div>
+          <div style="margin-top:2px">5Y: ${c.change_5y!=null?(c.change_5y>0?'+':'')+c.change_5y.toFixed(1)+c.unit:'—'}</div>
+        </div>
+      </div>
+      <canvas id="tcanvas-${c.key}" height="60" style="width:100%;display:block"></canvas>
+      <div style="margin-top:8px;line-height:1.8">${histRows}</div>`;
+    grid.appendChild(card);
+    if(hasHist) drawTrendChart(c,`tcanvas-${c.key}`);
+  });
+}
+
+function drawTrendChart(c,id){
+  const canvas=document.getElementById(id);
+  if(!canvas||!c.hist_series||c.hist_series.length<2)return;
+  const W=canvas.offsetWidth||440,H=60;
+  canvas.width=W;canvas.height=H;
+  const ctx=canvas.getContext('2d');
+  const vals=c.hist_series.map(p=>p.value);
+  const minV=Math.min(...vals)*0.95,maxV=Math.max(...vals)*1.05;
+  const pad=8;
+  (c.triggers||[]).forEach(t=>{
+    if(t.value<minV||t.value>maxV)return;
+    const ty=H-pad-((t.value-minV)/(maxV-minV))*(H-pad*2);
+    ctx.strokeStyle=t.color;ctx.lineWidth=1;ctx.setLineDash([3,3]);
+    ctx.beginPath();ctx.moveTo(0,ty);ctx.lineTo(W,ty);ctx.stroke();
+    ctx.setLineDash([]);
+  });
+  ctx.strokeStyle='#1a3a5c';ctx.lineWidth=2;
+  ctx.beginPath();
+  c.hist_series.forEach((p,i)=>{
+    const x=(i/(c.hist_series.length-1))*(W-20)+10;
+    const y=H-pad-((p.value-minV)/(maxV-minV||1))*(H-pad*2);
+    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+  c.hist_series.forEach((p,i)=>{
+    const x=(i/(c.hist_series.length-1))*(W-20)+10;
+    const y=H-pad-((p.value-minV)/(maxV-minV||1))*(H-pad*2);
+    ctx.fillStyle=p.year===YEAR?'#1a3a5c':'#94a3b8';
+    ctx.beginPath();ctx.arc(x,y,p.year===YEAR?4:2.5,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#9c9490';ctx.font='8px DM Mono,monospace';
+    ctx.textAlign='center';ctx.fillText(p.year,x,H);ctx.textAlign='left';
+  });
+}
+
+function renderTriggers(){
+  const container=document.getElementById('trigger-list');
+  if(container.children.length>0)return;
+  const order=['breach','downgrade_risk','watch','comfortable'];
+  const sorted=[...CHARTS].sort((a,b)=>order.indexOf(a.prox_status)-order.indexOf(b.prox_status));
+  sorted.forEach(c=>{
+    const card=document.createElement('div');
+    card.style.cssText='background:#fff;border:1px solid #e2ddd6;border-radius:10px;padding:18px 20px;margin-bottom:12px';
+    const trigRows=(c.triggers||[]).map(t=>{
+      const dist=Math.abs(c.value-t.value).toFixed(2);
+      const dir=c.value>t.value?'above':'below';
+      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #f2f0ec;font-size:11px">
+        <span style="color:#6b6560">${t.label}</span>
+        <span style="font-family:'DM Mono',monospace;color:${t.color};font-weight:600">${t.value}${c.unit}</span>
+        <span style="color:#9c9490">${dist}${c.unit} ${dir}</span>
+      </div>`;
+    }).join('');
+    const projHtml=c.prox_years
+      ?`<div style="margin-top:8px;padding:8px 10px;background:#fee2e2;border-radius:5px;font-size:11px;color:#7f1d1d;font-weight:600">
+          ⚡ At current trajectory: ~${c.prox_years} year(s) to ${c.prox_trigger}
+        </div>`:'';
+    card.innerHTML=`
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div>
+          <div style="font-weight:600;font-size:13px">${c.label}</div>
+          <div style="font-family:'DM Mono',monospace;font-size:20px;margin-top:2px">${c.value}${c.unit}</div>
+        </div>
+        <span class="status-pill status-${c.prox_status}">${c.prox_status.replace('_',' ')}</span>
+      </div>
+      ${trigRows}${projHtml}
+      <div style="margin-top:8px;font-size:11px;color:#6b6560">
+        ${c.prox_dist?`Distance to nearest trigger: <strong>${c.prox_dist}${c.unit}</strong>`:''}
+      </div>`;
+    container.appendChild(card);
+  });
+}
+renderOverview();
+
+</script>
+</body>
+</html>

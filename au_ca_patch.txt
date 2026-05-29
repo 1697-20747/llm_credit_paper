@@ -1,0 +1,10 @@
+    "AU": [
+        "commonwealth bank", "cba", "anz", "westpac", "national australia",
+    ],
+    # Canadian banks — RWA in CAD, not comparable with GBP/EUR/USD banks.
+    # Always use region_CA distribution for RWA peer comparison.
+    "CA": [
+        "royal bank of canada", "rbc", "toronto-dominion", "td bank",
+        "bank of nova scotia", "scotiabank", "bank of montreal", "bmo",
+        "canadian imperial", "cibc",
+    ],

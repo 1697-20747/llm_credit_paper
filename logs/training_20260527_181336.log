@@ -1,0 +1,191 @@
+Loading configuration file /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/lora_config.yaml
+Loading pretrained model
+Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files: 100%|██████████| 9/9 [00:00<00:00, 44098.99it/s]
+Loading datasets
+Training
+Trainable parameters: 0.019% (1.442M/7615.617M)
+Starting training..., iters: 600
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:07,  1.82s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:04,  1.57s/it]Calculating loss...:  60%|██████    | 3/5 [00:04<00:03,  1.65s/it]Calculating loss...:  80%|████████  | 4/5 [00:06<00:01,  1.64s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.55s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.60s/it]
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 525 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 1: Val loss 2.490, Val took 8.053s
+Iter 10: Train loss 2.734, Learning Rate 2.000e-05, It/sec 0.464, Tokens/sec 202.625, Trained Tokens 4367, Peak mem 5.702 GB
+Iter 20: Train loss 2.614, Learning Rate 2.000e-05, It/sec 0.458, Tokens/sec 205.165, Trained Tokens 8849, Peak mem 5.715 GB
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:06,  1.51s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:04,  1.64s/it]Calculating loss...:  60%|██████    | 3/5 [00:04<00:03,  1.53s/it]Calculating loss...:  80%|████████  | 4/5 [00:06<00:01,  1.61s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.61s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.60s/it]
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 552 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 25: Val loss 2.459, Val took 8.002s
+Iter 30: Train loss 2.754, Learning Rate 2.000e-05, It/sec 0.472, Tokens/sec 204.684, Trained Tokens 13181, Peak mem 5.715 GB
+Iter 40: Train loss 2.454, Learning Rate 2.000e-05, It/sec 0.436, Tokens/sec 205.001, Trained Tokens 17885, Peak mem 5.715 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 526 will be truncated to 512. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 531 will be truncated to 512. Consider pre-splitting your data to save memory.
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:06,  1.62s/it]Calculating loss...:  40%|████      | 2/5 [00:02<00:04,  1.43s/it]Calculating loss...:  60%|██████    | 3/5 [00:04<00:02,  1.46s/it]Calculating loss...:  80%|████████  | 4/5 [00:05<00:01,  1.40s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.47s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.46s/it]
+Iter 50: Val loss 2.479, Val took 7.325s
+Iter 50: Train loss 2.409, Learning Rate 2.000e-05, It/sec 0.451, Tokens/sec 205.939, Trained Tokens 22449, Peak mem 5.715 GB
+Iter 50: Saved adapter weights to /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/adapters.safetensors and /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/0000050_adapters.safetensors.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 516 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 60: Train loss 2.396, Learning Rate 2.000e-05, It/sec 0.446, Tokens/sec 206.127, Trained Tokens 27066, Peak mem 5.715 GB
+Iter 70: Train loss 2.323, Learning Rate 2.000e-05, It/sec 0.449, Tokens/sec 203.514, Trained Tokens 31603, Peak mem 5.721 GB
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:06,  1.51s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:04,  1.57s/it]Calculating loss...:  60%|██████    | 3/5 [00:04<00:03,  1.65s/it]Calculating loss...:  80%|████████  | 4/5 [00:06<00:01,  1.68s/it]Calculating loss...: 100%|██████████| 5/5 [00:08<00:00,  1.58s/it]Calculating loss...: 100%|██████████| 5/5 [00:08<00:00,  1.60s/it]
+Iter 75: Val loss 2.352, Val took 8.005s
+Iter 80: Train loss 2.529, Learning Rate 2.000e-05, It/sec 0.452, Tokens/sec 202.967, Trained Tokens 36096, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 521 will be truncated to 512. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 533 will be truncated to 512. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 517 will be truncated to 512. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 546 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 90: Train loss 2.042, Learning Rate 2.000e-05, It/sec 0.438, Tokens/sec 205.291, Trained Tokens 40780, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 536 will be truncated to 512. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 538 will be truncated to 512. Consider pre-splitting your data to save memory.
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:05,  1.40s/it]Calculating loss...:  40%|████      | 2/5 [00:02<00:04,  1.34s/it]Calculating loss...:  60%|██████    | 3/5 [00:03<00:02,  1.32s/it]Calculating loss...:  80%|████████  | 4/5 [00:05<00:01,  1.48s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.45s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.43s/it]
+Iter 100: Val loss 2.283, Val took 7.133s
+Iter 100: Train loss 2.013, Learning Rate 2.000e-05, It/sec 0.429, Tokens/sec 204.965, Trained Tokens 45555, Peak mem 5.721 GB
+Iter 100: Saved adapter weights to /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/adapters.safetensors and /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/0000100_adapters.safetensors.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 540 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 110: Train loss 2.187, Learning Rate 2.000e-05, It/sec 0.455, Tokens/sec 204.476, Trained Tokens 50052, Peak mem 5.721 GB
+Iter 120: Train loss 2.223, Learning Rate 2.000e-05, It/sec 0.436, Tokens/sec 203.226, Trained Tokens 54708, Peak mem 5.721 GB
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:05,  1.30s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:04,  1.56s/it]Calculating loss...:  60%|██████    | 3/5 [00:04<00:03,  1.64s/it]Calculating loss...:  80%|████████  | 4/5 [00:06<00:01,  1.50s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.47s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.49s/it]
+Iter 125: Val loss 2.226, Val took 7.476s
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 539 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 130: Train loss 2.104, Learning Rate 2.000e-05, It/sec 0.459, Tokens/sec 206.733, Trained Tokens 59215, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 525 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 140: Train loss 2.016, Learning Rate 2.000e-05, It/sec 0.443, Tokens/sec 201.389, Trained Tokens 63764, Peak mem 5.721 GB
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:05,  1.41s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:04,  1.60s/it]Calculating loss...:  60%|██████    | 3/5 [00:04<00:03,  1.56s/it]Calculating loss...:  80%|████████  | 4/5 [00:06<00:01,  1.63s/it]Calculating loss...: 100%|██████████| 5/5 [00:08<00:00,  1.63s/it]Calculating loss...: 100%|██████████| 5/5 [00:08<00:00,  1.61s/it]
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 536 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 150: Val loss 1.734, Val took 8.033s
+Iter 150: Train loss 2.072, Learning Rate 2.000e-05, It/sec 0.447, Tokens/sec 201.372, Trained Tokens 68265, Peak mem 5.721 GB
+Iter 150: Saved adapter weights to /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/adapters.safetensors and /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/0000150_adapters.safetensors.
+Iter 160: Train loss 1.950, Learning Rate 2.000e-05, It/sec 0.455, Tokens/sec 202.479, Trained Tokens 72711, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 531 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 170: Train loss 1.816, Learning Rate 2.000e-05, It/sec 0.453, Tokens/sec 204.318, Trained Tokens 77220, Peak mem 5.721 GB
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:06,  1.52s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:04,  1.65s/it]Calculating loss...:  60%|██████    | 3/5 [00:05<00:03,  1.69s/it]Calculating loss...:  80%|████████  | 4/5 [00:06<00:01,  1.71s/it]Calculating loss...: 100%|██████████| 5/5 [00:08<00:00,  1.72s/it]Calculating loss...: 100%|██████████| 5/5 [00:08<00:00,  1.70s/it]
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 558 will be truncated to 512. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 544 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 175: Val loss 1.793, Val took 8.497s
+Iter 180: Train loss 1.748, Learning Rate 2.000e-05, It/sec 0.437, Tokens/sec 201.687, Trained Tokens 81834, Peak mem 5.721 GB
+Iter 190: Train loss 1.692, Learning Rate 2.000e-05, It/sec 0.431, Tokens/sec 201.366, Trained Tokens 86503, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 536 will be truncated to 512. Consider pre-splitting your data to save memory.
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:06,  1.62s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:04,  1.62s/it]Calculating loss...:  60%|██████    | 3/5 [00:04<00:02,  1.47s/it]Calculating loss...:  80%|████████  | 4/5 [00:05<00:01,  1.45s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.55s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.54s/it]
+Iter 200: Val loss 1.701, Val took 7.694s
+Iter 200: Train loss 1.824, Learning Rate 2.000e-05, It/sec 0.449, Tokens/sec 201.335, Trained Tokens 90988, Peak mem 5.721 GB
+Iter 200: Saved adapter weights to /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/adapters.safetensors and /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/0000200_adapters.safetensors.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 513 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 210: Train loss 1.793, Learning Rate 2.000e-05, It/sec 0.459, Tokens/sec 203.143, Trained Tokens 95413, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 546 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 220: Train loss 1.721, Learning Rate 2.000e-05, It/sec 0.449, Tokens/sec 202.678, Trained Tokens 99925, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 523 will be truncated to 512. Consider pre-splitting your data to save memory.
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:06,  1.62s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:04,  1.50s/it]Calculating loss...:  60%|██████    | 3/5 [00:04<00:03,  1.55s/it]Calculating loss...:  80%|████████  | 4/5 [00:06<00:01,  1.63s/it]Calculating loss...: 100%|██████████| 5/5 [00:08<00:00,  1.67s/it]Calculating loss...: 100%|██████████| 5/5 [00:08<00:00,  1.63s/it]
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 515 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 225: Val loss 1.689, Val took 8.149s
+Iter 230: Train loss 1.635, Learning Rate 2.000e-05, It/sec 0.469, Tokens/sec 203.188, Trained Tokens 104258, Peak mem 5.721 GB
+Iter 240: Train loss 1.627, Learning Rate 2.000e-05, It/sec 0.449, Tokens/sec 202.033, Trained Tokens 108756, Peak mem 5.721 GB
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:05,  1.40s/it]Calculating loss...:  40%|████      | 2/5 [00:02<00:04,  1.46s/it]Calculating loss...:  60%|██████    | 3/5 [00:04<00:02,  1.44s/it]Calculating loss...:  80%|████████  | 4/5 [00:05<00:01,  1.51s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.54s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.51s/it]
+Iter 250: Val loss 1.740, Val took 7.540s
+Iter 250: Train loss 1.327, Learning Rate 2.000e-05, It/sec 0.424, Tokens/sec 201.291, Trained Tokens 113504, Peak mem 5.721 GB
+Iter 250: Saved adapter weights to /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/adapters.safetensors and /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/0000250_adapters.safetensors.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 526 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 260: Train loss 1.390, Learning Rate 2.000e-05, It/sec 0.451, Tokens/sec 204.507, Trained Tokens 118043, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 536 will be truncated to 512. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 558 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 270: Train loss 1.506, Learning Rate 2.000e-05, It/sec 0.472, Tokens/sec 206.770, Trained Tokens 122425, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 841 will be truncated to 512. Consider pre-splitting your data to save memory.
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:06,  1.62s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:04,  1.49s/it]Calculating loss...:  60%|██████    | 3/5 [00:04<00:02,  1.41s/it]Calculating loss...:  80%|████████  | 4/5 [00:05<00:01,  1.41s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.53s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.50s/it]
+Iter 275: Val loss 1.414, Val took 7.490s
+Iter 280: Train loss 1.372, Learning Rate 2.000e-05, It/sec 0.438, Tokens/sec 202.227, Trained Tokens 127038, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 527 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 290: Train loss 1.515, Learning Rate 2.000e-05, It/sec 0.450, Tokens/sec 204.649, Trained Tokens 131584, Peak mem 5.721 GB
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:05,  1.40s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:04,  1.60s/it]Calculating loss...:  60%|██████    | 3/5 [00:04<00:03,  1.61s/it]Calculating loss...:  80%|████████  | 4/5 [00:06<00:01,  1.61s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.50s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.53s/it]
+Iter 300: Val loss 1.384, Val took 7.668s
+Iter 300: Train loss 1.517, Learning Rate 2.000e-05, It/sec 0.472, Tokens/sec 206.150, Trained Tokens 135947, Peak mem 5.721 GB
+Iter 300: Saved adapter weights to /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/adapters.safetensors and /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/0000300_adapters.safetensors.
+Iter 310: Train loss 1.310, Learning Rate 2.000e-05, It/sec 0.462, Tokens/sec 205.685, Trained Tokens 140402, Peak mem 5.721 GB
+Iter 320: Train loss 1.336, Learning Rate 2.000e-05, It/sec 0.445, Tokens/sec 201.816, Trained Tokens 144941, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 540 will be truncated to 512. Consider pre-splitting your data to save memory.
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:06,  1.62s/it]Calculating loss...:  40%|████      | 2/5 [00:02<00:04,  1.43s/it]Calculating loss...:  60%|██████    | 3/5 [00:04<00:03,  1.51s/it]Calculating loss...:  80%|████████  | 4/5 [00:06<00:01,  1.60s/it]Calculating loss...: 100%|██████████| 5/5 [00:08<00:00,  1.65s/it]Calculating loss...: 100%|██████████| 5/5 [00:08<00:00,  1.60s/it]
+Iter 325: Val loss 1.125, Val took 8.006s
+Iter 330: Train loss 1.429, Learning Rate 2.000e-05, It/sec 0.454, Tokens/sec 203.037, Trained Tokens 149416, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 514 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 340: Train loss 1.112, Learning Rate 2.000e-05, It/sec 0.432, Tokens/sec 205.196, Trained Tokens 154162, Peak mem 5.721 GB
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:07,  1.75s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:05,  1.75s/it]Calculating loss...:  60%|██████    | 3/5 [00:05<00:03,  1.75s/it]Calculating loss...:  80%|████████  | 4/5 [00:06<00:01,  1.66s/it]Calculating loss...: 100%|██████████| 5/5 [00:08<00:00,  1.65s/it]Calculating loss...: 100%|██████████| 5/5 [00:08<00:00,  1.68s/it]
+Iter 350: Val loss 1.030, Val took 8.406s
+Iter 350: Train loss 1.220, Learning Rate 2.000e-05, It/sec 0.447, Tokens/sec 203.167, Trained Tokens 158704, Peak mem 5.721 GB
+Iter 350: Saved adapter weights to /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/adapters.safetensors and /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/0000350_adapters.safetensors.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 527 will be truncated to 512. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 519 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 360: Train loss 1.005, Learning Rate 2.000e-05, It/sec 0.439, Tokens/sec 203.885, Trained Tokens 163351, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 552 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 370: Train loss 1.269, Learning Rate 2.000e-05, It/sec 0.454, Tokens/sec 203.660, Trained Tokens 167840, Peak mem 5.721 GB
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:06,  1.75s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:04,  1.61s/it]Calculating loss...:  60%|██████    | 3/5 [00:05<00:03,  1.68s/it]Calculating loss...:  80%|████████  | 4/5 [00:06<00:01,  1.57s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.51s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.57s/it]
+Iter 375: Val loss 1.349, Val took 7.841s
+Iter 380: Train loss 1.386, Learning Rate 2.000e-05, It/sec 0.487, Tokens/sec 203.380, Trained Tokens 172018, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 792 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 390: Train loss 1.109, Learning Rate 2.000e-05, It/sec 0.442, Tokens/sec 202.634, Trained Tokens 176604, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 530 will be truncated to 512. Consider pre-splitting your data to save memory.
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:06,  1.51s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:04,  1.52s/it]Calculating loss...:  60%|██████    | 3/5 [00:04<00:03,  1.62s/it]Calculating loss...:  80%|████████  | 4/5 [00:06<00:01,  1.67s/it]Calculating loss...: 100%|██████████| 5/5 [00:08<00:00,  1.70s/it]Calculating loss...: 100%|██████████| 5/5 [00:08<00:00,  1.65s/it]
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 536 will be truncated to 512. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 531 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 400: Val loss 1.130, Val took 8.275s
+Iter 400: Train loss 1.145, Learning Rate 2.000e-05, It/sec 0.468, Tokens/sec 204.067, Trained Tokens 180968, Peak mem 5.721 GB
+Iter 400: Saved adapter weights to /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/adapters.safetensors and /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/0000400_adapters.safetensors.
+Iter 410: Train loss 1.230, Learning Rate 2.000e-05, It/sec 0.462, Tokens/sec 202.293, Trained Tokens 185348, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 522 will be truncated to 512. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 521 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 420: Train loss 1.009, Learning Rate 2.000e-05, It/sec 0.430, Tokens/sec 202.158, Trained Tokens 190048, Peak mem 5.721 GB
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:06,  1.75s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:05,  1.67s/it]Calculating loss...:  60%|██████    | 3/5 [00:05<00:03,  1.71s/it]Calculating loss...:  80%|████████  | 4/5 [00:06<00:01,  1.72s/it]Calculating loss...: 100%|██████████| 5/5 [00:08<00:00,  1.61s/it]Calculating loss...: 100%|██████████| 5/5 [00:08<00:00,  1.66s/it]
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 516 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 425: Val loss 0.854, Val took 8.280s
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 557 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 430: Train loss 1.203, Learning Rate 2.000e-05, It/sec 0.448, Tokens/sec 201.966, Trained Tokens 194553, Peak mem 5.721 GB
+Iter 440: Train loss 1.050, Learning Rate 2.000e-05, It/sec 0.439, Tokens/sec 201.946, Trained Tokens 199149, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 660 will be truncated to 512. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 534 will be truncated to 512. Consider pre-splitting your data to save memory.
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:05,  1.30s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:04,  1.56s/it]Calculating loss...:  60%|██████    | 3/5 [00:04<00:02,  1.44s/it]Calculating loss...:  80%|████████  | 4/5 [00:05<00:01,  1.43s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.38s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.41s/it]
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 832 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 450: Val loss 1.207, Val took 7.060s
+Iter 450: Train loss 0.909, Learning Rate 2.000e-05, It/sec 0.430, Tokens/sec 202.857, Trained Tokens 203872, Peak mem 5.721 GB
+Iter 450: Saved adapter weights to /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/adapters.safetensors and /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/0000450_adapters.safetensors.
+Iter 460: Train loss 1.055, Learning Rate 2.000e-05, It/sec 0.473, Tokens/sec 205.813, Trained Tokens 208227, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 529 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 470: Train loss 0.877, Learning Rate 2.000e-05, It/sec 0.441, Tokens/sec 201.011, Trained Tokens 212787, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 568 will be truncated to 512. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 539 will be truncated to 512. Consider pre-splitting your data to save memory.
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:06,  1.62s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:04,  1.49s/it]Calculating loss...:  60%|██████    | 3/5 [00:04<00:03,  1.60s/it]Calculating loss...:  80%|████████  | 4/5 [00:06<00:01,  1.52s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.60s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.58s/it]
+Iter 475: Val loss 0.820, Val took 7.899s
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 540 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 480: Train loss 0.935, Learning Rate 2.000e-05, It/sec 0.449, Tokens/sec 206.126, Trained Tokens 217381, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 519 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 490: Train loss 1.154, Learning Rate 2.000e-05, It/sec 0.473, Tokens/sec 206.453, Trained Tokens 221748, Peak mem 5.721 GB
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:05,  1.40s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:04,  1.60s/it]Calculating loss...:  60%|██████    | 3/5 [00:04<00:03,  1.66s/it]Calculating loss...:  80%|████████  | 4/5 [00:06<00:01,  1.64s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.59s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.60s/it]
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 760 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 500: Val loss 1.087, Val took 8.002s
+Iter 500: Train loss 1.009, Learning Rate 2.000e-05, It/sec 0.462, Tokens/sec 204.812, Trained Tokens 226180, Peak mem 5.721 GB
+Iter 500: Saved adapter weights to /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/adapters.safetensors and /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/0000500_adapters.safetensors.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 525 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 510: Train loss 0.929, Learning Rate 2.000e-05, It/sec 0.436, Tokens/sec 205.511, Trained Tokens 230893, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 529 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 520: Train loss 1.038, Learning Rate 2.000e-05, It/sec 0.455, Tokens/sec 203.569, Trained Tokens 235365, Peak mem 5.721 GB
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:05,  1.40s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:04,  1.60s/it]Calculating loss...:  60%|██████    | 3/5 [00:04<00:03,  1.51s/it]Calculating loss...:  80%|████████  | 4/5 [00:05<00:01,  1.42s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.49s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.49s/it]
+Iter 525: Val loss 1.037, Val took 7.448s
+Iter 530: Train loss 1.060, Learning Rate 2.000e-05, It/sec 0.469, Tokens/sec 204.912, Trained Tokens 239734, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 540 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 540: Train loss 0.819, Learning Rate 2.000e-05, It/sec 0.451, Tokens/sec 204.974, Trained Tokens 244275, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 624 will be truncated to 512. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 540 will be truncated to 512. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 540 will be truncated to 512. Consider pre-splitting your data to save memory.
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:06,  1.51s/it]Calculating loss...:  40%|████      | 2/5 [00:02<00:04,  1.45s/it]Calculating loss...:  60%|██████    | 3/5 [00:04<00:03,  1.52s/it]Calculating loss...:  80%|████████  | 4/5 [00:06<00:01,  1.61s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.61s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.58s/it]
+Iter 550: Val loss 0.839, Val took 7.879s
+Iter 550: Train loss 0.827, Learning Rate 2.000e-05, It/sec 0.443, Tokens/sec 208.813, Trained Tokens 248987, Peak mem 5.721 GB
+Iter 550: Saved adapter weights to /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/adapters.safetensors and /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/0000550_adapters.safetensors.
+Iter 560: Train loss 0.880, Learning Rate 2.000e-05, It/sec 0.441, Tokens/sec 204.009, Trained Tokens 253614, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 564 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 570: Train loss 0.823, Learning Rate 2.000e-05, It/sec 0.451, Tokens/sec 204.445, Trained Tokens 258143, Peak mem 5.721 GB
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:06,  1.74s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:05,  1.74s/it]Calculating loss...:  60%|██████    | 3/5 [00:05<00:03,  1.74s/it]Calculating loss...:  80%|████████  | 4/5 [00:06<00:01,  1.60s/it]Calculating loss...: 100%|██████████| 5/5 [00:08<00:00,  1.57s/it]Calculating loss...: 100%|██████████| 5/5 [00:08<00:00,  1.62s/it]
+Iter 575: Val loss 0.837, Val took 8.124s
+Iter 580: Train loss 1.034, Learning Rate 2.000e-05, It/sec 0.481, Tokens/sec 204.276, Trained Tokens 262391, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 522 will be truncated to 512. Consider pre-splitting your data to save memory.
+Iter 590: Train loss 0.838, Learning Rate 2.000e-05, It/sec 0.443, Tokens/sec 204.147, Trained Tokens 267004, Peak mem 5.721 GB
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 536 will be truncated to 512. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 541 will be truncated to 512. Consider pre-splitting your data to save memory.
+[WARNING] Some sequences are longer than 512 tokens. The longest sentence 514 will be truncated to 512. Consider pre-splitting your data to save memory.
+Calculating loss...:   0%|          | 0/5 [00:00<?, ?it/s]Calculating loss...:  20%|██        | 1/5 [00:01<00:06,  1.62s/it]Calculating loss...:  40%|████      | 2/5 [00:03<00:04,  1.49s/it]Calculating loss...:  60%|██████    | 3/5 [00:04<00:02,  1.45s/it]Calculating loss...:  80%|████████  | 4/5 [00:05<00:01,  1.43s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.42s/it]Calculating loss...: 100%|██████████| 5/5 [00:07<00:00,  1.44s/it]
+Iter 600: Val loss 1.184, Val took 7.219s
+Iter 600: Train loss 0.817, Learning Rate 2.000e-05, It/sec 0.430, Tokens/sec 200.498, Trained Tokens 271672, Peak mem 5.721 GB
+Iter 600: Saved adapter weights to /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/adapters.safetensors and /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/0000600_adapters.safetensors.
+Saved final weights to /Users/bruceschultz/Documents/projects/llm_credit_paper/models/qwen2.5-7b-camels-adapter/adapters.safetensors.

@@ -1,0 +1,1 @@
+    all_pairs = financial_pairs + rating_pairs + eba_pairs + fdic_pairs + credit_pairs + overview_pairs

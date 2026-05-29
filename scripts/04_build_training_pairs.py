@@ -19,6 +19,11 @@ Pipeline D — EBA Transparency Exercise:
 Pipeline E — FDIC Call Reports:
   training_data/fdic_pairs.jsonl → top US banks, quarterly data
 
+Pipeline F — Overview Pairs:
+  training_data/overview_pairs_upgraded.jsonl → institutional profile +
+  AR highlights paragraphs, one pair per annual report filing.
+  Build with: .venv/bin/python3 scripts/07_build_overview_pairs.py --upgrade
+
 Run:
     python scripts/04_build_training_pairs.py
 
@@ -78,7 +83,6 @@ MAX_TABLE_ROWS    = 25
 # ─────────────────────────────────────────────────────────────────────────────
 
 def load_jsonl(path: Path, pipeline_tag: str, quality_tag: str) -> list:
-    """Load a pre-built JSONL file and tag each pair with pipeline/quality."""
     if not path.exists():
         return []
     pairs = []
@@ -363,6 +367,22 @@ def main():
     else:
         print(f"\n[PIPELINE E] FDIC: none (run: ./run.sh --download-fdic)")
 
+    # ── F: Overview pairs ─────────────────────────────────────────────────────
+    # Prefers API-upgraded pairs; falls back to templates
+    overview_pairs = load_jsonl(
+        TRAINING_DIR / "overview_pairs_upgraded.jsonl", "overview_upgraded", "upgraded"
+    )
+    if not overview_pairs:
+        overview_pairs = load_jsonl(
+            TRAINING_DIR / "overview_pairs.jsonl", "overview_template", "template"
+        )
+    if overview_pairs:
+        print(f"\n[PIPELINE F] Overview pairs: {len(overview_pairs)} pairs")
+    else:
+        print(f"\n[PIPELINE F] Overview: none")
+        print(f"  Run: .venv/bin/python3 scripts/07_build_overview_pairs.py --upgrade")
+        print(f"  Or:  .venv/bin/python3 scripts/07_build_overview_pairs.py --template")
+
     # ── Write pipeline-specific files ─────────────────────────────────────────
     if financial_pairs:
         write_jsonl(strip_meta(financial_pairs), TRAINING_DIR / "financial_pairs.jsonl")
@@ -370,7 +390,8 @@ def main():
         write_jsonl(strip_meta(rating_pairs), TRAINING_DIR / "rating_agency_pairs.jsonl")
 
     # ── Combine all sources ───────────────────────────────────────────────────
-    all_pairs = financial_pairs + rating_pairs + eba_pairs + fdic_pairs + credit_pairs
+    all_pairs = (financial_pairs + rating_pairs + eba_pairs +
+                 fdic_pairs + overview_pairs + credit_pairs)
     if credit_pairs:
         all_pairs += credit_pairs   # 2× weight for gold pairs
         print(f"  Gold pairs duplicated (2x weight)")
@@ -404,6 +425,7 @@ def main():
         "rating_agency_pairs": len(rating_pairs),
         "eba_pairs":           len(eba_pairs),
         "fdic_pairs":          len(fdic_pairs),
+        "overview_pairs":      len(overview_pairs),
         "credit_report_pairs": len(credit_pairs),
         "total_after_dedup":   len(all_pairs),
         "train_count":         len(train_pairs),
@@ -420,6 +442,7 @@ def main():
     print(f"  Rating agency: {len(rating_pairs)}")
     print(f"  EBA          : {len(eba_pairs)}")
     print(f"  FDIC         : {len(fdic_pairs)}")
+    print(f"  Overview     : {len(overview_pairs)}")
     print(f"  Gold (DOCX)  : {len(credit_pairs)}")
     print(f"  ─────────────────────────")
     print(f"  Total (dedup): {len(all_pairs)}")

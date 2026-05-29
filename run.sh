@@ -3,19 +3,16 @@
 # run.sh — CAMELS Credit Paper Ingestion Pipeline
 # =============================================================================
 # Usage:
-#   ./run.sh                          # full pipeline
-#   ./run.sh --download-us            # download US banks from EDGAR
-#   ./run.sh --download-uk            # download UK/EU/AU banks
-#   ./run.sh --download-ra            # download rating agency / regulatory docs
-#   ./run.sh --download-eba           # download EBA transparency exercise data
-#   ./run.sh --download-fdic          # download FDIC Call Report data
-#   ./run.sh --download-all           # download everything
-#   ./run.sh --download-all --years 5 # override years (default: 10)
+#   ./run.sh                             # full pipeline
+#   ./run.sh --download-us               # US banks from EDGAR
+#   ./run.sh --download-banks            # comprehensive AR + P3 downloader (Python)
+#   ./run.sh --download-ra               # rating agency / regulatory docs
+#   ./run.sh --download-eba              # EBA transparency exercise data
+#   ./run.sh --download-fdic             # FDIC Call Report data
+#   ./run.sh --download-all              # everything
 #   ./run.sh --skip-triage
 #   ./run.sh --pairs-only
 #   ./run.sh --reprocess
-#
-# Downloads always skip existing files — safe to re-run at any time.
 # =============================================================================
 
 set -euo pipefail
@@ -28,6 +25,9 @@ GREEN='\033[0;32m'; YELLOW='\033[1;33m'; RED='\033[0;31m'; NC='\033[0m'
 info()  { echo -e "${GREEN}[INFO]${NC}  $*"; }
 warn()  { echo -e "${YELLOW}[WARN]${NC}  $*"; }
 error() { echo -e "${RED}[ERROR]${NC} $*"; exit 1; }
+
+# ── Fix permissions on all scripts ────────────────────────────────────────────
+find "$PROJECT_ROOT" -maxdepth 2 -name "*.sh" -exec chmod +x {} \; 2>/dev/null || true
 
 # ── Find Python 3.10+ ─────────────────────────────────────────────────────────
 find_python() {
@@ -73,43 +73,36 @@ if ! command -v pdfinfo &>/dev/null; then
 fi
 
 # ── Parse args ────────────────────────────────────────────────────────────────
-DOWNLOAD_US=false
-DOWNLOAD_UK=false
-DOWNLOAD_RA=false
-DOWNLOAD_EBA=false
-DOWNLOAD_FDIC=false
-YEARS=10
-FDIC_LIMIT=100
+DOWNLOAD_US=false; DOWNLOAD_BANKS=false; DOWNLOAD_RA=false
+DOWNLOAD_EBA=false; DOWNLOAD_FDIC=false
+YEARS=10; FDIC_LIMIT=100
 PIPELINE_ARGS=()
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        --download-us)   DOWNLOAD_US=true;   shift ;;
-        --download-uk)   DOWNLOAD_UK=true;   shift ;;
-        --download-ra)   DOWNLOAD_RA=true;   shift ;;
-        --download-eba)  DOWNLOAD_EBA=true;  shift ;;
-        --download-fdic) DOWNLOAD_FDIC=true; shift ;;
+        --download-us)    DOWNLOAD_US=true;    shift ;;
+        --download-banks) DOWNLOAD_BANKS=true; shift ;;
+        --download-ra)    DOWNLOAD_RA=true;    shift ;;
+        --download-eba)   DOWNLOAD_EBA=true;   shift ;;
+        --download-fdic)  DOWNLOAD_FDIC=true;  shift ;;
         --download-all)
-            DOWNLOAD_US=true; DOWNLOAD_UK=true; DOWNLOAD_RA=true
-            DOWNLOAD_EBA=true; DOWNLOAD_FDIC=true
-            shift ;;
-        --years)       YEARS="$2";      shift 2 ;;
-        --fdic-limit)  FDIC_LIMIT="$2"; shift 2 ;;
-        *)             PIPELINE_ARGS+=("$1"); shift ;;
+            DOWNLOAD_US=true; DOWNLOAD_BANKS=true; DOWNLOAD_RA=true
+            DOWNLOAD_EBA=true; DOWNLOAD_FDIC=true; shift ;;
+        --years)      YEARS="$2";      shift 2 ;;
+        --fdic-limit) FDIC_LIMIT="$2"; shift 2 ;;
+        *)            PIPELINE_ARGS+=("$1"); shift ;;
     esac
 done
 
-# ── Downloads ─────────────────────────────────────────────────────────────────
+# ── Downloads — all use Python (no bash declare -A issues) ───────────────────
 if [[ "$DOWNLOAD_US" == true ]]; then
     info "Downloading US bank 10-Ks from SEC EDGAR (years: $YEARS)..."
-    python "$PROJECT_ROOT/scripts/download_financials.py" \
-        --source edgar --years "$YEARS"
+    python "$PROJECT_ROOT/scripts/download_financials.py" --source edgar --years "$YEARS"
 fi
 
-if [[ "$DOWNLOAD_UK" == true ]]; then
-    info "Downloading UK/EU/AU bank annual reports (years: $YEARS)..."
-    python "$PROJECT_ROOT/scripts/download_uk_banks.py" \
-        --years "$YEARS"
+if [[ "$DOWNLOAD_BANKS" == true ]]; then
+    info "Downloading Annual Reports + Pillar 3 (comprehensive)..."
+    python "$PROJECT_ROOT/scripts/download_annual_reports.py"
 fi
 
 if [[ "$DOWNLOAD_RA" == true ]]; then
@@ -124,8 +117,7 @@ fi
 
 if [[ "$DOWNLOAD_FDIC" == true ]]; then
     info "Downloading FDIC Call Report data (top $FDIC_LIMIT banks, $YEARS years)..."
-    python "$PROJECT_ROOT/scripts/download_fdic_data.py" \
-        --limit "$FDIC_LIMIT" --years "$YEARS"
+    python "$PROJECT_ROOT/scripts/download_fdic_data.py" --limit "$FDIC_LIMIT" --years "$YEARS"
 fi
 
 # ── Run the pipeline ──────────────────────────────────────────────────────────
